@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:sanrachna_web/views/widgets/title_widget.dart';
+
 
 class DatabasePage extends StatefulWidget {
   @override
@@ -17,22 +19,12 @@ class _DatabasePageState extends State<DatabasePage> {
         children: [
           Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text("Materials"),
-                ),
-              )
+              TitleWidget(title: "Material")
             ],
           ),
           Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text("Services"),
-                ),
-              )
+              TitleWidget(title: "Services")
             ],
           ),
         ],

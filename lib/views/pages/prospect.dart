@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:sanrachna_web/views/widgets/title_widget.dart';
 
 class ProspectPage extends StatefulWidget {
   @override
@@ -17,12 +18,7 @@ class _ProspectPageState extends State<ProspectPage> {
           children: [
             Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text("Prospects"),
-                  ),
-                )
+               TitleWidget(title: "Prospects")
               ],
             ),
           ],
