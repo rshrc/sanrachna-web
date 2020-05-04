@@ -49,6 +49,7 @@ class _AssociatePageState extends State<AssociatePage> {
                           DataColumn(label: Text('ID')),
                           DataColumn(label: Text('Full Name')),
                           DataColumn(label: Text('Organization')),
+                          DataColumn(label: Text("Delete")),
                         ],
                         rows: _labourList
                             .map((element) => DataRow(cells: <DataCell>[
@@ -56,6 +57,28 @@ class _AssociatePageState extends State<AssociatePage> {
                                   //Extracting from Map element the value
                                   DataCell(Text("${element.fullName}")),
                                   DataCell(Text("${element.organization}")),
+                                  DataCell(IconButton(
+                                    onPressed: () {
+                                      _associateProvider
+                                          .deleteLabour(element.id)
+                                          .then((value) {
+                                        Toast.show(
+                                            "Deleting Labour ${element.fullName}",
+                                            context,
+                                            backgroundColor: Colors.green);
+                                        setState(() {});
+                                        Toast.show(
+                                            "Deleted Labour ${element.fullName}",
+                                            context,
+                                            backgroundColor: Colors.green);
+                                        setState(() {});
+                                      });
+                                    },
+                                    icon: Icon(
+                                      Icons.delete_outline,
+                                      color: Colors.grey,
+                                    ),
+                                  ))
                                 ]))
                             .toList(),
                       ),
@@ -90,6 +113,7 @@ class _AssociatePageState extends State<AssociatePage> {
                         DataColumn(label: Text('ID')),
                         DataColumn(label: Text('Full Name')),
                         DataColumn(label: Text('Organization')),
+                        DataColumn(label: Text("Delete")),
                       ],
                       rows: _supervisorList
                           .map((element) => DataRow(cells: <DataCell>[
@@ -97,6 +121,28 @@ class _AssociatePageState extends State<AssociatePage> {
                                 //Extracting from Map element the value
                                 DataCell(Text("${element.fullName}")),
                                 DataCell(Text("${element.organization}")),
+                                DataCell(IconButton(
+                                  onPressed: () {
+                                    _associateProvider
+                                        .deleteSupervisor(element.id)
+                                        .then((value) {
+                                      Toast.show(
+                                          "Deleting Supervisor ${element.fullName}",
+                                          context,
+                                          backgroundColor: Colors.green);
+                                      setState(() {});
+                                      Toast.show(
+                                          "Deleted Supervisor ${element.fullName}",
+                                          context,
+                                          backgroundColor: Colors.green);
+                                      setState(() {});
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.delete_outline,
+                                    color: Colors.grey,
+                                  ),
+                                ))
                               ]))
                           .toList(),
                     ),
@@ -130,13 +176,33 @@ class _AssociatePageState extends State<AssociatePage> {
                         DataColumn(label: Text('ID')),
                         DataColumn(label: Text('Full Name')),
                         DataColumn(label: Text('Organization')),
+                        DataColumn(label: Text("Delete")),
                       ],
                       rows: _vendorList
                           .map((element) => DataRow(cells: <DataCell>[
                                 DataCell(Text("${element.id}")),
-                                //Extracting from Map element the value
                                 DataCell(Text("${element.fullName}")),
                                 DataCell(Text("${element.organization}")),
+                                DataCell(IconButton(
+                                  onPressed: () {
+                                    _associateProvider
+                                        .deleteVendor(element.id)
+                                        .then((value) {
+                                      Toast.show("Deleting Vendor ${element.fullName}",
+                                          context,
+                                          backgroundColor: Colors.green);
+                                      setState(() {});
+                                      Toast.show("Deleted Vendor ${element.fullName}",
+                                          context,
+                                          backgroundColor: Colors.green);
+                                      setState(() {});
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.delete_outline,
+                                    color: Colors.grey,
+                                  ),
+                                ))
                               ]))
                           .toList(),
                     ),

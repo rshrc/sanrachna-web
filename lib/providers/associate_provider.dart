@@ -79,21 +79,37 @@ class AssociateProvider implements AssociateAPIProvider {
   }
 
   @override
-  Future<String> deleteLabour(int id) {
-    // TODO: implement deleteLabour
-    throw UnimplementedError();
+  Future<String> deleteLabour(int id) async {
+    http.Response response = await http.delete(
+        'http://sanrachna.pythonanywhere.com/api/associate/labour/$id/delete/',
+        );
+
+    print("Line 74: ${response.body}");
+
+    return response.body;
+
   }
 
   @override
-  Future<String> deleteSupervisor(int id) {
-    // TODO: implement deleteSupervisor
-    throw UnimplementedError();
+  Future<String> deleteSupervisor(int id) async {
+    http.Response response = await http.delete(
+      'http://sanrachna.pythonanywhere.com/api/associate/supervisor/$id/delete/',
+    );
+
+    print("Line 99: ${response.body}");
+
+    return response.body;
   }
 
   @override
-  Future<String> deleteVendor(int id) {
-    // TODO: implement deleteVendor
-    throw UnimplementedError();
+  Future<String> deleteVendor(int id) async {
+    http.Response response = await http.delete(
+      'http://sanrachna.pythonanywhere.com/api/associate/vendor/$id/delete/',
+    );
+
+    print("Line 110: ${response.body}");
+
+    return response.body;
   }
 
   @override
