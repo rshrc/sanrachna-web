@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TitleWidget extends StatelessWidget {
 
@@ -15,7 +16,7 @@ class TitleWidget extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.16,
         decoration: BoxDecoration(color: Colors.redAccent, borderRadius: BorderRadius.circular(16.0)),
         child: Center(
-          child: Text(title, style: TextStyle(color: Colors.white, fontSize: 20.0),),
+          child: Text(title, style: GoogleFonts.exo2(fontSize: 26.0, color: Colors.white)),
         ),
       ),
     );

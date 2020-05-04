@@ -31,6 +31,7 @@ dependencies:
   flutter_speed_dial:
   http:
   logger_flutter:
+  google_fonts:
 
 dev_dependencies:
   flutter_test:
