@@ -96,7 +96,7 @@ class ClienteleProvider implements ClientaleAPIProvider {
   @override
   Future<List<ClienteleModel>> getClients() async {
     http.Response response = await http
-        .get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
+        .get(Constants.clientClienteleAPI);
 
     print("Line 48: ${response.body}");
 
@@ -114,7 +114,7 @@ class ClienteleProvider implements ClientaleAPIProvider {
   @override
   Future<List<ClienteleModel>> getLeads() async {
     http.Response response = await http
-        .get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
+        .get(Constants.leadClienteleAPI);
 
     print("Line 48: ${response.body}");
 
@@ -132,7 +132,7 @@ class ClienteleProvider implements ClientaleAPIProvider {
   @override
   Future<List<ClienteleModel>> getProspects() async {
     http.Response response = await http
-        .get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
+        .get(Constants.prospectClienteleAPI);
 
     print("Line 48: ${response.body}");
 
