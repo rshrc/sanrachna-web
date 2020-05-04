@@ -6,23 +6,37 @@ class DatabasePage extends StatefulWidget {
   _DatabasePageState createState() => _DatabasePageState();
 }
 
-
 class _DatabasePageState extends State<DatabasePage> {
-
   bool _dialVisible = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Center(
-            child: Text("Database Data Goes Here"),
-          )
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text("Materials"),
+                ),
+              )
+            ],
+          ),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text("Services"),
+                ),
+              )
+            ],
+          ),
         ],
       ),
-
       floatingActionButton: SpeedDial(
         marginRight: 18,
         marginBottom: 20,

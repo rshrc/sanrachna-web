@@ -13,12 +13,42 @@ class _AssociatePageState extends State<AssociatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Center(
-            child: Text("Associate Data Goes Here"),
-          )
+          Container(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text("Labours"),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text("Supervisor"),
+                ),
+              )
+            ],
+          ),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text("Vendor"),
+                ),
+              )
+            ],
+          ),
         ],
       ),
       floatingActionButton: SpeedDial(

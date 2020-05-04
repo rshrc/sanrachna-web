@@ -7,20 +7,26 @@ class ProspectPage extends StatefulWidget {
 }
 
 class _ProspectPageState extends State<ProspectPage> {
-
   bool _dialVisible = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Text("Prospect Data Goes Here"),
-          )
-        ],
-      ),
+        body: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text("Prospects"),
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
         floatingActionButton: SpeedDial(
           marginRight: 18,
           marginBottom: 20,
@@ -47,7 +53,6 @@ class _ProspectPageState extends State<ProspectPage> {
                 labelStyle: TextStyle(fontSize: 18.0),
                 onTap: () => print('FIRST CHILD')),
           ],
-        )
-    );
+        ));
   }
 }
