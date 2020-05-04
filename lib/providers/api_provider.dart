@@ -60,11 +60,47 @@ abstract class ClientaleAPIProvider {
 }
 
 abstract class MaterialAPIProvider {
-  Future<List<MaterialModel>> getMaterials();
+  Future<List<MaterialModel>> getTiles();
 
-  Future<String> addMaterial();
+  Future<String> addTiles();
 
-  Future<String> deleteMaterial();
+  Future<String> deleteTiles();
+
+  Future<List<MaterialModel>> getCivil();
+
+  Future<String> addCivil();
+
+  Future<String> deleteCivil();
+
+  Future<List<MaterialModel>> getElectric();
+
+  Future<String> addElectric();
+
+  Future<String> deleteElectric();
+
+  Future<List<MaterialModel>> getPaint();
+
+  Future<String> addPaint();
+
+  Future<String> deletePaint();
+
+  Future<List<MaterialModel>> getPlumbing();
+
+  Future<String> addPlumbing();
+
+  Future<String> deletePlumbing();
+
+  Future<List<MaterialModel>> getPly();
+
+  Future<String> addPly();
+
+  Future<String> deletePly();
+
+
+
+
+
+
 }
 
 abstract class ProspectAPIProvider {
