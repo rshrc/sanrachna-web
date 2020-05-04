@@ -34,15 +34,45 @@ class ClienteleProvider implements ClientaleAPIProvider {
   }
 
   @override
-  Future<String> addLead() {
-    // TODO: implement addLead
-    throw UnimplementedError();
+  Future<String> addLead({String fullName,
+    String organization,
+    String email,
+    String mobileNumber,
+    String siteType,
+    String sourceType}) async {
+    var body = {
+      "fullName": fullName,
+      "organization": organization,
+      "email": email,
+      "mobileNumber": mobileNumber,
+      "siteType": siteType,
+      "sourceType": sourceType
+    };
+    http.Response response =
+        await http.post(Constants.leadClienteleAPI, body: body);
+
+    print(response.statusCode);
   }
 
   @override
-  Future<String> addProspect() {
-    // TODO: implement addProspect
-    throw UnimplementedError();
+  Future<String> addProspect({String fullName,
+    String organization,
+    String email,
+    String mobileNumber,
+    String siteType,
+    String sourceType}) async {
+    var body = {
+      "fullName": fullName,
+      "organization": organization,
+      "email": email,
+      "mobileNumber": mobileNumber,
+      "siteType": siteType,
+      "sourceType": sourceType
+    };
+    http.Response response =
+        await http.post(Constants.prospectClienteleAPI, body: body);
+
+    print(response.statusCode);
   }
 
   @override
