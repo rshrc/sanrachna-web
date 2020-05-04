@@ -2,6 +2,7 @@ import 'package:sanrachna_web/models/associate_model.dart';
 import 'package:sanrachna_web/models/clientele_model.dart';
 import 'package:sanrachna_web/models/material_model.dart';
 import 'package:sanrachna_web/models/prospect_model.dart';
+import 'package:sanrachna_web/models/service_model.dart';
 
 abstract class AssociateAPIProvider {
   Future<List<AssociateModel>> getLabours();
@@ -64,3 +65,12 @@ abstract class ProspectAPIProvider {
 
   Future<String> deleteProspect();
 }
+
+abstract class ServiceAPIProvider {
+  Future<List<ServiceModel>> getServices();
+
+  Future<String> addServices();
+
+  Future<String> deleteServices();
+}
+
