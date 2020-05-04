@@ -3,19 +3,34 @@ import 'dart:convert';
 import 'package:sanrachna_web/models/clientelle_model.dart';
 import 'package:sanrachna_web/models/prospect_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:sanrachna_web/utils/constants.dart';
 import 'api_provider.dart';
 
 class ClienteleProvider implements ClientaleAPIProvider {
-
   List<ClientelleModel> prospectList = [];
   List<ClientelleModel> clientList = [];
   List<ClientelleModel> leadsList = [];
 
-
   @override
-  Future<String> addClient() {
-    // TODO: implement addClient
-    throw UnimplementedError();
+  Future<String> addClient(
+      {String fullName,
+      String organization,
+      String email,
+      String mobileNumber,
+      String siteType,
+      String sourceType}) async {
+    var body = {
+      "fullName": fullName,
+      "organization": organization,
+      "email": email,
+      "mobileNumber": mobileNumber,
+      "siteType": siteType,
+      "sourceType": sourceType
+    };
+    http.Response response =
+        await http.post(Constants.clientClienteleAPI, body: body);
+
+    print(response.statusCode);
   }
 
   @override
@@ -50,7 +65,8 @@ class ClienteleProvider implements ClientaleAPIProvider {
 
   @override
   Future<List<ClientelleModel>> getClients() async {
-    http.Response response = await http.get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
+    http.Response response = await http
+        .get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
 
     print("Line 48: ${response.body}");
 
@@ -67,7 +83,8 @@ class ClienteleProvider implements ClientaleAPIProvider {
 
   @override
   Future<List<ClientelleModel>> getLeads() async {
-    http.Response response = await http.get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
+    http.Response response = await http
+        .get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
 
     print("Line 48: ${response.body}");
 
@@ -84,7 +101,8 @@ class ClienteleProvider implements ClientaleAPIProvider {
 
   @override
   Future<List<ClientelleModel>> getProspects() async {
-    http.Response response = await http.get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
+    http.Response response = await http
+        .get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
 
     print("Line 48: ${response.body}");
 
@@ -98,5 +116,4 @@ class ClienteleProvider implements ClientaleAPIProvider {
 
     return prospectList;
   }
-
 }
