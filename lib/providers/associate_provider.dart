@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 class AssociateProvider implements AssociateAPIProvider {
 
   List<AssociateModel> _labourList = [];
+  List<AssociateModel> _supervisorList = [];
+  List<AssociateModel> _vendorList = [];
 
   @override
   Future<String> addLabour() {
@@ -65,15 +67,37 @@ class AssociateProvider implements AssociateAPIProvider {
   }
 
   @override
-  Future<List<AssociateModel>> getSupervisors() {
-    // TODO: implement getSupervisors
-    throw UnimplementedError();
+  Future<List<AssociateModel>> getSupervisors() async {
+    http.Response response = await http.get('http://sanrachna.pythonanywhere.com/api/associate/supervisor/');
+
+    print("Line 73: ${response.body}");
+
+    List<dynamic> responseList = jsonDecode(response.body);
+
+    _supervisorList?.clear();
+
+    responseList.forEach((element) {
+      _supervisorList.add(AssociateModel.fromJson(element));
+    });
+
+    return _supervisorList;
   }
 
   @override
-  Future<List<AssociateModel>> getVendors() {
-    // TODO: implement getVendors
-    throw UnimplementedError();
+  Future<List<AssociateModel>> getVendors() async {
+    http.Response response = await http.get('http://sanrachna.pythonanywhere.com/api/associate/vendor/');
+
+    print("Line 90: ${response.body}");
+
+    List<dynamic> responseList = jsonDecode(response.body);
+
+    _vendorList?.clear();
+
+    responseList.forEach((element) {
+      _vendorList.add(AssociateModel.fromJson(element));
+    });
+
+    return _vendorList;
   }
 
 }

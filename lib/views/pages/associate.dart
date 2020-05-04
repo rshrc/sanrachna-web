@@ -13,17 +13,11 @@ class AssociatePage extends StatefulWidget {
 class _AssociatePageState extends State<AssociatePage> {
   bool _dialVisible = true;
 
-  final List<Map<String, String>> listOfColumns = [
-    {"Name": "AAAAAA", "Number": "1", "State": "Yes"},
-    {"Name": "BBBBBB", "Number": "2", "State": "no"},
-    {"Name": "CCCCCC", "Number": "3", "State": "Yes"}
-  ];
-
-  var logger = Logger();
-
   AssociateProvider _associateProvider = AssociateProvider();
 
   List<AssociateModel> _labourList = [];
+  List<AssociateModel> _supervisorList = [];
+  List<AssociateModel> _vendorList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -34,129 +28,120 @@ class _AssociatePageState extends State<AssociatePage> {
           Container(
             height: MediaQuery.of(context).size.height,
             child: FutureBuilder<Object>(
-              future: _associateProvider.getLabours(),
-              builder: (context, snapshot) {
+                future: _associateProvider.getLabours(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
 
-                if(!snapshot.hasData) {
+                  print("Line 40: ${snapshot.data}");
+
+                  _labourList = snapshot.data;
+
+                  return Column(
+                    children: [
+                      TitleWidget(title: "Labour"),
+                      DataTable(
+                        columns: [
+                          DataColumn(label: Text('ID')),
+                          DataColumn(label: Text('Full Name')),
+                          DataColumn(label: Text('Organization')),
+                        ],
+                        rows: _labourList
+                            .map((element) => DataRow(cells: <DataCell>[
+                                  DataCell(Text("${element.id}")),
+                                  //Extracting from Map element the value
+                                  DataCell(Text("${element.fullName}")),
+                                  DataCell(Text("${element.organization}")),
+                                ]))
+                            .toList(),
+                      ),
+                    ],
+                  );
+                }),
+          ),
+          FutureBuilder<Object>(
+              future: _associateProvider.getSupervisors(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
                 }
 
-                print("Line 40: ${snapshot.data}");
+                print("Line 74: ${snapshot.data}");
 
-                _labourList = snapshot.data;
+                _supervisorList = snapshot.data;
+
+                if(_supervisorList.length == 0) {
+                  return Center(
+                    child: Text("No Data"),
+                  );
+                }
 
                 return Column(
                   children: [
-                    TitleWidget(title: "Labour"),
+                    TitleWidget(title: "Supervisor"),
                     DataTable(
                       columns: [
                         DataColumn(label: Text('ID')),
                         DataColumn(label: Text('Full Name')),
                         DataColumn(label: Text('Organization')),
                       ],
-                      rows: _labourList.map((element) => DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text("${element.id}")), //Extracting from Map element the value
-                          DataCell(Text("${element.fullName}")),
-                          DataCell(Text("${element.organization}")),
-                        ]
-                      )).toList(),
+                      rows: _supervisorList
+                          .map((element) => DataRow(cells: <DataCell>[
+                                DataCell(Text("${element.id}")),
+                                //Extracting from Map element the value
+                                DataCell(Text("${element.fullName}")),
+                                DataCell(Text("${element.organization}")),
+                              ]))
+                          .toList(),
                     ),
                   ],
                 );
-              }
-            ),
-          ),
-          Column(
-            children: [
-              TitleWidget(title: "Supervisor"),
-              DataTable(
-                columns: [
-                  DataColumn(label: Text('RollNo')),
-                  DataColumn(label: Text('Name')),
-                  DataColumn(label: Text('Class')),
-                ],
-                rows: [
-                  DataRow(cells: [
-                    DataCell(Text('1')),
-                    DataCell(Text('Arya')),
-                    DataCell(Text('6')),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text('12')),
-                    DataCell(Text('John')),
-                    DataCell(Text('9')),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text('42')),
-                    DataCell(Text('Tony')),
-                    DataCell(Text('8')),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text('1')),
-                    DataCell(Text('Arya')),
-                    DataCell(Text('6')),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text('12')),
-                    DataCell(Text('John')),
-                    DataCell(Text('9')),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text('42')),
-                    DataCell(Text('Tony')),
-                    DataCell(Text('8')),
-                  ]),
-                ],
-              )
-            ],
-          ),
-          Column(
-            children: [
-              TitleWidget(title: "Vendor"),
-              DataTable(
-                columns: [
-                  DataColumn(label: Text('RollNo')),
-                  DataColumn(label: Text('Name')),
-                  DataColumn(label: Text('Class')),
-                ],
-                rows: [
-                  DataRow(cells: [
-                    DataCell(Text('1')),
-                    DataCell(Text('Arya')),
-                    DataCell(Text('6')),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text('12')),
-                    DataCell(Text('John')),
-                    DataCell(Text('9')),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text('42')),
-                    DataCell(Text('Tony')),
-                    DataCell(Text('8')),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text('1')),
-                    DataCell(Text('Arya')),
-                    DataCell(Text('6')),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text('12')),
-                    DataCell(Text('John')),
-                    DataCell(Text('9')),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text('42')),
-                    DataCell(Text('Tony')),
-                    DataCell(Text('8')),
-                  ]),
-                ],
-              )
-            ],
-          ),
+              }),
+          FutureBuilder<Object>(
+              future: _associateProvider.getVendors(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                print("Line 74: ${snapshot.data}");
+
+                _vendorList = snapshot.data;
+
+                if(_vendorList.length == 0) {
+                  return Center(
+                    child: Text("No Data"),
+                  );
+                }
+
+                return Column(
+                  children: [
+                    TitleWidget(title: "Vendor"),
+                    DataTable(
+                      columns: [
+                        DataColumn(label: Text('ID')),
+                        DataColumn(label: Text('Full Name')),
+                        DataColumn(label: Text('Organization')),
+                      ],
+                      rows: _vendorList
+                          .map((element) => DataRow(cells: <DataCell>[
+                        DataCell(Text("${element.id}")),
+                        //Extracting from Map element the value
+                        DataCell(Text("${element.fullName}")),
+                        DataCell(Text("${element.organization}")),
+                      ]))
+                          .toList(),
+                    ),
+                  ],
+                );
+              }),
         ],
       ),
       floatingActionButton: SpeedDial(
