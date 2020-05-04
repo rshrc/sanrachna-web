@@ -1,4 +1,5 @@
 class ProspectModel {
+  int id;
   String fullName;
   String organization;
   String email;
@@ -6,15 +7,18 @@ class ProspectModel {
   String siteType;
   String sourceType;
 
-  ProspectModel(
-      {this.fullName,
-        this.organization,
-        this.email,
-        this.mobileNumber,
-        this.siteType,
-        this.sourceType});
+  ProspectModel({
+    this.id,
+    this.fullName,
+    this.organization,
+    this.email,
+    this.mobileNumber,
+    this.siteType,
+    this.sourceType,
+  });
 
   ProspectModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     fullName = json['full_name'];
     organization = json['organization'];
     email = json['email'];
@@ -25,6 +29,7 @@ class ProspectModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['full_name'] = this.fullName;
     data['organization'] = this.organization;
     data['email'] = this.email;

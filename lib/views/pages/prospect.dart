@@ -43,21 +43,46 @@ class _ProspectPageState extends State<ProspectPage> {
                         TitleWidget(title: "Labour"),
                         DataTable(
                           columns: [
+                            DataColumn(label: Text('ID')),
                             DataColumn(label: Text('Email')),
                             DataColumn(label: Text('Full Name')),
                             DataColumn(label: Text('Organization')),
                             DataColumn(label: Text("Phone Number")),
                             DataColumn(label: Text('Site Type')),
                             DataColumn(label: Text("Source Type")),
+                            DataColumn(label: Text("Delete")),
                           ],
                           rows: _prospectList
                               .map((element) => DataRow(cells: <DataCell>[
+                                    DataCell(Text("${element.id}")),
                                     DataCell(Text("${element.email}")),
                                     DataCell(Text("${element.fullName}")),
                                     DataCell(Text("${element.organization}")),
                                     DataCell(Text("${element.mobileNumber}")),
                                     DataCell(Text("${element.siteType}")),
                                     DataCell(Text("${element.sourceType}")),
+                                    DataCell(IconButton(
+                                      onPressed: () {
+                                        _prospectProvider
+                                            .deleteProspect(element.id)
+                                            .then((value) {
+                                          Toast.show(
+                                              "Deleting Prospect ${element.fullName}",
+                                              context,
+                                              backgroundColor: Colors.green);
+                                          setState(() {});
+                                          Toast.show(
+                                              "Deleted Prospect ${element.fullName}",
+                                              context,
+                                              backgroundColor: Colors.green);
+                                          setState(() {});
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.delete_outline,
+                                        color: Colors.grey,
+                                      ),
+                                    ))
                                   ]))
                               .toList(),
                         ),

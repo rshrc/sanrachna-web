@@ -130,7 +130,7 @@ abstract class ProspectAPIProvider {
     String sourceType,
   });
 
-  Future<String> deleteProspect();
+  Future<String> deleteProspect(int id);
 }
 
 abstract class ServiceAPIProvider {

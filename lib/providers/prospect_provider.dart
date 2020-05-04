@@ -36,9 +36,14 @@ class ProspectProvider implements ProspectAPIProvider {
   }
 
   @override
-  Future<String> deleteProspect() {
-    // TODO: implement deleteProspect
-    throw UnimplementedError();
+  Future<String> deleteProspect(int id) async {
+    http.Response response = await http.delete(
+      'http://sanrachna.pythonanywhere.com/api/prospect/prospect/$id/delete/',
+    );
+
+    print("Line 74: ${response.body}");
+
+    return response.body;
   }
 
   @override
