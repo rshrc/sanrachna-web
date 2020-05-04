@@ -75,7 +75,7 @@ class _AssociatePageState extends State<AssociatePage> {
 
                 _supervisorList = snapshot.data;
 
-                if(_supervisorList.length == 0) {
+                if (_supervisorList.length == 0) {
                   return Center(
                     child: Text("No Data"),
                   );
@@ -115,7 +115,7 @@ class _AssociatePageState extends State<AssociatePage> {
 
                 _vendorList = snapshot.data;
 
-                if(_vendorList.length == 0) {
+                if (_vendorList.length == 0) {
                   return Center(
                     child: Text("No Data"),
                   );
@@ -132,11 +132,11 @@ class _AssociatePageState extends State<AssociatePage> {
                       ],
                       rows: _vendorList
                           .map((element) => DataRow(cells: <DataCell>[
-                        DataCell(Text("${element.id}")),
-                        //Extracting from Map element the value
-                        DataCell(Text("${element.fullName}")),
-                        DataCell(Text("${element.organization}")),
-                      ]))
+                                DataCell(Text("${element.id}")),
+                                //Extracting from Map element the value
+                                DataCell(Text("${element.fullName}")),
+                                DataCell(Text("${element.organization}")),
+                              ]))
                           .toList(),
                     ),
                   ],
@@ -164,11 +164,14 @@ class _AssociatePageState extends State<AssociatePage> {
         shape: CircleBorder(),
         children: [
           SpeedDialChild(
-              child: Icon(Icons.accessibility),
-              backgroundColor: Colors.red,
-              label: 'Add Labour',
-              labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () => print('FIRST CHILD')),
+            child: Icon(Icons.accessibility),
+            backgroundColor: Colors.red,
+            label: 'Add Labour',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () {
+              _addLabourDialog(context);
+            },
+          ),
           SpeedDialChild(
             child: Icon(Icons.brush),
             backgroundColor: Colors.blue,
@@ -184,6 +187,105 @@ class _AssociatePageState extends State<AssociatePage> {
             onTap: () => print('THIRD CHILD'),
           ),
         ],
+      ),
+    );
+  }
+
+  _addLabourDialog(context) async {
+    TextEditingController _goodHabitController = TextEditingController();
+    TextEditingController _badHabitController = TextEditingController();
+
+    TextEditingController _fullNameController = TextEditingController();
+    TextEditingController _organizationController = TextEditingController();
+    TextEditingController _mobileNumberController = TextEditingController();
+    TextEditingController _emailController = TextEditingController();
+
+    TextStyle _labelTextStyle = TextStyle(color: Colors.black);
+
+    await showDialog<String>(
+      context: context,
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.5,
+        width: MediaQuery.of(context).size.width * 0.3,
+        child: Dialog(
+          shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
+//          contentPadding: const EdgeInsets.all(16.0),
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Text("Add Labour"),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _fullNameController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Full Name',
+                        hintText: 'Full Name',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _organizationController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Organization',
+                        hintText: 'Organization',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _mobileNumberController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Mobile Number',
+                        hintText: 'Mobile Number',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _emailController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Email ID',
+                        hintText: 'Email ID',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+//          actions: <Widget>[
+//            IconButton(
+//                icon: Icon(Icons.clear),
+//                onPressed: () {
+//                  Navigator.of(context).pop();
+//                }),
+//            IconButton(
+//                icon: Icon(Icons.check),
+//                onPressed: () {
+//                  // add it
+//                })
+//          ],
+        ),
       ),
     );
   }
