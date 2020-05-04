@@ -30,6 +30,7 @@ class Sanrachna extends StatelessWidget {
             centerTitle: true,
           ),
           body: TabBarView(
+            physics: NeverScrollableScrollPhysics(),
             children: [
               AssociatePage(),
               ClientalePage(),

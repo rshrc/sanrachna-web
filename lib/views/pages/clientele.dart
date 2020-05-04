@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:sanrachna_web/models/clientele_model.dart';
+import 'package:sanrachna_web/providers/clientele_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
 
 
@@ -10,29 +12,166 @@ class ClientalePage extends StatefulWidget {
 
 class _ClientalePageState extends State<ClientalePage> {
   bool _dialVisible = true;
+  List<ClienteleModel> _clientList = [];
+  List<ClienteleModel> _leadList = [];
+  List<ClienteleModel> _prospectList = [];
+
+  ClienteleProvider _clienteleProvider = ClienteleProvider();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
-              children: [
-                TitleWidget(title: "Clients")
-              ],
-            ),
-            Column(
-              children: [
-                TitleWidget(title: "Leads")
-              ],
-            ),
-            Column(
-              children: [
-                TitleWidget(title: "Prospect")
-              ],
-            ),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(height: 50.0,),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: FutureBuilder<Object>(
+                    future: _clienteleProvider.getClients(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+
+                      print("Line 40: ${snapshot.data}");
+
+                      _clientList = snapshot.data;
+
+                      return Column(
+                        children: [
+                          TitleWidget(title: "Clients"),
+                          DataTable(
+                            columns: [
+                              DataColumn(label: Text('Full Name')),
+                              DataColumn(label: Text('Organization')),
+                              DataColumn(label: Text('Email')),
+                              DataColumn(label: Text('Mobile')),
+                              DataColumn(label: Text('Site Type')),
+                              DataColumn(label: Text('Source Type')),
+
+                            ],
+                            rows: _clientList
+                                .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.fullName}")),
+                              DataCell(Text("${element.organization}")),
+                              DataCell(Text("${element.email}")),
+                              DataCell(Text("${element.mobileNumber}")),
+                              DataCell(Text("${element.siteType}")),
+                              DataCell(Text("${element.sourceType}")),
+
+                            ]))
+                                .toList(),
+                          ),
+                        ],
+                      );
+                    }),
+              ),
+              SizedBox(height: 50.0,),
+              FutureBuilder<Object>(
+                  future: _clienteleProvider.getLeads(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    print("Line 74: ${snapshot.data}");
+
+                    _leadList = snapshot.data;
+
+                    if(_leadList.length == 0) {
+                      return Center(
+                        child: Text("No Data"),
+                      );
+                    }
+
+                    return Column(
+                      children: [
+                        TitleWidget(title: "Leads"),
+                        DataTable(
+                          columns: [
+                            DataColumn(label: Text('Full Name')),
+                            DataColumn(label: Text('Organization')),
+                            DataColumn(label: Text('Email')),
+                            DataColumn(label: Text('Mobile')),
+                            DataColumn(label: Text('Site Type')),
+                            DataColumn(label: Text('Source Type')),
+
+                          ],
+                          rows: _leadList
+                              .map((element) => DataRow(cells: <DataCell>[
+                            //Extracting from Map element the value
+                            DataCell(Text("${element.fullName}")),
+                            DataCell(Text("${element.organization}")),
+                            DataCell(Text("${element.email}")),
+                            DataCell(Text("${element.mobileNumber}")),
+                            DataCell(Text("${element.siteType}")),
+                            DataCell(Text("${element.sourceType}")),
+
+                          ]))
+                              .toList(),
+                        ),
+                      ],
+                    );
+                  }),
+              SizedBox(height: 50.0,),
+              FutureBuilder<Object>(
+                  future: _clienteleProvider.getProspects(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    print("Line 74: ${snapshot.data}");
+
+                    _prospectList = snapshot.data;
+
+                    if(_prospectList.length == 0) {
+                      return Center(
+                        child: Text("No Data"),
+                      );
+                    }
+
+                    return Column(
+                      children: [
+                        TitleWidget(title: "Prospects"),
+                        DataTable(
+                          columns: [
+                            DataColumn(label: Text('Full Name')),
+                            DataColumn(label: Text('Organization')),
+                            DataColumn(label: Text('Email')),
+                            DataColumn(label: Text('Mobile')),
+                            DataColumn(label: Text('Site Type')),
+                            DataColumn(label: Text('Source Type')),
+
+                          ],
+                          rows: _prospectList
+                              .map((element) => DataRow(cells: <DataCell>[
+                            //Extracting from Map element the value
+                            DataCell(Text("${element.fullName}")),
+                            DataCell(Text("${element.organization}")),
+                            DataCell(Text("${element.email}")),
+                            DataCell(Text("${element.mobileNumber}")),
+                            DataCell(Text("${element.siteType}")),
+                            DataCell(Text("${element.sourceType}")),
+
+                          ]))
+                              .toList(),
+                        ),
+                      ],
+                    );
+                  }),
+              SizedBox(height: 50.0,),
+            ],
+          ),
         ),
         floatingActionButton: SpeedDial(
           marginRight: 18,
