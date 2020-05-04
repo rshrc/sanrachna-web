@@ -12,12 +12,39 @@ class _ClientalePageState extends State<ClientalePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        body: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Center(
-              child: Text("Clientale Data Goes Here"),
-            )
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text("Clients"),
+                  ),
+                )
+              ],
+            ),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text("Leads"),
+                  ),
+                )
+              ],
+            ),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text("Prospect"),
+                  ),
+                )
+              ],
+            ),
           ],
         ),
         floatingActionButton: SpeedDial(
