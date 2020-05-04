@@ -25,7 +25,9 @@ class _ClientalePageState extends State<ClientalePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 50.0,),
+              SizedBox(
+                height: 50.0,
+              ),
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: FutureBuilder<Object>(
@@ -54,48 +56,49 @@ class _ClientalePageState extends State<ClientalePage> {
                               DataColumn(label: Text('Site Type')),
                               DataColumn(label: Text('Source Type')),
                               DataColumn(label: Text("Delete")),
-
                             ],
                             rows: _clientList
                                 .map((element) => DataRow(cells: <DataCell>[
-                              //Extracting from Map element the value
-                              DataCell(Text("${element.id}")),
-                              DataCell(Text("${element.fullName}")),
-                              DataCell(Text("${element.organization}")),
-                              DataCell(Text("${element.email}")),
-                              DataCell(Text("${element.mobileNumber}")),
-                              DataCell(Text("${element.siteType}")),
-                              DataCell(Text("${element.sourceType}")),
-                              DataCell(IconButton(
-                                onPressed: () {
-                                  _clienteleProvider
-                                      .deleteClient(element.id)
-                                      .then((value) {
-                                    Toast.show("Deleting Client ${element.fullName}",
-                                        context,
-                                        backgroundColor: Colors.green);
-                                    setState(() {});
-                                    Toast.show("Deleted Client ${element.fullName}",
-                                        context,
-                                        backgroundColor: Colors.green);
-                                    setState(() {});
-                                  });
-                                },
-                                icon: Icon(
-                                  Icons.delete_outline,
-                                  color: Colors.grey,
-                                ),
-                              ))
-
-
-                            ]))
+                                      //Extracting from Map element the value
+                                      DataCell(Text("${element.id}")),
+                                      DataCell(Text("${element.fullName}")),
+                                      DataCell(Text("${element.organization}")),
+                                      DataCell(Text("${element.email}")),
+                                      DataCell(Text("${element.mobileNumber}")),
+                                      DataCell(Text("${element.siteType}")),
+                                      DataCell(Text("${element.sourceType}")),
+                                      DataCell(IconButton(
+                                        onPressed: () {
+                                          _clienteleProvider
+                                              .deleteClient(element.id)
+                                              .then((value) {
+                                            Toast.show(
+                                                "Deleting Client ${element.fullName}",
+                                                context,
+                                                backgroundColor: Colors.green);
+                                            setState(() {});
+                                            Toast.show(
+                                                "Deleted Client ${element.fullName}",
+                                                context,
+                                                backgroundColor: Colors.green);
+                                            setState(() {});
+                                          });
+                                        },
+                                        icon: Icon(
+                                          Icons.delete_outline,
+                                          color: Colors.grey,
+                                        ),
+                                      ))
+                                    ]))
                                 .toList(),
                           ),
                         ],
                       );
                     }),
               ),
-              SizedBox(height: 50.0,),
+              SizedBox(
+                height: 50.0,
+              ),
               FutureBuilder<Object>(
                   future: _clienteleProvider.getLeads(),
                   builder: (context, snapshot) {
@@ -109,7 +112,7 @@ class _ClientalePageState extends State<ClientalePage> {
 
                     _leadList = snapshot.data;
 
-                    if(_leadList.length == 0) {
+                    if (_leadList.length == 0) {
                       return Center(
                         child: Text("No Data"),
                       );
@@ -128,47 +131,48 @@ class _ClientalePageState extends State<ClientalePage> {
                             DataColumn(label: Text('Site Type')),
                             DataColumn(label: Text('Source Type')),
                             DataColumn(label: Text("Delete")),
-
                           ],
                           rows: _leadList
                               .map((element) => DataRow(cells: <DataCell>[
-                            //Extracting from Map element the value
-                            DataCell(Text("${element.id}")),
-                            DataCell(Text("${element.fullName}")),
-                            DataCell(Text("${element.organization}")),
-                            DataCell(Text("${element.email}")),
-                            DataCell(Text("${element.mobileNumber}")),
-                            DataCell(Text("${element.siteType}")),
-                            DataCell(Text("${element.sourceType}")),
-                            DataCell(IconButton(
-                              onPressed: () {
-                                _clienteleProvider
-                                    .deleteLead(element.id)
-                                    .then((value) {
-                                  Toast.show("Deleting Lead ${element.fullName}",
-                                      context,
-                                      backgroundColor: Colors.green);
-                                  setState(() {});
-                                  Toast.show("Deleted Lead ${element.fullName}",
-                                      context,
-                                      backgroundColor: Colors.green);
-                                  setState(() {});
-                                });
-                              },
-                              icon: Icon(
-                                Icons.delete_outline,
-                                color: Colors.grey,
-                              ),
-                            ))
-
-
-                          ]))
+                                    //Extracting from Map element the value
+                                    DataCell(Text("${element.id}")),
+                                    DataCell(Text("${element.fullName}")),
+                                    DataCell(Text("${element.organization}")),
+                                    DataCell(Text("${element.email}")),
+                                    DataCell(Text("${element.mobileNumber}")),
+                                    DataCell(Text("${element.siteType}")),
+                                    DataCell(Text("${element.sourceType}")),
+                                    DataCell(IconButton(
+                                      onPressed: () {
+                                        _clienteleProvider
+                                            .deleteLead(element.id)
+                                            .then((value) {
+                                          Toast.show(
+                                              "Deleting Lead ${element.fullName}",
+                                              context,
+                                              backgroundColor: Colors.green);
+                                          setState(() {});
+                                          Toast.show(
+                                              "Deleted Lead ${element.fullName}",
+                                              context,
+                                              backgroundColor: Colors.green);
+                                          setState(() {});
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.delete_outline,
+                                        color: Colors.grey,
+                                      ),
+                                    ))
+                                  ]))
                               .toList(),
                         ),
                       ],
                     );
                   }),
-              SizedBox(height: 50.0,),
+              SizedBox(
+                height: 50.0,
+              ),
               FutureBuilder<Object>(
                   future: _clienteleProvider.getProspects(),
                   builder: (context, snapshot) {
@@ -182,7 +186,7 @@ class _ClientalePageState extends State<ClientalePage> {
 
                     _prospectList = snapshot.data;
 
-                    if(_prospectList.length == 0) {
+                    if (_prospectList.length == 0) {
                       return Center(
                         child: Text("No Data"),
                       );
@@ -193,31 +197,55 @@ class _ClientalePageState extends State<ClientalePage> {
                         TitleWidget(title: "Prospects"),
                         DataTable(
                           columns: [
+                            DataColumn(label: Text("ID")),
                             DataColumn(label: Text('Full Name')),
                             DataColumn(label: Text('Organization')),
                             DataColumn(label: Text('Email')),
                             DataColumn(label: Text('Mobile')),
                             DataColumn(label: Text('Site Type')),
                             DataColumn(label: Text('Source Type')),
-
+                            DataColumn(label: Text('Delete')),
                           ],
                           rows: _prospectList
                               .map((element) => DataRow(cells: <DataCell>[
-                            //Extracting from Map element the value
-                            DataCell(Text("${element.fullName}")),
-                            DataCell(Text("${element.organization}")),
-                            DataCell(Text("${element.email}")),
-                            DataCell(Text("${element.mobileNumber}")),
-                            DataCell(Text("${element.siteType}")),
-                            DataCell(Text("${element.sourceType}")),
-
-                          ]))
+                                    DataCell(Text("${element.id}")),
+                                    DataCell(Text("${element.fullName}")),
+                                    DataCell(Text("${element.organization}")),
+                                    DataCell(Text("${element.email}")),
+                                    DataCell(Text("${element.mobileNumber}")),
+                                    DataCell(Text("${element.siteType}")),
+                                    DataCell(Text("${element.sourceType}")),
+                                    DataCell(IconButton(
+                                      onPressed: () {
+                                        _clienteleProvider
+                                            .deleteProspect(element.id)
+                                            .then((value) {
+                                          Toast.show(
+                                              "Deleting Prospect ${element.fullName}",
+                                              context,
+                                              backgroundColor: Colors.green);
+                                          setState(() {});
+                                          Toast.show(
+                                              "Deleted Prospect ${element.fullName}",
+                                              context,
+                                              backgroundColor: Colors.green);
+                                          setState(() {});
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.delete_outline,
+                                        color: Colors.grey,
+                                      ),
+                                    ))
+                                  ]))
                               .toList(),
                         ),
                       ],
                     );
                   }),
-              SizedBox(height: 50.0,),
+              SizedBox(
+                height: 50.0,
+              ),
             ],
           ),
         ),
@@ -269,7 +297,6 @@ class _ClientalePageState extends State<ClientalePage> {
           ],
         ));
   }
-
 
   _addClienaleDialog(context, {clientele}) async {
     TextEditingController _fullNameController = TextEditingController();
@@ -469,5 +496,4 @@ class _ClientalePageState extends State<ClientalePage> {
       ),
     );
   }
-
 }
