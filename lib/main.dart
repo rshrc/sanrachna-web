@@ -13,7 +13,7 @@ class Sanrachna extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primaryColor: Colors.redAccent, indicatorColor: Colors.yellow),
+      theme: ThemeData(primaryColor: Colors.redAccent, indicatorColor: Colors.yellow,splashColor: Colors.yellow),
       home: DefaultTabController(
         length: 4,
         child: Scaffold(
