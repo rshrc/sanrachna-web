@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:sanrachna_web/models/associate_model.dart';
+import 'package:sanrachna_web/providers/associate_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
+import 'package:logger/logger.dart';
 
 class AssociatePage extends StatefulWidget {
   @override
@@ -16,6 +19,12 @@ class _AssociatePageState extends State<AssociatePage> {
     {"Name": "CCCCCC", "Number": "3", "State": "Yes"}
   ];
 
+  var logger = Logger();
+
+  AssociateProvider _associateProvider = AssociateProvider();
+
+  List<AssociateModel> _labourList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,49 +33,40 @@ class _AssociatePageState extends State<AssociatePage> {
         children: [
           Container(
             height: MediaQuery.of(context).size.height,
-            child: Column(
-              children: [
-                TitleWidget(title: "Labour"),
-                DataTable(
-                  columns: [
-                    DataColumn(label: Text('RollNo')),
-                    DataColumn(label: Text('Name')),
-                    DataColumn(label: Text('Class')),
+            child: FutureBuilder<Object>(
+              future: _associateProvider.getLabours(),
+              builder: (context, snapshot) {
+
+                if(!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                print("Line 40: ${snapshot.data}");
+
+                _labourList = snapshot.data;
+
+                return Column(
+                  children: [
+                    TitleWidget(title: "Labour"),
+                    DataTable(
+                      columns: [
+                        DataColumn(label: Text('ID')),
+                        DataColumn(label: Text('Full Name')),
+                        DataColumn(label: Text('Organization')),
+                      ],
+                      rows: _labourList.map((element) => DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text("${element.id}")), //Extracting from Map element the value
+                          DataCell(Text("${element.fullName}")),
+                          DataCell(Text("${element.organization}")),
+                        ]
+                      )).toList(),
+                    ),
                   ],
-                  rows: [
-                    DataRow(cells: [
-                      DataCell(Text('1')),
-                      DataCell(Text('Arya')),
-                      DataCell(Text('6')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('12')),
-                      DataCell(Text('John')),
-                      DataCell(Text('9')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('42')),
-                      DataCell(Text('Tony')),
-                      DataCell(Text('8')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('1')),
-                      DataCell(Text('Arya')),
-                      DataCell(Text('6')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('12')),
-                      DataCell(Text('John')),
-                      DataCell(Text('9')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('42')),
-                      DataCell(Text('Tony')),
-                      DataCell(Text('8')),
-                    ]),
-                  ],
-                ),
-              ],
+                );
+              }
             ),
           ),
           Column(
