@@ -95,18 +95,19 @@ abstract class MaterialAPIProvider {
   Future<String> addPly();
 
   Future<String> deletePly();
-
-
-
-
-
-
 }
 
 abstract class ProspectAPIProvider {
   Future<List<ProspectModel>> getProspects();
 
-  Future<String> addProspect();
+  Future<String> addProspect({
+    String fullName,
+    String organization,
+    String email,
+    String mobileNumber,
+    String siteType,
+    String sourceType,
+  });
 
   Future<String> deleteProspect();
 }

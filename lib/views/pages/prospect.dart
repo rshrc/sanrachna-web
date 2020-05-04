@@ -3,6 +3,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:sanrachna_web/models/prospect_model.dart';
 import 'package:sanrachna_web/providers/prospect_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
+import 'package:toast/toast.dart';
 
 class ProspectPage extends StatefulWidget {
   @override
@@ -45,14 +46,19 @@ class _ProspectPageState extends State<ProspectPage> {
                             DataColumn(label: Text('Email')),
                             DataColumn(label: Text('Full Name')),
                             DataColumn(label: Text('Organization')),
+                            DataColumn(label: Text("Phone Number")),
+                            DataColumn(label: Text('Site Type')),
+                            DataColumn(label: Text("Source Type")),
                           ],
                           rows: _prospectList
                               .map((element) => DataRow(cells: <DataCell>[
-                            DataCell(Text("${element.email}")),
-                            //Extracting from Map element the value
-                            DataCell(Text("${element.fullName}")),
-                            DataCell(Text("${element.organization}")),
-                          ]))
+                                    DataCell(Text("${element.email}")),
+                                    DataCell(Text("${element.fullName}")),
+                                    DataCell(Text("${element.organization}")),
+                                    DataCell(Text("${element.mobileNumber}")),
+                                    DataCell(Text("${element.siteType}")),
+                                    DataCell(Text("${element.sourceType}")),
+                                  ]))
                               .toList(),
                         ),
                       ],
@@ -85,8 +91,164 @@ class _ProspectPageState extends State<ProspectPage> {
                 backgroundColor: Colors.red,
                 label: 'Add Prospect',
                 labelStyle: TextStyle(fontSize: 18.0),
-                onTap: () => print('FIRST CHILD')),
+                onTap: () {
+                  _addProspectDialog(context, prospect: "prospect");
+                }),
           ],
         ));
+  }
+
+  _addProspectDialog(context, {prospect}) async {
+    TextEditingController _fullNameController = TextEditingController();
+    TextEditingController _organizationController = TextEditingController();
+    TextEditingController _mobileNumberController = TextEditingController();
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _siteTypeController = TextEditingController();
+    TextEditingController _sourceTypeController = TextEditingController();
+
+    TextStyle _labelTextStyle = TextStyle(color: Colors.black);
+
+    await showDialog<String>(
+      context: context,
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.5,
+        width: MediaQuery.of(context).size.width * 0.3,
+        child: AlertDialog(
+          shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
+          content: Container(
+            child: Column(
+              children: <Widget>[
+                Text("Add Prospect"),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _fullNameController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Full Name',
+                        hintText: 'Full Name',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _organizationController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Organization',
+                        hintText: 'Organization',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _mobileNumberController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Mobile Number',
+                        hintText: 'Mobile Number',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _emailController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Email ID',
+                        hintText: 'Email ID',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _siteTypeController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Site Type',
+                        hintText: 'Site Type',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _sourceTypeController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Source Type',
+                        hintText: 'Source Type',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.clear),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                }),
+            IconButton(
+                icon: Icon(Icons.check),
+                onPressed: () {
+                  // add it
+                  print("Trying to add prospect");
+
+                  switch (prospect) {
+                    case 'prospect':
+                      print("Line 223: Inside Prospect Case");
+                      _prospectProvider
+                          .addProspect(
+                        fullName: _fullNameController.text,
+                        organization: _organizationController.text,
+                        mobileNumber: _mobileNumberController.text,
+                        email: _emailController.text,
+                        siteType: _siteTypeController.text,
+                        sourceType: _sourceTypeController.text,
+                      )
+                          .then((value) {
+                        Toast.show(
+                          "Added Prospect ${_fullNameController.text}",
+                          context,
+                          backgroundColor: Colors.green,
+                          duration: 3,
+                          textColor: Colors.white,
+                          border: Border.all(color: Colors.white),
+                        );
+                        setState(() {
+                          // Update Future Builder
+                        });
+                      });
+                      break;
+                  }
+                })
+          ],
+        ),
+      ),
+    );
   }
 }

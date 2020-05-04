@@ -9,9 +9,30 @@ class ProspectProvider implements ProspectAPIProvider {
   List<ProspectModel> _prospectList = [];
 
   @override
-  Future<String> addProspect() {
-    // TODO: implement addProspect
-    throw UnimplementedError();
+  Future<String> addProspect({
+    String fullName,
+    String organization,
+    String email,
+    String mobileNumber,
+    String siteType,
+    String sourceType,
+  }) async {
+
+    Map<String, dynamic> payload = {
+      'full_name': fullName,
+      'organization': organization,
+      'email': email,
+      'mobile_number': mobileNumber,
+      'site_type': siteType,
+      'source_type': sourceType,
+    };
+
+    http.Response response = await http
+        .post('http://sanrachna.pythonanywhere.com/api/prospect/list/', body: payload);
+
+    print("Line 48: ${response.body} $payload");
+
+    return response.body;
   }
 
   @override
