@@ -46,11 +46,32 @@ abstract class ClientaleAPIProvider {
 
   Future<List<ClienteleModel>> getProspects();
 
-  Future<String> addClient();
+  Future<String> addClient({
+    String fullName,
+    String organization,
+    String email,
+    String mobileNumber,
+    String siteType,
+    String sourceType,
+  });
 
-  Future<String> addLead();
+  Future<String> addLead({
+    String fullName,
+    String organization,
+    String email,
+    String mobileNumber,
+    String siteType,
+    String sourceType,
+  });
 
-  Future<String> addProspect();
+  Future<String> addProspect({
+    String fullName,
+    String organization,
+    String email,
+    String mobileNumber,
+    String siteType,
+    String sourceType,
+  });
 
   Future<String> deleteClient(int id);
 

@@ -12,20 +12,21 @@ class ClienteleProvider implements ClientaleAPIProvider {
   List<ClienteleModel> leadsList = [];
 
   @override
-  Future<String> addClient(
-      {String fullName,
-      String organization,
-      String email,
-      String mobileNumber,
-      String siteType,
-      String sourceType}) async {
-    var body = {
-      "fullName": fullName,
+  Future<String> addClient({
+    String fullName,
+    String organization,
+    String email,
+    String mobileNumber,
+    String siteType,
+    String sourceType,
+  }) async {
+    Map<String, dynamic> body = {
+      "full_name": fullName,
       "organization": organization,
       "email": email,
-      "mobileNumber": mobileNumber,
-      "siteType": siteType,
-      "sourceType": sourceType
+      "mobile_number": mobileNumber,
+      "site_type": siteType,
+      "source_type": sourceType
     };
     http.Response response =
         await http.post(Constants.clientClienteleAPI, body: body);
@@ -34,19 +35,21 @@ class ClienteleProvider implements ClientaleAPIProvider {
   }
 
   @override
-  Future<String> addLead({String fullName,
+  Future<String> addLead({
+    String fullName,
     String organization,
     String email,
     String mobileNumber,
     String siteType,
-    String sourceType}) async {
-    var body = {
-      "fullName": fullName,
+    String sourceType,
+  }) async {
+    Map<String, dynamic> body = {
+      "full_name": fullName,
       "organization": organization,
       "email": email,
-      "mobileNumber": mobileNumber,
-      "siteType": siteType,
-      "sourceType": sourceType
+      "mobile_number": mobileNumber,
+      "site_type": siteType,
+      "source_type": sourceType
     };
     http.Response response =
         await http.post(Constants.leadClienteleAPI, body: body);
@@ -55,19 +58,21 @@ class ClienteleProvider implements ClientaleAPIProvider {
   }
 
   @override
-  Future<String> addProspect({String fullName,
+  Future<String> addProspect({
+    String fullName,
     String organization,
     String email,
     String mobileNumber,
     String siteType,
-    String sourceType}) async {
-    var body = {
-      "fullName": fullName,
+    String sourceType,
+  }) async {
+    Map<String, dynamic> body = {
+      "full_name": fullName,
       "organization": organization,
       "email": email,
-      "mobileNumber": mobileNumber,
-      "siteType": siteType,
-      "sourceType": sourceType
+      "mobile_number": mobileNumber,
+      "site_type": siteType,
+      "source_type": sourceType
     };
     http.Response response =
         await http.post(Constants.prospectClienteleAPI, body: body);
@@ -95,8 +100,7 @@ class ClienteleProvider implements ClientaleAPIProvider {
 
   @override
   Future<List<ClienteleModel>> getClients() async {
-    http.Response response = await http
-        .get(Constants.clientClienteleAPI);
+    http.Response response = await http.get(Constants.clientClienteleAPI);
 
     print("Line 48: ${response.body}");
 
@@ -113,8 +117,7 @@ class ClienteleProvider implements ClientaleAPIProvider {
 
   @override
   Future<List<ClienteleModel>> getLeads() async {
-    http.Response response = await http
-        .get(Constants.leadClienteleAPI);
+    http.Response response = await http.get(Constants.leadClienteleAPI);
 
     print("Line 48: ${response.body}");
 
@@ -131,8 +134,7 @@ class ClienteleProvider implements ClientaleAPIProvider {
 
   @override
   Future<List<ClienteleModel>> getProspects() async {
-    http.Response response = await http
-        .get(Constants.prospectClienteleAPI);
+    http.Response response = await http.get(Constants.prospectClienteleAPI);
 
     print("Line 48: ${response.body}");
 

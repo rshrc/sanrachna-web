@@ -3,7 +3,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:sanrachna_web/models/clientele_model.dart';
 import 'package:sanrachna_web/providers/clientele_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
-
+import 'package:toast/toast.dart';
 
 class ClientalePage extends StatefulWidget {
   @override
@@ -197,22 +197,229 @@ class _ClientalePageState extends State<ClientalePage> {
                 backgroundColor: Colors.red,
                 label: 'Add Client',
                 labelStyle: TextStyle(fontSize: 18.0),
-                onTap: () => print('FIRST CHILD')),
+                onTap: () {
+                  _addClienaleDialog(context, clientele: 'client');
+                }),
             SpeedDialChild(
               child: Icon(Icons.brush),
               backgroundColor: Colors.blue,
               label: 'Add Leads',
               labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () => print('SECOND CHILD'),
+              onTap: () {
+                _addClienaleDialog(context, clientele: 'lead');
+              },
             ),
             SpeedDialChild(
               child: Icon(Icons.keyboard_voice),
               backgroundColor: Colors.green,
               label: 'Add Prospects',
               labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () => print('THIRD CHILD'),
+              onTap: () {
+                _addClienaleDialog(context, clientele: 'prospect');
+              },
             ),
           ],
         ));
   }
+
+
+  _addClienaleDialog(context, {clientele}) async {
+    TextEditingController _fullNameController = TextEditingController();
+    TextEditingController _organizationController = TextEditingController();
+    TextEditingController _mobileNumberController = TextEditingController();
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _siteTypeController = TextEditingController();
+    TextEditingController _sourceTypeController = TextEditingController();
+
+    TextStyle _labelTextStyle = TextStyle(color: Colors.black);
+
+    await showDialog<String>(
+      context: context,
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.5,
+        width: MediaQuery.of(context).size.width * 0.3,
+        child: AlertDialog(
+          shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
+          content: Container(
+            child: Column(
+              children: <Widget>[
+                Text("Add Labour"),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _fullNameController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Full Name',
+                        hintText: 'Full Name',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _organizationController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Organization',
+                        hintText: 'Organization',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _mobileNumberController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Mobile Number',
+                        hintText: 'Mobile Number',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _emailController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Email ID',
+                        hintText: 'Email ID',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _siteTypeController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Site Type',
+                        hintText: 'Site Type',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _sourceTypeController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Source Type',
+                        hintText: 'Source Type',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.clear),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                }),
+            IconButton(
+                icon: Icon(Icons.check),
+                onPressed: () {
+                  // add it
+                  switch (clientele) {
+                    case 'client':
+                      _clienteleProvider
+                          .addClient(
+                        fullName: _fullNameController.text,
+                        organization: _organizationController.text,
+                        mobileNumber: _mobileNumberController.text,
+                        email: _emailController.text,
+                        siteType: _siteTypeController.text,
+                        sourceType: _sourceTypeController.text,
+                      )
+                          .then((value) {
+                        Toast.show(
+                          "Added Client ${_fullNameController.text}",
+                          context,
+                          backgroundColor: Colors.green,
+                          duration: 3,
+                          textColor: Colors.white,
+                          border: Border.all(color: Colors.white),
+                        );
+                        setState(() {
+                          // Update Future Builder
+                        });
+                      });
+                      break;
+                    case 'lead':
+                      _clienteleProvider
+                          .addLead(
+                        fullName: _fullNameController.text,
+                        organization: _organizationController.text,
+                        mobileNumber: _mobileNumberController.text,
+                        email: _emailController.text,
+                        siteType: _siteTypeController.text,
+                        sourceType: _sourceTypeController.text,
+                      )
+                          .then((value) {
+                        Toast.show(
+                          "Added Lead ${_fullNameController.text}",
+                          context,
+                          backgroundColor: Colors.green,
+                          duration: 3,
+                          textColor: Colors.white,
+                          border: Border.all(color: Colors.white),
+                        );
+                        setState(() {
+                          // Update Future Builder
+                        });
+                      });
+                      break;
+                    case 'prospect':
+                      _clienteleProvider
+                          .addProspect(
+                        fullName: _fullNameController.text,
+                        organization: _organizationController.text,
+                        mobileNumber: _mobileNumberController.text,
+                        email: _emailController.text,
+                        siteType: _siteTypeController.text,
+                        sourceType: _sourceTypeController.text,
+                      )
+                          .then((value) {
+                        Toast.show(
+                          "Added Prospect ${_fullNameController.text}",
+                          context,
+                          backgroundColor: Colors.green,
+                          duration: 3,
+                          textColor: Colors.white,
+                          border: Border.all(color: Colors.white),
+                        );
+                        setState(() {
+                          // Update Future Builder
+                        });
+                      });
+                      break;
+                  }
+                })
+          ],
+        ),
+      ),
+    );
+  }
+
 }
