@@ -81,21 +81,36 @@ class ClienteleProvider implements ClientaleAPIProvider {
   }
 
   @override
-  Future<String> deleteClient(int id) {
-    // TODO: implement deleteClient
-    throw UnimplementedError();
+  Future<String> deleteClient(int id) async {
+    http.Response response = await http.delete(
+      'http://sanrachna.pythonanywhere.com/api/clientele/client/$id/delete/',
+    );
+
+    print("Line 89: ${response.body}");
+
+    return response.body;
   }
 
   @override
-  Future<String> deleteLead(int id) {
-    // TODO: implement deleteLead
-    throw UnimplementedError();
+  Future<String> deleteLead(int id) async {
+    http.Response response = await http.delete(
+      'http://sanrachna.pythonanywhere.com/api/clientele/lead/$id/delete/',
+    );
+
+    print("Line 100: ${response.body}");
+
+    return response.body;
   }
 
   @override
-  Future<String> deleteProspect(int id) {
-    // TODO: implement deleteProspect
-    throw UnimplementedError();
+  Future<String> deleteProspect(int id) async {
+    http.Response response = await http.delete(
+      'http://sanrachna.pythonanywhere.com/api/clientele/prospect/$id/delete/',
+    );
+
+    print("Line 111: ${response.body}");
+
+    return response.body;
   }
 
   @override

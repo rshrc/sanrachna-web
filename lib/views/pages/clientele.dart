@@ -46,23 +46,47 @@ class _ClientalePageState extends State<ClientalePage> {
                           TitleWidget(title: "Clients"),
                           DataTable(
                             columns: [
+                              DataColumn(label: Text("ID")),
                               DataColumn(label: Text('Full Name')),
                               DataColumn(label: Text('Organization')),
                               DataColumn(label: Text('Email')),
                               DataColumn(label: Text('Mobile')),
                               DataColumn(label: Text('Site Type')),
                               DataColumn(label: Text('Source Type')),
+                              DataColumn(label: Text("Delete")),
 
                             ],
                             rows: _clientList
                                 .map((element) => DataRow(cells: <DataCell>[
                               //Extracting from Map element the value
+                              DataCell(Text("${element.id}")),
                               DataCell(Text("${element.fullName}")),
                               DataCell(Text("${element.organization}")),
                               DataCell(Text("${element.email}")),
                               DataCell(Text("${element.mobileNumber}")),
                               DataCell(Text("${element.siteType}")),
                               DataCell(Text("${element.sourceType}")),
+                              DataCell(IconButton(
+                                onPressed: () {
+                                  _clienteleProvider
+                                      .deleteClient(element.id)
+                                      .then((value) {
+                                    Toast.show("Deleting Client ${element.fullName}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                    Toast.show("Deleted Client ${element.fullName}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.grey,
+                                ),
+                              ))
+
 
                             ]))
                                 .toList(),
