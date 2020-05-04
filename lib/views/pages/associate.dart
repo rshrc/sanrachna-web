@@ -4,6 +4,7 @@ import 'package:sanrachna_web/models/associate_model.dart';
 import 'package:sanrachna_web/providers/associate_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
 import 'package:logger/logger.dart';
+import 'package:toast/toast.dart';
 
 class AssociatePage extends StatefulWidget {
   @override
@@ -169,7 +170,7 @@ class _AssociatePageState extends State<AssociatePage> {
             label: 'Add Labour',
             labelStyle: TextStyle(fontSize: 18.0),
             onTap: () {
-              _addLabourDialog(context);
+              _addAssociateDialog(context, associate: "labour");
             },
           ),
           SpeedDialChild(
@@ -177,24 +178,25 @@ class _AssociatePageState extends State<AssociatePage> {
             backgroundColor: Colors.blue,
             label: 'Add Supervisor',
             labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => print('SECOND CHILD'),
+            onTap: () {
+              _addAssociateDialog(context, associate: "supervisor");
+            },
           ),
           SpeedDialChild(
             child: Icon(Icons.keyboard_voice),
             backgroundColor: Colors.green,
             label: 'Add Vendor',
             labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => print('THIRD CHILD'),
+            onTap: () {
+              _addAssociateDialog(context, associate: "vendor");
+            },
           ),
         ],
       ),
     );
   }
 
-  _addLabourDialog(context) async {
-    TextEditingController _goodHabitController = TextEditingController();
-    TextEditingController _badHabitController = TextEditingController();
-
+  _addAssociateDialog(context, {associate}) async {
     TextEditingController _fullNameController = TextEditingController();
     TextEditingController _organizationController = TextEditingController();
     TextEditingController _mobileNumberController = TextEditingController();
@@ -207,10 +209,9 @@ class _AssociatePageState extends State<AssociatePage> {
       child: Container(
         height: MediaQuery.of(context).size.height * 0.5,
         width: MediaQuery.of(context).size.width * 0.3,
-        child: Dialog(
+        child: AlertDialog(
           shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
-//          contentPadding: const EdgeInsets.all(16.0),
-          child: Container(
+          content: Container(
             child: Column(
               children: <Widget>[
                 Text("Add Labour"),
@@ -273,18 +274,86 @@ class _AssociatePageState extends State<AssociatePage> {
               ],
             ),
           ),
-//          actions: <Widget>[
-//            IconButton(
-//                icon: Icon(Icons.clear),
-//                onPressed: () {
-//                  Navigator.of(context).pop();
-//                }),
-//            IconButton(
-//                icon: Icon(Icons.check),
-//                onPressed: () {
-//                  // add it
-//                })
-//          ],
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.clear),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                }),
+            IconButton(
+                icon: Icon(Icons.check),
+                onPressed: () {
+                  // add it
+                  switch (associate) {
+                    case 'labour':
+                      _associateProvider
+                          .addLabour(
+                        fullName: _fullNameController.text,
+                        organization: _organizationController.text,
+                        mobileNumber: _mobileNumberController.text,
+                        email: _emailController.text,
+                      )
+                          .then((value) {
+                        Toast.show(
+                          "Added Labour ${_fullNameController.text}",
+                          context,
+                          backgroundColor: Colors.green,
+                          duration: 3,
+                          textColor: Colors.white,
+                          border: Border.all(color: Colors.white),
+                        );
+                        setState(() {
+                          // Update Future Builder
+                        });
+                      });
+                      break;
+                    case 'supervisor':
+                      _associateProvider
+                          .addSupervisor(
+                        fullName: _fullNameController.text,
+                        organization: _organizationController.text,
+                        mobileNumber: _mobileNumberController.text,
+                        email: _emailController.text,
+                      )
+                          .then((value) {
+                        Toast.show(
+                          "Added Supervisor ${_fullNameController.text}",
+                          context,
+                          backgroundColor: Colors.green,
+                          duration: 3,
+                          textColor: Colors.white,
+                          border: Border.all(color: Colors.white),
+                        );
+                        setState(() {
+                          // Update Future Builder
+                        });
+                      });
+                      break;
+                    case 'vendor':
+                      _associateProvider
+                          .addVendors(
+                        fullName: _fullNameController.text,
+                        organization: _organizationController.text,
+                        mobileNumber: _mobileNumberController.text,
+                        email: _emailController.text,
+                      )
+                          .then((value) {
+                        Toast.show(
+                          "Added Vendor ${_fullNameController.text}",
+                          context,
+                          backgroundColor: Colors.green,
+                          duration: 3,
+                          textColor: Colors.white,
+                          border: Border.all(color: Colors.white),
+                        );
+                        setState(() {
+                          // Update Future Builder
+                        });
+                      });
+                      break;
+                  }
+                })
+          ],
         ),
       ),
     );

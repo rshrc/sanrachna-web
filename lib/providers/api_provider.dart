@@ -11,11 +11,26 @@ abstract class AssociateAPIProvider {
 
   Future<List<AssociateModel>> getVendors();
 
-  Future<String> addLabour();
+  Future<String> addLabour({
+    String fullName,
+    String organization,
+    String mobileNumber,
+    String email,
+  });
 
-  Future<String> addSupervisor();
+  Future<String> addSupervisor({
+    String fullName,
+    String organization,
+    String mobileNumber,
+    String email,
+  });
 
-  Future<String> addVendors();
+  Future<String> addVendors({
+    String fullName,
+    String organization,
+    String mobileNumber,
+    String email,
+  });
 
   Future<String> deleteLabour(int id);
 

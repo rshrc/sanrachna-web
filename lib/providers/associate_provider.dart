@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:sanrachna_web/models/associate_model.dart';
@@ -6,27 +5,77 @@ import 'package:sanrachna_web/providers/api_provider.dart';
 import 'package:http/http.dart' as http;
 
 class AssociateProvider implements AssociateAPIProvider {
-
   List<AssociateModel> _labourList = [];
   List<AssociateModel> _supervisorList = [];
   List<AssociateModel> _vendorList = [];
 
   @override
-  Future<String> addLabour() {
-    // TODO: implement addLabour
-    throw UnimplementedError();
+  Future<String> addLabour({
+    String fullName,
+    String organization,
+    String mobileNumber,
+    String email,
+  }) async {
+    Map<String, dynamic> payload = {
+      'full_name': fullName,
+      'organization': organization,
+      'mobile_number': mobileNumber,
+      'email': email,
+    };
+
+    http.Response response = await http.post(
+        'http://sanrachna.pythonanywhere.com/api/associate/labour/',
+        body: payload);
+
+    print("Line 18: ${response.body}");
+
+    return response.body;
   }
 
   @override
-  Future<String> addSupervisor() {
-    // TODO: implement addSupervisor
-    throw UnimplementedError();
+  Future<String> addSupervisor({
+    String fullName,
+    String organization,
+    String mobileNumber,
+    String email,
+  }) async {
+    Map<String, dynamic> payload = {
+      'full_name': fullName,
+      'organization': organization,
+      'mobile_number': mobileNumber,
+      'email': email,
+    };
+
+    http.Response response = await http.post(
+        'http://sanrachna.pythonanywhere.com/api/associate/supervisor/',
+        body: payload);
+
+    print("Line 52: ${response.body}");
+
+    return response.body;
   }
 
   @override
-  Future<String> addVendors() {
-    // TODO: implement addVendors
-    throw UnimplementedError();
+  Future<String> addVendors({
+    String fullName,
+    String organization,
+    String mobileNumber,
+    String email,
+  }) async {
+    Map<String, dynamic> payload = {
+      'full_name': fullName,
+      'organization': organization,
+      'mobile_number': mobileNumber,
+      'email': email,
+    };
+
+    http.Response response = await http.post(
+        'http://sanrachna.pythonanywhere.com/api/associate/vendor/',
+        body: payload);
+
+    print("Line 74: ${response.body}");
+
+    return response.body;
   }
 
   @override
@@ -49,8 +98,8 @@ class AssociateProvider implements AssociateAPIProvider {
 
   @override
   Future<List<AssociateModel>> getLabours() async {
-
-    http.Response response = await http.get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
+    http.Response response = await http
+        .get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
 
     print("Line 48: ${response.body}");
 
@@ -63,12 +112,12 @@ class AssociateProvider implements AssociateAPIProvider {
     });
 
     return _labourList;
-
   }
 
   @override
   Future<List<AssociateModel>> getSupervisors() async {
-    http.Response response = await http.get('http://sanrachna.pythonanywhere.com/api/associate/supervisor/');
+    http.Response response = await http
+        .get('http://sanrachna.pythonanywhere.com/api/associate/supervisor/');
 
     print("Line 73: ${response.body}");
 
@@ -85,7 +134,8 @@ class AssociateProvider implements AssociateAPIProvider {
 
   @override
   Future<List<AssociateModel>> getVendors() async {
-    http.Response response = await http.get('http://sanrachna.pythonanywhere.com/api/associate/vendor/');
+    http.Response response = await http
+        .get('http://sanrachna.pythonanywhere.com/api/associate/vendor/');
 
     print("Line 90: ${response.body}");
 
@@ -99,5 +149,4 @@ class AssociateProvider implements AssociateAPIProvider {
 
     return _vendorList;
   }
-
 }

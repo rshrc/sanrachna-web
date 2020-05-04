@@ -32,6 +32,7 @@ dependencies:
   http:
   logger_flutter:
   google_fonts:
+  toast:
 
 dev_dependencies:
   flutter_test:
