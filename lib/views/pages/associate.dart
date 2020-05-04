@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:sanrachna_web/views/widgets/title_widget.dart';
 
 class AssociatePage extends StatefulWidget {
   @override
@@ -7,8 +8,13 @@ class AssociatePage extends StatefulWidget {
 }
 
 class _AssociatePageState extends State<AssociatePage> {
-
   bool _dialVisible = true;
+
+  final List<Map<String, String>> listOfColumns = [
+    {"Name": "AAAAAA", "Number": "1", "State": "Yes"},
+    {"Name": "BBBBBB", "Number": "2", "State": "no"},
+    {"Name": "CCCCCC", "Number": "3", "State": "Yes"}
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -20,32 +26,134 @@ class _AssociatePageState extends State<AssociatePage> {
             height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text("Labours"),
-                  ),
+                TitleWidget(title: "Labour"),
+                DataTable(
+                  columns: [
+                    DataColumn(label: Text('RollNo')),
+                    DataColumn(label: Text('Name')),
+                    DataColumn(label: Text('Class')),
+                  ],
+                  rows: [
+                    DataRow(cells: [
+                      DataCell(Text('1')),
+                      DataCell(Text('Arya')),
+                      DataCell(Text('6')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('12')),
+                      DataCell(Text('John')),
+                      DataCell(Text('9')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('42')),
+                      DataCell(Text('Tony')),
+                      DataCell(Text('8')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('1')),
+                      DataCell(Text('Arya')),
+                      DataCell(Text('6')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('12')),
+                      DataCell(Text('John')),
+                      DataCell(Text('9')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('42')),
+                      DataCell(Text('Tony')),
+                      DataCell(Text('8')),
+                    ]),
+                  ],
                 ),
               ],
             ),
           ),
           Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text("Supervisor"),
-                ),
+              TitleWidget(title: "Supervisor"),
+              DataTable(
+                columns: [
+                  DataColumn(label: Text('RollNo')),
+                  DataColumn(label: Text('Name')),
+                  DataColumn(label: Text('Class')),
+                ],
+                rows: [
+                  DataRow(cells: [
+                    DataCell(Text('1')),
+                    DataCell(Text('Arya')),
+                    DataCell(Text('6')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('12')),
+                    DataCell(Text('John')),
+                    DataCell(Text('9')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('42')),
+                    DataCell(Text('Tony')),
+                    DataCell(Text('8')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('1')),
+                    DataCell(Text('Arya')),
+                    DataCell(Text('6')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('12')),
+                    DataCell(Text('John')),
+                    DataCell(Text('9')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('42')),
+                    DataCell(Text('Tony')),
+                    DataCell(Text('8')),
+                  ]),
+                ],
               )
             ],
           ),
           Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text("Vendor"),
-                ),
+              TitleWidget(title: "Vendor"),
+              DataTable(
+                columns: [
+                  DataColumn(label: Text('RollNo')),
+                  DataColumn(label: Text('Name')),
+                  DataColumn(label: Text('Class')),
+                ],
+                rows: [
+                  DataRow(cells: [
+                    DataCell(Text('1')),
+                    DataCell(Text('Arya')),
+                    DataCell(Text('6')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('12')),
+                    DataCell(Text('John')),
+                    DataCell(Text('9')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('42')),
+                    DataCell(Text('Tony')),
+                    DataCell(Text('8')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('1')),
+                    DataCell(Text('Arya')),
+                    DataCell(Text('6')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('12')),
+                    DataCell(Text('John')),
+                    DataCell(Text('9')),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(Text('42')),
+                    DataCell(Text('Tony')),
+                    DataCell(Text('8')),
+                  ]),
+                ],
               )
             ],
           ),
@@ -75,8 +183,7 @@ class _AssociatePageState extends State<AssociatePage> {
               backgroundColor: Colors.red,
               label: 'Add Labour',
               labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () => print('FIRST CHILD')
-          ),
+              onTap: () => print('FIRST CHILD')),
           SpeedDialChild(
             child: Icon(Icons.brush),
             backgroundColor: Colors.blue,
