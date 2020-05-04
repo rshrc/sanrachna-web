@@ -1,8 +1,17 @@
-import 'package:sanrachna_web/models/clientelle_model.dart';
+import 'dart:convert';
 
+import 'package:sanrachna_web/models/clientelle_model.dart';
+import 'package:sanrachna_web/models/prospect_model.dart';
+import 'package:http/http.dart' as http;
 import 'api_provider.dart';
 
 class ClienteleProvider implements ClientaleAPIProvider {
+
+  List<ClientelleModel> prospectList = [];
+  List<ClientelleModel> clientList = [];
+  List<ClientelleModel> leadsList = [];
+
+
   @override
   Future<String> addClient() {
     // TODO: implement addClient
@@ -40,21 +49,54 @@ class ClienteleProvider implements ClientaleAPIProvider {
   }
 
   @override
-  Future<List<ClientelleModel>> getClients() {
-    // TODO: implement getClients
-    throw UnimplementedError();
+  Future<List<ClientelleModel>> getClients() async {
+    http.Response response = await http.get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
+
+    print("Line 48: ${response.body}");
+
+    List<dynamic> responseList = jsonDecode(response.body);
+
+    clientList?.clear();
+
+    responseList.forEach((element) {
+      clientList.add(ClientelleModel.fromJson(element));
+    });
+
+    return clientList;
   }
 
   @override
-  Future<List<ClientelleModel>> getLeads() {
-    // TODO: implement getLeads
-    throw UnimplementedError();
+  Future<List<ClientelleModel>> getLeads() async {
+    http.Response response = await http.get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
+
+    print("Line 48: ${response.body}");
+
+    List<dynamic> responseList = jsonDecode(response.body);
+
+    leadsList?.clear();
+
+    responseList.forEach((element) {
+      leadsList.add(ClientelleModel.fromJson(element));
+    });
+
+    return leadsList;
   }
 
   @override
-  Future<List<ClientelleModel>> getProspects() {
-    // TODO: implement getProspects
-    throw UnimplementedError();
+  Future<List<ClientelleModel>> getProspects() async {
+    http.Response response = await http.get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
+
+    print("Line 48: ${response.body}");
+
+    List<dynamic> responseList = jsonDecode(response.body);
+
+    prospectList?.clear();
+
+    responseList.forEach((element) {
+      prospectList.add(ClientelleModel.fromJson(element));
+    });
+
+    return prospectList;
   }
 
 }

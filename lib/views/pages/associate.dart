@@ -24,7 +24,6 @@ class _AssociatePageState extends State<AssociatePage> {
   AssociateProvider _associateProvider = AssociateProvider();
 
   List<AssociateModel> _labourList = [];
-  List<>
 
   @override
   Widget build(BuildContext context) {
