@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sanrachna_web/views/pages/associate.dart';
-import 'package:sanrachna_web/views/pages/clientale.dart';
+import 'package:sanrachna_web/views/pages/clientele.dart';
 import 'package:sanrachna_web/views/pages/database.dart';
 import 'package:sanrachna_web/views/pages/home_page.dart';
 import 'package:sanrachna_web/views/pages/prospect.dart';

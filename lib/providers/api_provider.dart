@@ -1,5 +1,5 @@
 import 'package:sanrachna_web/models/associate_model.dart';
-import 'package:sanrachna_web/models/clientelle_model.dart';
+import 'package:sanrachna_web/models/clientele_model.dart';
 import 'package:sanrachna_web/models/material_model.dart';
 import 'package:sanrachna_web/models/prospect_model.dart';
 
@@ -24,11 +24,11 @@ abstract class AssociateAPIProvider {
 }
 
 abstract class ClientaleAPIProvider {
-  Future<List<ClientelleModel>> getClients();
+  Future<List<ClienteleModel>> getClients();
 
-  Future<List<ClientelleModel>> getLeads();
+  Future<List<ClienteleModel>> getLeads();
 
-  Future<List<ClientelleModel>> getProspects();
+  Future<List<ClienteleModel>> getProspects();
 
   Future<String> addClient();
 

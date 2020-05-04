@@ -1,15 +1,15 @@
 import 'dart:convert';
 
-import 'package:sanrachna_web/models/clientelle_model.dart';
+import 'package:sanrachna_web/models/clientele_model.dart';
 import 'package:sanrachna_web/models/prospect_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:sanrachna_web/utils/constants.dart';
 import 'api_provider.dart';
 
 class ClienteleProvider implements ClientaleAPIProvider {
-  List<ClientelleModel> prospectList = [];
-  List<ClientelleModel> clientList = [];
-  List<ClientelleModel> leadsList = [];
+  List<ClienteleModel> prospectList = [];
+  List<ClienteleModel> clientList = [];
+  List<ClienteleModel> leadsList = [];
 
   @override
   Future<String> addClient(
@@ -94,7 +94,7 @@ class ClienteleProvider implements ClientaleAPIProvider {
   }
 
   @override
-  Future<List<ClientelleModel>> getClients() async {
+  Future<List<ClienteleModel>> getClients() async {
     http.Response response = await http
         .get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
 
@@ -105,14 +105,14 @@ class ClienteleProvider implements ClientaleAPIProvider {
     clientList?.clear();
 
     responseList.forEach((element) {
-      clientList.add(ClientelleModel.fromJson(element));
+      clientList.add(ClienteleModel.fromJson(element));
     });
 
     return clientList;
   }
 
   @override
-  Future<List<ClientelleModel>> getLeads() async {
+  Future<List<ClienteleModel>> getLeads() async {
     http.Response response = await http
         .get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
 
@@ -123,14 +123,14 @@ class ClienteleProvider implements ClientaleAPIProvider {
     leadsList?.clear();
 
     responseList.forEach((element) {
-      leadsList.add(ClientelleModel.fromJson(element));
+      leadsList.add(ClienteleModel.fromJson(element));
     });
 
     return leadsList;
   }
 
   @override
-  Future<List<ClientelleModel>> getProspects() async {
+  Future<List<ClienteleModel>> getProspects() async {
     http.Response response = await http
         .get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
 
@@ -141,7 +141,7 @@ class ClienteleProvider implements ClientaleAPIProvider {
     prospectList?.clear();
 
     responseList.forEach((element) {
-      prospectList.add(ClientelleModel.fromJson(element));
+      prospectList.add(ClienteleModel.fromJson(element));
     });
 
     return prospectList;

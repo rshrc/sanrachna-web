@@ -1,4 +1,4 @@
-class ClientelleModel {
+class ClienteleModel {
   String fullName;
   String organization;
   String email;
@@ -6,7 +6,7 @@ class ClientelleModel {
   String siteType;
   String sourceType;
 
-  ClientelleModel(
+  ClienteleModel(
       {this.fullName,
         this.organization,
         this.email,
@@ -14,7 +14,7 @@ class ClientelleModel {
         this.siteType,
         this.sourceType});
 
-  ClientelleModel.fromJson(Map<String, dynamic> json) {
+  ClienteleModel.fromJson(Map<String, dynamic> json) {
     fullName = json['full_name'];
     organization = json['organization'];
     email = json['email'];
