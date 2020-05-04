@@ -44,18 +44,12 @@ abstract class ClientaleAPIProvider {
   Future<String> deleteProspect(int id);
 }
 
-abstract class DatabaseAPIProvider {
+abstract class MaterialAPIProvider {
   Future<List<MaterialModel>> getMaterials();
-
-  Future<String> getServices();
 
   Future<String> addMaterial();
 
-  Future<String> addService();
-
   Future<String> deleteMaterial();
-
-  Future<String> deleteService();
 }
 
 abstract class ProspectAPIProvider {
@@ -73,4 +67,3 @@ abstract class ServiceAPIProvider {
 
   Future<String> deleteServices();
 }
-
