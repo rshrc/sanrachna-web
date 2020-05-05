@@ -210,14 +210,14 @@ class _ServicePageState extends State<ServicePage> {
                   print("Trying to add prospect");
 
                   switch (service) {
-                    case 'prospect':
+                    case 'service':
                       print("Line 223: Inside service Case");
                       _serviceProvider
                           .addServices(
                         name: _nameController.text,
                         unit: _unitController.text,
                         rate: _rateController.text,
-                        prospect: _prospectController.text,
+                        prospect: int.parse(_prospectController.text),
                       )
                           .then((value) {
                         Toast.show(

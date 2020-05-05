@@ -136,7 +136,7 @@ abstract class ProspectAPIProvider {
 abstract class ServiceAPIProvider {
   Future<List<ServiceModel>> getServices();
 
-  Future<String> addServices({String name, String unit, String rate, String prospect});
+  Future<String> addServices({String name, String unit, String rate, int prospect});
 
   Future<String> deleteServices(int id);
 }
