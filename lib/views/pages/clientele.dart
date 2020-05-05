@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:sanrachna_web/models/clientele_model.dart';
 import 'package:sanrachna_web/providers/clientele_provider.dart';
+import 'package:sanrachna_web/utils/constants.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
 import 'package:toast/toast.dart';
 
@@ -305,8 +306,9 @@ class _ClientalePageState extends State<ClientalePage> {
     TextEditingController _emailController = TextEditingController();
     TextEditingController _siteTypeController = TextEditingController();
     TextEditingController _sourceTypeController = TextEditingController();
-
+    String dropdownValue = "COMMERCIAL";
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
+    String dropdownValue2 = "ONLINE";
 
     await showDialog<String>(
       context: context,
@@ -316,6 +318,7 @@ class _ClientalePageState extends State<ClientalePage> {
         child: AlertDialog(
           shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
           content: Container(
+            width: MediaQuery.of(context).size.width/2,
             child: Column(
               children: <Widget>[
                 Text("Add Labour"),
@@ -378,42 +381,76 @@ class _ClientalePageState extends State<ClientalePage> {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _siteTypeController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Site Type',
-                        hintText: 'Site Type',
-                        labelStyle: _labelTextStyle,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width/2.1,
+                      child: DropdownButton<String>(
+                        value: dropdownValue,
+                        icon: Icon(Icons.keyboard_arrow_down),
+                        iconSize: 24,
+                        elevation: 8,
+                        style: TextStyle(
+                            color: Colors.blue
+                        ),
+
+                        onChanged: (String newValue) {
+                          setState(() {
+                            dropdownValue = newValue;
+                          });
+                        },
+                        items: <String>['COMMERCIAL', 'HOME', 'OFFICE']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        })
+                            .toList(),
                       ),
-                    ),
+                    )
                   ),
                 ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _sourceTypeController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Source Type',
-                        hintText: 'Source Type',
-                        labelStyle: _labelTextStyle,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width/2.05,
+                      child: DropdownButton<String>(
+                        value: dropdownValue2,
+                        icon: Icon(Icons.keyboard_arrow_down),
+                        iconSize: 24,
+                        elevation: 8,
+                        style: TextStyle(
+                            color: Colors.blue
+                        ),
+
+                        onChanged: (String newValue) {
+                          setState(() {
+                            dropdownValue2 = newValue;
+                          });
+                        },
+                        items: <String>['ONLINE', 'OFFLINE']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        })
+                            .toList(),
                       ),
-                    ),
+                    )
                   ),
                 ),
               ],
             ),
           ),
           actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.clear),
+            FlatButton(
+                child: Text("CANCEL", style: TextStyle(color: Colors.redAccent, fontSize: 16.0),),
                 onPressed: () {
                   Navigator.of(context).pop();
                 }),
-            IconButton(
-                icon: Icon(Icons.check),
+            FlatButton(
+                child: Text("ADD", style: TextStyle(color: Colors.blue ,fontSize: 16.0),),
                 onPressed: () {
                   // add it
                   switch (clientele) {

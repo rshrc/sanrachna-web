@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:printing/printing.dart';
+//import 'package:printing/printing.dart';
 import 'package:sanrachna_web/providers/oq_provider.dart';
 import 'package:sanrachna_web/views/pages/associate.dart';
 import 'package:sanrachna_web/views/pages/clientele.dart';
@@ -55,14 +55,14 @@ class _SanrachnaState extends State<Sanrachna> {
               IconButton(
                 onPressed: () {
                   /// Null
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return GenerateQuotePage();
-                      },
-                    ),
-                  );
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(
+//                      builder: (context) {
+//                        return GenerateQuotePage();
+//                      },
+//                    ),
+//                  );
                 },
                 icon: Icon(Icons.data_usage),
               ),

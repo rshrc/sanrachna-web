@@ -23,13 +23,85 @@ class _AssociatePageState extends State<AssociatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height,
-            child: FutureBuilder<Object>(
-                future: _associateProvider.getLabours(),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 50.0,
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: FutureBuilder<Object>(
+                  future: _associateProvider.getLabours(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    print("Line 40: ${snapshot.data}");
+
+                    _labourList = snapshot.data;
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        TitleWidget(title: "Labour"),
+                        DataTable(
+                          columns: [
+                            DataColumn(label: Text('ID')),
+                            DataColumn(label: Text('Full Name')),
+                            DataColumn(label: Text('Organization')),
+                            DataColumn(label: Text("Email")),
+                            DataColumn(label: Text("Mobile")),
+                            DataColumn(label: Text("Delete")),
+                          ],
+                          rows: _labourList
+                              .map((element) => DataRow(cells: <DataCell>[
+                                    DataCell(Text("${element.id}")),
+                                    //Extracting from Map element the value
+                                    DataCell(Text("${element.fullName}")),
+                                    DataCell(Text("${element.organization}")),
+                                    DataCell(Text("${element.email}")),
+                                    DataCell(Text("${element.mobileNumber}")),
+
+                                    DataCell(IconButton(
+                                      onPressed: () {
+                                        _associateProvider
+                                            .deleteLabour(element.id)
+                                            .then((value) {
+                                          Toast.show(
+                                              "Deleting Labour ${element.fullName}",
+                                              context,
+                                              backgroundColor: Colors.green);
+                                          setState(() {});
+                                          Toast.show(
+                                              "Deleted Labour ${element.fullName}",
+                                              context,
+                                              backgroundColor: Colors.green);
+                                          setState(() {});
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.delete_outline,
+                                        color: Colors.grey,
+                                      ),
+                                    ))
+                                  ]))
+                              .toList(),
+                        ),
+                      ],
+                    );
+                  }),
+            ),
+            SizedBox(
+              height: 50.0,
+            ),
+            FutureBuilder<Object>(
+                future: _associateProvider.getSupervisors(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     return Center(
@@ -37,38 +109,48 @@ class _AssociatePageState extends State<AssociatePage> {
                     );
                   }
 
-                  print("Line 40: ${snapshot.data}");
+                  print("Line 74: ${snapshot.data}");
 
-                  _labourList = snapshot.data;
+                  _supervisorList = snapshot.data;
+
+                  if (_supervisorList.length == 0) {
+                    return Center(
+                      child: Text("No Data"),
+                    );
+                  }
 
                   return Column(
                     children: [
-                      TitleWidget(title: "Labour"),
+                      TitleWidget(title: "Supervisor"),
                       DataTable(
                         columns: [
                           DataColumn(label: Text('ID')),
                           DataColumn(label: Text('Full Name')),
                           DataColumn(label: Text('Organization')),
+                          DataColumn(label: Text("Email")),
+                          DataColumn(label: Text("Mobile")),
                           DataColumn(label: Text("Delete")),
                         ],
-                        rows: _labourList
+                        rows: _supervisorList
                             .map((element) => DataRow(cells: <DataCell>[
                                   DataCell(Text("${element.id}")),
                                   //Extracting from Map element the value
                                   DataCell(Text("${element.fullName}")),
                                   DataCell(Text("${element.organization}")),
+                                  DataCell(Text("${element.email}")),
+                                  DataCell(Text("${element.mobileNumber}")),
                                   DataCell(IconButton(
                                     onPressed: () {
                                       _associateProvider
-                                          .deleteLabour(element.id)
+                                          .deleteSupervisor(element.id)
                                           .then((value) {
                                         Toast.show(
-                                            "Deleting Labour ${element.fullName}",
+                                            "Deleting Supervisor ${element.fullName}",
                                             context,
                                             backgroundColor: Colors.green);
                                         setState(() {});
                                         Toast.show(
-                                            "Deleted Labour ${element.fullName}",
+                                            "Deleted Supervisor ${element.fullName}",
                                             context,
                                             backgroundColor: Colors.green);
                                         setState(() {});
@@ -85,131 +167,80 @@ class _AssociatePageState extends State<AssociatePage> {
                     ],
                   );
                 }),
-          ),
-          FutureBuilder<Object>(
-              future: _associateProvider.getSupervisors(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(),
+            SizedBox(
+              height: 50.0,
+            ),
+            FutureBuilder<Object>(
+                future: _associateProvider.getVendors(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+
+                  print("Line 74: ${snapshot.data}");
+
+                  _vendorList = snapshot.data;
+
+                  if (_vendorList.length == 0) {
+                    return Center(
+                      child: Text("No Data"),
+                    );
+                  }
+
+                  return Column(
+                    children: [
+                      TitleWidget(title: "Vendor"),
+                      DataTable(
+                        columns: [
+                          DataColumn(label: Text('ID')),
+                          DataColumn(label: Text('Full Name')),
+                          DataColumn(label: Text('Organization')),
+                          DataColumn(label: Text("Email")),
+                          DataColumn(label: Text("Mobile")),
+                          DataColumn(label: Text("Delete")),
+                        ],
+                        rows: _vendorList
+                            .map((element) => DataRow(cells: <DataCell>[
+                                  DataCell(Text("${element.id}")),
+                                  DataCell(Text("${element.fullName}")),
+                                  DataCell(Text("${element.organization}")),
+                                  DataCell(Text("${element.email}")),
+                                  DataCell(Text("${element.mobileNumber}")),
+                                  DataCell(IconButton(
+                                    onPressed: () {
+                                      _associateProvider
+                                          .deleteVendor(element.id)
+                                          .then((value) {
+                                        Toast.show(
+                                            "Deleting Vendor ${element.fullName}",
+                                            context,
+                                            backgroundColor: Colors.green);
+                                        setState(() {});
+                                        Toast.show(
+                                            "Deleted Vendor ${element.fullName}",
+                                            context,
+                                            backgroundColor: Colors.green);
+                                        setState(() {});
+                                      });
+                                    },
+                                    icon: Icon(
+                                      Icons.delete_outline,
+                                      color: Colors.grey,
+                                    ),
+                                  ))
+                                ]))
+                            .toList(),
+                      ),
+                    ],
                   );
-                }
-
-                print("Line 74: ${snapshot.data}");
-
-                _supervisorList = snapshot.data;
-
-                if (_supervisorList.length == 0) {
-                  return Center(
-                    child: Text("No Data"),
-                  );
-                }
-
-                return Column(
-                  children: [
-                    TitleWidget(title: "Supervisor"),
-                    DataTable(
-                      columns: [
-                        DataColumn(label: Text('ID')),
-                        DataColumn(label: Text('Full Name')),
-                        DataColumn(label: Text('Organization')),
-                        DataColumn(label: Text("Delete")),
-                      ],
-                      rows: _supervisorList
-                          .map((element) => DataRow(cells: <DataCell>[
-                                DataCell(Text("${element.id}")),
-                                //Extracting from Map element the value
-                                DataCell(Text("${element.fullName}")),
-                                DataCell(Text("${element.organization}")),
-                                DataCell(IconButton(
-                                  onPressed: () {
-                                    _associateProvider
-                                        .deleteSupervisor(element.id)
-                                        .then((value) {
-                                      Toast.show(
-                                          "Deleting Supervisor ${element.fullName}",
-                                          context,
-                                          backgroundColor: Colors.green);
-                                      setState(() {});
-                                      Toast.show(
-                                          "Deleted Supervisor ${element.fullName}",
-                                          context,
-                                          backgroundColor: Colors.green);
-                                      setState(() {});
-                                    });
-                                  },
-                                  icon: Icon(
-                                    Icons.delete_outline,
-                                    color: Colors.grey,
-                                  ),
-                                ))
-                              ]))
-                          .toList(),
-                    ),
-                  ],
-                );
-              }),
-          FutureBuilder<Object>(
-              future: _associateProvider.getVendors(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-
-                print("Line 74: ${snapshot.data}");
-
-                _vendorList = snapshot.data;
-
-                if (_vendorList.length == 0) {
-                  return Center(
-                    child: Text("No Data"),
-                  );
-                }
-
-                return Column(
-                  children: [
-                    TitleWidget(title: "Vendor"),
-                    DataTable(
-                      columns: [
-                        DataColumn(label: Text('ID')),
-                        DataColumn(label: Text('Full Name')),
-                        DataColumn(label: Text('Organization')),
-                        DataColumn(label: Text("Delete")),
-                      ],
-                      rows: _vendorList
-                          .map((element) => DataRow(cells: <DataCell>[
-                                DataCell(Text("${element.id}")),
-                                DataCell(Text("${element.fullName}")),
-                                DataCell(Text("${element.organization}")),
-                                DataCell(IconButton(
-                                  onPressed: () {
-                                    _associateProvider
-                                        .deleteVendor(element.id)
-                                        .then((value) {
-                                      Toast.show("Deleting Vendor ${element.fullName}",
-                                          context,
-                                          backgroundColor: Colors.green);
-                                      setState(() {});
-                                      Toast.show("Deleted Vendor ${element.fullName}",
-                                          context,
-                                          backgroundColor: Colors.green);
-                                      setState(() {});
-                                    });
-                                  },
-                                  icon: Icon(
-                                    Icons.delete_outline,
-                                    color: Colors.grey,
-                                  ),
-                                ))
-                              ]))
-                          .toList(),
-                    ),
-                  ],
-                );
-              }),
-        ],
+                }),
+            SizedBox(
+              height: 50.0,
+            ),
+          ],
+        ),
       ),
       floatingActionButton: SpeedDial(
         marginRight: 18,
@@ -278,6 +309,7 @@ class _AssociatePageState extends State<AssociatePage> {
         child: AlertDialog(
           shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
           content: Container(
+            width: MediaQuery.of(context).size.width/2,
             child: Column(
               children: <Widget>[
                 Text("Add Labour"),
@@ -341,13 +373,13 @@ class _AssociatePageState extends State<AssociatePage> {
             ),
           ),
           actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.clear),
+            FlatButton(
+                child: Text("CANCEL", style: TextStyle(color: Colors.redAccent, fontSize: 16.0),),
                 onPressed: () {
                   Navigator.of(context).pop();
                 }),
-            IconButton(
-                icon: Icon(Icons.check),
+            FlatButton(
+                child: Text("ADD", style: TextStyle(color: Colors.blue ,fontSize: 16.0),),
                 onPressed: () {
                   // add it
                   switch (associate) {

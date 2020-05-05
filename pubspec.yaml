@@ -18,11 +18,11 @@ dependencies:
   logger_flutter:
   #google_fonts:
   toast:
-  path_provider:
+#  path_provider:
   open_file:
   url_launcher:
-  pdf:
-  printing:
+#  pdf:
+#  printing:
 
 
 
@@ -31,11 +31,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-dependency_overrides:
-  printing:
-    git:
-      url: https://github.com/DavBfr/dart_pdf
-      path: printing
+#dependency_overrides:
+#  printing:
+#    git:
+#      url: https://github.com/DavBfr/dart_pdf
+#      path: printing
 
 flutter:
 

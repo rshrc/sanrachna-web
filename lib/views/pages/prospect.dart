@@ -141,6 +141,7 @@ class _ProspectPageState extends State<ProspectPage> {
         child: AlertDialog(
           shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
           content: Container(
+            width: MediaQuery.of(context).size.width/2,
             child: Column(
               children: <Widget>[
                 Text("Add Prospect"),
@@ -232,13 +233,13 @@ class _ProspectPageState extends State<ProspectPage> {
             ),
           ),
           actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.clear),
+            FlatButton(
+                child: Text("CANCEL", style: TextStyle(color: Colors.redAccent, fontSize: 16.0),),
                 onPressed: () {
                   Navigator.of(context).pop();
                 }),
-            IconButton(
-                icon: Icon(Icons.check),
+            FlatButton(
+                child: Text("ADD", style: TextStyle(color: Colors.blue ,fontSize: 16.0),),
                 onPressed: () {
                   // add it
                   print("Trying to add prospect");
