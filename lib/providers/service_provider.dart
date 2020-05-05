@@ -8,22 +8,22 @@ import 'package:sanrachna_web/utils/constants.dart';
 import 'api_provider.dart';
 
 class ServiceProvider implements ServiceAPIProvider {
-
   List<ServiceModel> _services = [];
 
   @override
-  Future<String> addServices({String name, String unit, String rate, String prospect}) async {
-
+  Future<String> addServices(
+      {String name, String unit, String rate, String prospect}) async {
     try {
       Map<String, dynamic> body = {
-            'name': name,
-            'unit': unit,
-            'rate': rate,
-            'prospect': int.parse(prospect),
-          };
+        'name': name,
+        'unit': unit,
+        'rate': rate,
+        'prospect': int.parse(prospect),
+      };
 
-      http.Response response =
-          await http.post("http://sanrachna.pythonanywhere.com/api/database/service/", body: body);
+      http.Response response = await http.post(
+          "http://sanrachna.pythonanywhere.com/api/database/service/",
+          body: body);
 
       print(response.statusCode);
     } catch (e) {
@@ -59,5 +59,4 @@ class ServiceProvider implements ServiceAPIProvider {
 
     return _services;
   }
-
 }
