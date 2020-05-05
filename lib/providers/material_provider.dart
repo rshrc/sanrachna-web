@@ -61,7 +61,7 @@ class MaterialProvider implements MaterialAPIProvider {
     String quantity,
     String unit,
     String rate,
-    int prospect}) async {
+    String prospect}) async {
     Map<String, dynamic> body = {
       "particulars": particulars,
       "quantity": quantity,
