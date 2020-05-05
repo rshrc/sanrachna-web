@@ -18,7 +18,11 @@ dependencies:
   logger_flutter:
   #google_fonts:
   toast:
-
+  printing:
+  path_provider:
+  open_file:
+  url_launcher:
+  pdf:
 
 
 dev_dependencies:
