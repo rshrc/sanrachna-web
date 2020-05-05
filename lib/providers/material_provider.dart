@@ -16,39 +16,123 @@ class MaterialProvider implements MaterialAPIProvider {
 
 
   @override
-  Future<String> addCivil() {
-    // TODO: implement addCivil
-    return null;
+  Future<String> addCivil({
+  String particulars,
+  String quantity,
+  String unit,
+  String rate,
+  int prospect}) async {
+    Map<String, dynamic> body = {
+      "particulars": particulars,
+      "quantity": quantity,
+      "unit": unit,
+      "rate": rate,
+      "prospect": prospect,
+    };
+    http.Response response =
+        await http.post(Constants.materialCivilAPI, body: body);
+
+    print(response.statusCode);
   }
 
   @override
-  Future<String> addElectric() {
-    // TODO: implement addElectric
-    return null;
+  Future<String> addElectric({
+    String particulars,
+    String quantity,
+    String unit,
+    String rate,
+    int prospect}) async {
+    Map<String, dynamic> body = {
+      "particulars": particulars,
+      "quantity": quantity,
+      "unit": unit,
+      "rate": rate,
+      "prospect": prospect,
+    };
+    http.Response response =
+    await http.post(Constants.materialElectricAPI, body: body);
+
+    print(response.statusCode);
   }
 
   @override
-  Future<String> addPaint() {
-    // TODO: implement addPaint
-    return null;
+  Future<String> addPaint({
+    String particulars,
+    String quantity,
+    String unit,
+    String rate,
+    int prospect}) async {
+    Map<String, dynamic> body = {
+      "particulars": particulars,
+      "quantity": quantity,
+      "unit": unit,
+      "rate": rate,
+      "prospect": prospect,
+    };
+    http.Response response =
+    await http.post(Constants.materialPaintAPI, body: body);
+
+    print(response.statusCode);
   }
 
   @override
-  Future<String> addPlumbing() {
-    // TODO: implement addPlumbing
-    return null;
+  Future<String> addPlumbing({
+    String particulars,
+    String quantity,
+    String unit,
+    String rate,
+    int prospect}) async {
+    Map<String, dynamic> body = {
+      "particulars": particulars,
+      "quantity": quantity,
+      "unit": unit,
+      "rate": rate,
+      "prospect": prospect,
+    };
+    http.Response response =
+    await http.post(Constants.materialPlumbingAPI, body: body);
+
+    print(response.statusCode);
   }
 
   @override
-  Future<String> addPly() {
-    // TODO: implement addPly
-    return null;
+  Future<String> addPly({
+    String particulars,
+    String quantity,
+    String unit,
+    String rate,
+    int prospect}) async {
+    Map<String, dynamic> body = {
+      "particulars": particulars,
+      "quantity": quantity,
+      "unit": unit,
+      "rate": rate,
+      "prospect": prospect,
+    };
+    http.Response response =
+    await http.post(Constants.materialPlyAPI, body: body);
+
+    print(response.statusCode);
   }
 
   @override
-  Future<String> addTiles() {
-    // TODO: implement addTiles
-    return null;
+  Future<String> addTiles({
+    String particulars,
+    String quantity,
+    String unit,
+    String rate,
+    int prospect}) async {
+    Map<String, dynamic> body = {
+      "particulars": particulars,
+      "quantity": quantity,
+      "unit": unit,
+      "rate": rate,
+      "prospect": prospect,
+    };
+    http.Response response =
+    await http.post(Constants.materialTilesAPI, body: body);
+
+    print(response.statusCode);
   }
 
 
