@@ -274,7 +274,7 @@ class _ClientalePageState extends State<ClientalePage> {
                 label: 'Add Client',
                 labelStyle: TextStyle(fontSize: 18.0),
                 onTap: () {
-                  _addClienaleDialog(context, clientele: 'client');
+                  _addClienteleDialog(context, clientele: 'client');
                 }),
             SpeedDialChild(
               child: Icon(Icons.brush),
@@ -282,7 +282,7 @@ class _ClientalePageState extends State<ClientalePage> {
               label: 'Add Leads',
               labelStyle: TextStyle(fontSize: 18.0),
               onTap: () {
-                _addClienaleDialog(context, clientele: 'lead');
+                _addClienteleDialog(context, clientele: 'lead');
               },
             ),
             SpeedDialChild(
@@ -291,14 +291,14 @@ class _ClientalePageState extends State<ClientalePage> {
               label: 'Add Prospects',
               labelStyle: TextStyle(fontSize: 18.0),
               onTap: () {
-                _addClienaleDialog(context, clientele: 'prospect');
+                _addClienteleDialog(context, clientele: 'prospect');
               },
             ),
           ],
         ));
   }
 
-  _addClienaleDialog(context, {clientele}) async {
+  _addClienteleDialog(context, {clientele}) async {
     TextEditingController _fullNameController = TextEditingController();
     TextEditingController _organizationController = TextEditingController();
     TextEditingController _mobileNumberController = TextEditingController();

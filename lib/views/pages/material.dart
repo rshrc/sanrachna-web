@@ -373,7 +373,7 @@ class _MaterialPageState extends State<MaterialPage> {
         heroTag: 'speed-dial-hero-tag',
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        elevation: 8.0,
+        elevation: 4.0,
         shape: CircleBorder(),
         children: [
           SpeedDialChild(
@@ -381,41 +381,281 @@ class _MaterialPageState extends State<MaterialPage> {
               backgroundColor: Colors.red,
               label: 'Add Tiles',
               labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () => print('FIRST CHILD')),
+              onTap: () {
+                _addMaterialDialog(context, material: "tiles");
+              }),
           SpeedDialChild(
             child: Icon(Icons.location_city),
             backgroundColor: Colors.blue,
             label: 'Add Civil',
             labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => print('SECOND CHILD'),
-          ),
+              onTap: () {
+                _addMaterialDialog(context, material: "civil");
+              }          ),
           SpeedDialChild(
               child: Icon(Icons.lightbulb_outline),
               backgroundColor: Colors.red,
               label: 'Add Electric',
               labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () => print('FIRST CHILD')),
+              onTap: () {
+                _addMaterialDialog(context, material: "electric");
+              }),
           SpeedDialChild(
             child: Icon(Icons.format_paint),
             backgroundColor: Colors.blue,
             label: 'Add Paint',
             labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => print('SECOND CHILD'),
+              onTap: () {
+                _addMaterialDialog(context, material: "paint");
+              }
           ),SpeedDialChild(
               child: Icon(Icons.settings),
               backgroundColor: Colors.red,
               label: 'Add Ply',
               labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () => print('FIRST CHILD')),
+              onTap: () {
+                _addMaterialDialog(context, material: "ply");
+              }),
           SpeedDialChild(
             child: Icon(Icons.transfer_within_a_station),
             backgroundColor: Colors.blue,
             label: 'Add Plumbing',
             labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => print('SECOND CHILD'),
+              onTap: () {
+                _addMaterialDialog(context, material: "plumbing");
+              }
           ),
         ],
       ),
     );
   }
+
+  _addMaterialDialog(context, {material}) async {
+    TextEditingController _particularsController = TextEditingController();
+    TextEditingController _unitController = TextEditingController();
+    TextEditingController _rateController = TextEditingController();
+    TextEditingController _quantityController = TextEditingController();
+    TextEditingController _prospectController = TextEditingController();
+
+    TextStyle _labelTextStyle = TextStyle(color: Colors.black);
+
+    await showDialog<String>(
+      context: context,
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.5,
+        width: MediaQuery.of(context).size.width * 0.3,
+        child: AlertDialog(
+          shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
+          content: Container(
+            width: MediaQuery.of(context).size.width/2,
+            child: Column(
+              children: <Widget>[
+                Text("Add $material"),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _particularsController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Particulars',
+                        hintText: 'Particulars',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _rateController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Rate',
+                        hintText: 'Rate',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _unitController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Unit',
+                        hintText: 'Unit',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _quantityController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Quantity',
+                        hintText: 'Quantity',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _prospectController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Prospect',
+                        hintText: 'Prospect',
+                        labelStyle: _labelTextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+                child: Text("CANCEL", style: TextStyle(color: Colors.redAccent, fontSize: 16.0),),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                }),
+            FlatButton(
+                child: Text("ADD", style: TextStyle(color: Colors.blue ,fontSize: 16.0),),
+                onPressed: () {
+                  // add it
+                  switch (material) {
+                    case 'electric':
+                      _materialProvider
+                          .addCivil(
+                        particulars: _particularsController.text,
+                        rate: _rateController.text,
+                        unit: _unitController.text,
+                        quantity: _quantityController.text,
+                        prospect: int.parse(_prospectController.text)
+                      )
+                          .then((value) {
+                        Toast.show(
+                          "Added Civil Material",
+                          context,
+                          backgroundColor: Colors.green,
+                          duration: 3,
+                          textColor: Colors.white,
+                          border: Border.all(color: Colors.white),
+                        );
+                        setState(() {
+                          // Update Future Builder
+                        });
+                      });
+                      break;
+                    case 'paint':
+                      _materialProvider
+                          .addPaint(
+                          particulars: _particularsController.text,
+                          rate: _rateController.text,
+                          unit: _unitController.text,
+                          quantity: _quantityController.text,
+                          prospect: _prospectController.text
+                      )
+                          .then((value) {
+                        Toast.show(
+                          "Added Paint Material",
+                          context,
+                          backgroundColor: Colors.green,
+                          duration: 3,
+                          textColor: Colors.white,
+                          border: Border.all(color: Colors.white),
+                        );
+                        setState(() {
+                          // Update Future Builder
+                        });
+                      });
+                      break;
+                    case 'plumbing':
+                      _materialProvider
+                          .addPlumbing(
+                          particulars: _particularsController.text,
+                          rate: _rateController.text,
+                          unit: _unitController.text,
+                          quantity: _quantityController.text,
+                          prospect: int.parse(_prospectController.text)
+                      )
+                          .then((value) {
+                        Toast.show(
+                          "Added Plumbing Material",
+                          context,
+                          backgroundColor: Colors.green,
+                          duration: 3,
+                          textColor: Colors.white,
+                          border: Border.all(color: Colors.white),
+                        );
+                        setState(() {
+                          // Update Future Builder
+                        });
+                      });
+                      break;
+                    case 'ply':
+                      _materialProvider
+                          .addPly(
+                          particulars: _particularsController.text,
+                          rate: _rateController.text,
+                          unit: _unitController.text,
+                          quantity: _quantityController.text,
+                          prospect: int.parse(_prospectController.text)
+                      )
+                          .then((value) {
+                        Toast.show(
+                          "Added Ply Material",
+                          context,
+                          backgroundColor: Colors.green,
+                          duration: 3,
+                          textColor: Colors.white,
+                          border: Border.all(color: Colors.white),
+                        );
+                        setState(() {
+                          // Update Future Builder
+                        });
+                      });
+                      break;
+                      case 'tiles':
+                    _materialProvider
+                        .addTiles(
+                        particulars: _particularsController.text,
+                        rate: _rateController.text,
+                        unit: _unitController.text,
+                        quantity: _quantityController.text,
+                        prospect: int.parse(_prospectController.text)
+                    )
+                        .then((value) {
+                      Toast.show(
+                        "Added Tiles Material",
+                        context,
+                        backgroundColor: Colors.green,
+                        duration: 3,
+                        textColor: Colors.white,
+                        border: Border.all(color: Colors.white),
+                      );
+                      setState(() {
+                        // Update Future Builder
+                      });
+                    });
+                    break;
+                  }
+                })
+          ],
+        ),
+      ),
+    );
+  }
+
 }
