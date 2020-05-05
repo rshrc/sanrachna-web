@@ -106,33 +106,93 @@ class MaterialProvider implements MaterialAPIProvider {
   }
 
   @override
-  Future<List<MaterialModel>> getElectric() {
-    // TODO: implement getElectric
-    return null;
+  Future<List<MaterialModel>> getElectric() async {
+    http.Response response = await http
+        .get(Constants.materialElectricAPI);
+
+    print("Line 48: ${response.body}");
+
+    List<dynamic> responseList = jsonDecode(response.body);
+
+    _electric?.clear();
+
+    responseList.forEach((element) {
+      _electric.add(MaterialModel.fromJson(element));
+    });
+
+    return _electric;
   }
 
   @override
-  Future<List<MaterialModel>> getPaint() {
-    // TODO: implement getPaint
-    return null;
+  Future<List<MaterialModel>> getPaint() async {
+    http.Response response = await http
+        .get(Constants.materialPaintAPI);
+
+    print("Line 48: ${response.body}");
+
+    List<dynamic> responseList = jsonDecode(response.body);
+
+    _paint?.clear();
+
+    responseList.forEach((element) {
+      _paint.add(MaterialModel.fromJson(element));
+    });
+
+    return _paint;
   }
 
   @override
-  Future<List<MaterialModel>> getPlumbing() {
-    // TODO: implement getPlumbing
-    return null;
+  Future<List<MaterialModel>> getPlumbing() async {
+    http.Response response = await http
+        .get(Constants.materialPlumbingAPI);
+
+    print("Line 48: ${response.body}");
+
+    List<dynamic> responseList = jsonDecode(response.body);
+
+    _plumbing?.clear();
+
+    responseList.forEach((element) {
+      _plumbing.add(MaterialModel.fromJson(element));
+    });
+
+    return _plumbing;
   }
 
   @override
-  Future<List<MaterialModel>> getPly() {
-    // TODO: implement getPly
-    return null;
+  Future<List<MaterialModel>> getPly() async {
+    http.Response response = await http
+        .get(Constants.materialPlyAPI);
+
+    print("Line 48: ${response.body}");
+
+    List<dynamic> responseList = jsonDecode(response.body);
+
+    _ply?.clear();
+
+    responseList.forEach((element) {
+      _ply.add(MaterialModel.fromJson(element));
+    });
+
+    return _ply;
   }
 
   @override
-  Future<List<MaterialModel>> getTiles() {
-    // TODO: implement getTiles
-    return null;
+  Future<List<MaterialModel>> getTiles() async {
+    http.Response response = await http
+        .get(Constants.leadClienteleAPI);
+
+    print("Line 48: ${response.body}");
+
+    List<dynamic> responseList = jsonDecode(response.body);
+
+    _tiles?.clear();
+
+    responseList.forEach((element) {
+      _tiles.add(MaterialModel.fromJson(element));
+    });
+
+    return _tiles;
   }
 
 }
