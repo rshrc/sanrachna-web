@@ -3,6 +3,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:sanrachna_web/models/material_model.dart';
 import 'package:sanrachna_web/providers/material_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
+import 'package:toast/toast.dart';
 
 
 class MaterialPage extends StatefulWidget {
@@ -56,6 +57,7 @@ class _MaterialPageState extends State<MaterialPage> {
                             DataColumn(label: Text('Unit')),
                             DataColumn(label: Text('Quantity')),
                             DataColumn(label: Text('Prospect')),
+                            DataColumn(label: Text("Delete")),
 
                           ],
                           rows: _civil
@@ -66,7 +68,28 @@ class _MaterialPageState extends State<MaterialPage> {
                             DataCell(Text("${element.unit}")),
                             DataCell(Text("${element.quantity}")),
                             DataCell(Text("${element.prospect}")),
-
+                            DataCell(IconButton(
+                              onPressed: () {
+                                _materialProvider
+                                    .deleteCivil(int.parse(element.sno))
+                                    .then((value) {
+                                  Toast.show(
+                                      "Deleting Material ${element.particulars}",
+                                      context,
+                                      backgroundColor: Colors.green);
+                                  setState(() {});
+                                  Toast.show(
+                                      "Deleted Labour ${element.particulars}",
+                                      context,
+                                      backgroundColor: Colors.green);
+                                  setState(() {});
+                                });
+                              },
+                              icon: Icon(
+                                Icons.delete_outline,
+                                color: Colors.grey,
+                              ),
+                            ))
                           ]))
                               .toList(),
                         ),
@@ -151,6 +174,7 @@ class _MaterialPageState extends State<MaterialPage> {
                           DataColumn(label: Text('Unit')),
                           DataColumn(label: Text('Quantity')),
                           DataColumn(label: Text('Prospect')),
+                          DataColumn(label: Text("Delete")),
 
                         ],
                         rows: _paint
@@ -161,7 +185,28 @@ class _MaterialPageState extends State<MaterialPage> {
                           DataCell(Text("${element.unit}")),
                           DataCell(Text("${element.quantity}")),
                           DataCell(Text("${element.prospect}")),
-
+                          DataCell(IconButton(
+                            onPressed: () {
+                              _materialProvider
+                                  .deletePaint(int.parse(element.sno))
+                                  .then((value) {
+                                Toast.show(
+                                    "Deleting Material ${element.particulars}",
+                                    context,
+                                    backgroundColor: Colors.green);
+                                setState(() {});
+                                Toast.show(
+                                    "Deleted Labour ${element.particulars}",
+                                    context,
+                                    backgroundColor: Colors.green);
+                                setState(() {});
+                              });
+                            },
+                            icon: Icon(
+                              Icons.delete_outline,
+                              color: Colors.grey,
+                            ),
+                          ))
                         ]))
                             .toList(),
                       ),

@@ -51,41 +51,7 @@ class MaterialProvider implements MaterialAPIProvider {
     return null;
   }
 
-  @override
-  Future<String> deleteCivil() {
-    // TODO: implement deleteCivil
-    return null;
-  }
 
-  @override
-  Future<String> deleteElectric() {
-    // TODO: implement deleteElectric
-    return null;
-  }
-
-  @override
-  Future<String> deletePaint() {
-    // TODO: implement deletePaint
-    return null;
-  }
-
-  @override
-  Future<String> deletePlumbing() {
-    // TODO: implement deletePlumbing
-    return null;
-  }
-
-  @override
-  Future<String> deletePly() {
-    // TODO: implement deletePly
-    return null;
-  }
-
-  @override
-  Future<String> deleteTiles() {
-    // TODO: implement deleteTiles
-    return null;
-  }
 
   @override
   Future<List<MaterialModel>> getCivil() async {
@@ -193,6 +159,72 @@ class MaterialProvider implements MaterialAPIProvider {
     });
 
     return _tiles;
+  }
+
+  @override
+  Future<String> deleteCivil(int id) async {
+    http.Response response = await http.delete(
+      'http://sanrachna.pythonanywhere.com/api/material/civil/$id/delete/',
+    );
+
+    print("Line 74: ${response.body}");
+
+    return response.body;
+  }
+
+  @override
+  Future<String> deleteElectric(int id) async {
+    http.Response response = await http.delete(
+      'http://sanrachna.pythonanywhere.com/api/material/electric/$id/delete/',
+    );
+
+    print("Line 74: ${response.body}");
+
+    return response.body;
+  }
+
+  @override
+  Future<String> deletePaint(int id) async{
+    http.Response response = await http.delete(
+      'http://sanrachna.pythonanywhere.com/api/material/paint/$id/delete/',
+    );
+
+    print("Line 74: ${response.body}");
+
+    return response.body;
+  }
+
+  @override
+  Future<String> deletePlumbing(int id) async {
+    http.Response response = await http.delete(
+      'http://sanrachna.pythonanywhere.com/api/material/plumbing/$id/delete/',
+    );
+
+    print("Line 74: ${response.body}");
+
+    return response.body;
+  }
+
+  @override
+  Future<String> deletePly(int id) async {
+    http.Response response = await http.delete(
+      'http://sanrachna.pythonanywhere.com/api/material/ply/$id/delete/',
+    );
+
+    print("Line 74: ${response.body}");
+
+    return response.body;
+  }
+
+  @override
+  Future<String> deleteTiles(int id) async {
+    http.Response response = await http.delete(
+      'http://sanrachna.pythonanywhere.com/api/material/tiles/$id/delete/',
+    );
+
+    print("Line 74: ${response.body}");
+
+    return response.body;
   }
 
 }

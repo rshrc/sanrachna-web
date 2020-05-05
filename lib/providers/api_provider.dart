@@ -85,37 +85,37 @@ abstract class MaterialAPIProvider {
 
   Future<String> addTiles();
 
-  Future<String> deleteTiles();
+  Future<String> deleteTiles(int id);
 
   Future<List<MaterialModel>> getCivil();
 
   Future<String> addCivil();
 
-  Future<String> deleteCivil();
+  Future<String> deleteCivil(int id);
 
   Future<List<MaterialModel>> getElectric();
 
   Future<String> addElectric();
 
-  Future<String> deleteElectric();
+  Future<String> deleteElectric(int id);
 
   Future<List<MaterialModel>> getPaint();
 
   Future<String> addPaint();
 
-  Future<String> deletePaint();
+  Future<String> deletePaint(int id);
 
   Future<List<MaterialModel>> getPlumbing();
 
   Future<String> addPlumbing();
 
-  Future<String> deletePlumbing();
+  Future<String> deletePlumbing(int id);
 
   Future<List<MaterialModel>> getPly();
 
   Future<String> addPly();
 
-  Future<String> deletePly();
+  Future<String> deletePly(int id);
 }
 
 abstract class ProspectAPIProvider {
