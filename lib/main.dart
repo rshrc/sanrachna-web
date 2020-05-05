@@ -3,6 +3,7 @@ import 'package:sanrachna_web/views/pages/associate.dart';
 import 'package:sanrachna_web/views/pages/clientele.dart';
 import 'package:sanrachna_web/views/pages/material.dart';
 import 'package:sanrachna_web/views/pages/prospect.dart';
+import 'package:sanrachna_web/views/pages/services.dart';
 //import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class Sanrachna extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.redAccent, indicatorColor: Colors.yellow,splashColor: Colors.yellow),
       home: DefaultTabController(
-        length: 4,
+        length: 5,
         child: Scaffold(
           appBar: AppBar(
             bottom: TabBar(
@@ -25,6 +26,7 @@ class Sanrachna extends StatelessWidget {
                 Tab(text: "Associate",),
                 Tab(text: "Clientele"),
                 Tab(text: "Material",),
+                Tab(text: "Service"),
                 Tab(text: "Prospect",),
               ],
             ),
@@ -39,6 +41,7 @@ class Sanrachna extends StatelessWidget {
               AssociatePage(),
               ClientalePage(),
               MaterialPage(),
+              ServicePage(),
               ProspectPage(),
             ],
           ),

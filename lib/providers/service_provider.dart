@@ -13,28 +13,39 @@ class ServiceProvider implements ServiceAPIProvider {
 
   @override
   Future<String> addServices({String name, String unit, String rate, String prospect}) async {
-    var body = {
-      "name": name,
-      "unit": unit,
-      "rate": rate,
-      "prospect": prospect
-    };
-    http.Response response =
-    await http.post(Constants.serviceAPI, body: body);
 
-    print(response.statusCode);
+    try {
+      Map<String, dynamic> body = {
+            'name': name,
+            'unit': unit,
+            'rate': rate,
+            'prospect': int.parse(prospect),
+          };
+
+      http.Response response =
+          await http.post("http://sanrachna.pythonanywhere.com/api/database/service/", body: body);
+
+      print(response.statusCode);
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
-  Future<String> deleteServices() {
-    // TODO: implement deleteServices
-    return null;
+  Future<String> deleteServices(int id) async {
+    http.Response response = await http.delete(
+      'http://sanrachna.pythonanywhere.com/api/database/service/$id/delete/',
+    );
+
+    print("Line 74: ${response.body}");
+
+    return response.body;
   }
 
   @override
   Future<List<ServiceModel>> getServices() async {
     http.Response response = await http
-        .get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
+        .get('http://sanrachna.pythonanywhere.com/api/database/service/');
 
     print("Line 48: ${response.body}");
 
