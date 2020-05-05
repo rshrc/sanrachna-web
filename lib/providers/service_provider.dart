@@ -12,23 +12,20 @@ class ServiceProvider implements ServiceAPIProvider {
 
   @override
   Future<String> addServices(
-      {String name, String unit, String rate, String prospect}) async {
-    try {
-      Map<String, dynamic> body = {
-        'name': name,
-        'unit': unit,
-        'rate': rate,
-        'prospect': int.parse(prospect),
-      };
+      {String name, String unit, String rate, int prospect}) async {
+    Map<String, dynamic> body = {
+      'name': name,
+      'unit': unit,
+      'rate': rate,
+      'prospect': prospect.toString(),
+    };
 
-      http.Response response = await http.post(
-          "http://sanrachna.pythonanywhere.com/api/database/service/",
-          body: body);
+    http.Response response = await http.post(
+        "http://sanrachna.pythonanywhere.com/api/database/service/",
+        body: body);
 
-      print(response.statusCode);
-    } catch (e) {
-      print(e);
-    }
+    print(response.statusCode);
+    return response.body;
   }
 
   @override
