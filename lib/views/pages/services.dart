@@ -142,6 +142,8 @@ class _ServicePageState extends State<ServicePage> {
 
     ProspectModel dropdownProspectValue = _prospectList[0];
 
+    int prospectId = _prospectList[0].id;
+
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
 
     await showDialog<String>(
@@ -199,20 +201,6 @@ class _ServicePageState extends State<ServicePage> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _prospectController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Prospect',
-                        hintText: 'Prospect',
-                        labelStyle: _labelTextStyle,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         width: MediaQuery.of(context).size.width / 2.1,
@@ -222,9 +210,10 @@ class _ServicePageState extends State<ServicePage> {
                           iconSize: 24,
                           elevation: 8,
                           style: TextStyle(color: Colors.blue),
-                          onChanged: (ProspectModel newValue) {
+                          onChanged: (ProspectModel prospectModel) {
                             setState(() {
-                              dropdownProspectValue = newValue;
+                              dropdownProspectValue = prospectModel;
+                              prospectId = prospectModel.id;
                             });
                           },
                           items: _prospectList
@@ -260,7 +249,7 @@ class _ServicePageState extends State<ServicePage> {
                         name: _nameController.text,
                         unit: _unitController.text,
                         rate: _rateController.text,
-                        prospect: int.parse(_prospectController.text),
+                        prospect: prospectId,
                       )
                           .then((value) {
                         Toast.show(
