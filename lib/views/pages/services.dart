@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:sanrachna_web/models/prospect_model.dart';
 import 'package:sanrachna_web/models/service_model.dart';
+import 'package:sanrachna_web/providers/prospect_provider.dart';
 import 'package:sanrachna_web/providers/service_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
 import 'package:toast/toast.dart';
@@ -15,7 +17,20 @@ class _ServicePageState extends State<ServicePage> {
 
   List<ServiceModel> _serviceList = [];
 
+  List<ProspectModel> _prospectList = [];
+
   ServiceProvider _serviceProvider = ServiceProvider();
+
+  @override
+  void initState() {
+    /// Need to get all the prospects
+    ProspectProvider().getProspects().then((value) {
+      _prospectList = value;
+      print("Line 31: $_prospectList");
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +140,7 @@ class _ServicePageState extends State<ServicePage> {
     TextEditingController _rateController = TextEditingController();
     TextEditingController _prospectController = TextEditingController();
 
-    String dropdownProspectValue = 'COMMERCIAL';
+    ProspectModel dropdownProspectValue = _prospectList[0];
 
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
 
@@ -200,32 +215,27 @@ class _ServicePageState extends State<ServicePage> {
                   child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        width: MediaQuery.of(context).size.width/2.1,
-                        child: DropdownButton<String>(
+                        width: MediaQuery.of(context).size.width / 2.1,
+                        child: DropdownButton<ProspectModel>(
                           value: dropdownProspectValue,
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 24,
                           elevation: 8,
-                          style: TextStyle(
-                              color: Colors.blue
-                          ),
-
-                          onChanged: (String newValue) {
+                          style: TextStyle(color: Colors.blue),
+                          onChanged: (ProspectModel newValue) {
                             setState(() {
                               dropdownProspectValue = newValue;
                             });
                           },
-                          items: <String>['COMMERCIAL', 'HOME', 'OFFICE']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
+                          items: _prospectList
+                              .map<DropdownMenuItem<ProspectModel>>((ProspectModel value) {
+                            return DropdownMenuItem<ProspectModel>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value.fullName),
                             );
-                          })
-                              .toList(),
+                          }).toList(),
                         ),
-                      )
-                  ),
+                      )),
                 ),
               ],
             ),
