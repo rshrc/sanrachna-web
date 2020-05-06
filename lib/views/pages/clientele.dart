@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sanrachna_web/models/clientele_model.dart';
 import 'package:sanrachna_web/providers/clientele_provider.dart';
 import 'package:sanrachna_web/utils/constants.dart';
@@ -23,229 +24,306 @@ class _ClientalePageState extends State<ClientalePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-          child: Column(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 50.0,
-              ),
               Container(
-                width: MediaQuery.of(context).size.width,
-                child: FutureBuilder<Object>(
-                    future: _clienteleProvider.getClients(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-
-                      print("Line 40: ${snapshot.data}");
-
-                      _clientList = snapshot.data;
-
-                      return Column(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width / 8,
+                decoration: BoxDecoration(
+                    color: Colors.redAccent,
+                    border: Border.symmetric(
+                        vertical: BorderSide(color: Colors.white, width: 2.0))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ListTile(
+                      title: Row(
                         children: [
-                          TitleWidget(title: "Clients"),
-                          DataTable(
-                            columns: [
-                              DataColumn(label: Text("ID")),
-                              DataColumn(label: Text('Full Name')),
-                              DataColumn(label: Text('Organization')),
-                              DataColumn(label: Text('Email')),
-                              DataColumn(label: Text('Mobile')),
-                              DataColumn(label: Text('Site Type')),
-                              DataColumn(label: Text('Source Type')),
-                              DataColumn(label: Text("Delete")),
-                            ],
-                            rows: _clientList
-                                .map((element) => DataRow(cells: <DataCell>[
-                                      //Extracting from Map element the value
-                                      DataCell(Text("${element.id}")),
-                                      DataCell(Text("${element.fullName}")),
-                                      DataCell(Text("${element.organization}")),
-                                      DataCell(Text("${element.email}")),
-                                      DataCell(Text("${element.mobileNumber}")),
-                                      DataCell(Text("${element.siteType}")),
-                                      DataCell(Text("${element.sourceType}")),
-                                      DataCell(IconButton(
-                                        onPressed: () {
-                                          _clienteleProvider
-                                              .deleteClient(element.id)
-                                              .then((value) {
-                                            Toast.show(
-                                                "Deleting Client ${element.fullName}",
-                                                context,
-                                                backgroundColor: Colors.green);
-                                            setState(() {});
-                                            Toast.show(
-                                                "Deleted Client ${element.fullName}",
-                                                context,
-                                                backgroundColor: Colors.green);
-                                            setState(() {});
-                                          });
-                                        },
-                                        icon: Icon(
-                                          Icons.delete_outline,
-                                          color: Colors.grey,
-                                        ),
-                                      ))
-                                    ]))
-                                .toList(),
+                          Icon(Icons.directions_walk, color: Colors.white, size: 20.0,),
+                          SizedBox(width: 8.0,),
+                          Text(
+                            "Leads",
+                            style: GoogleFonts.exo(
+                                color: Colors.white,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w400),
                           ),
                         ],
-                      );
-                    }),
+                      ),
+                      onTap: (){
+
+                      },
+                    ),
+                    SizedBox(height: 20.0,),
+                    ListTile(
+                      title: Row(
+                        children: [
+                          Icon(Icons.business_center, color: Colors.white, size: 20.0,),
+                          SizedBox(width: 8.0,),
+                          Text(
+                            "Clients",
+                            style: GoogleFonts.exo(
+                                color: Colors.white,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
+                      onTap: (){
+
+                      },
+                    ),
+                    SizedBox(height: 20.0,),
+                    ListTile(
+                      title: Row(
+                        children: [
+                          Icon(Icons.pages, color: Colors.white, size: 20.0,),
+                          SizedBox(width: 8.0,),
+                          Text(
+                            "Prospects",
+                            style: GoogleFonts.exo(
+                                color: Colors.white,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
+                      onTap: (){
+
+                      },
+                    ),
+
+                  ],
+                ),
               ),
-              SizedBox(
-                height: 50.0,
-              ),
-              FutureBuilder<Object>(
-                  future: _clienteleProvider.getLeads(),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 50.0,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width/1.25,
+                    child: FutureBuilder<Object>(
+                        future: _clienteleProvider.getClients(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
 
-                    print("Line 74: ${snapshot.data}");
+                          print("Line 40: ${snapshot.data}");
 
-                    _leadList = snapshot.data;
+                          _clientList = snapshot.data;
 
-                    if (_leadList.length == 0) {
-                      return Center(
-                        child: Text("No Data"),
-                      );
-                    }
+                          return Column(
+                            children: [
+                              TitleWidget(title: "Clients"),
+                              DataTable(
+                                columns: [
+                                  DataColumn(label: Text("ID")),
+                                  DataColumn(label: Text('Full Name')),
+                                  DataColumn(label: Text('Organization')),
+                                  DataColumn(label: Text('Email')),
+                                  DataColumn(label: Text('Mobile')),
+                                  DataColumn(label: Text('Site Type')),
+                                  DataColumn(label: Text('Source Type')),
+                                  DataColumn(label: Text("Delete")),
+                                ],
+                                rows: _clientList
+                                    .map((element) => DataRow(cells: <DataCell>[
+                                          //Extracting from Map element the value
+                                          DataCell(Text("${element.id}")),
+                                          DataCell(Text("${element.fullName}")),
+                                          DataCell(Text("${element.organization}")),
+                                          DataCell(Text("${element.email}")),
+                                          DataCell(Text("${element.mobileNumber}")),
+                                          DataCell(Text("${element.siteType}")),
+                                          DataCell(Text("${element.sourceType}")),
+                                          DataCell(IconButton(
+                                            onPressed: () {
+                                              _clienteleProvider
+                                                  .deleteClient(element.id)
+                                                  .then((value) {
+                                                Toast.show(
+                                                    "Deleting Client ${element.fullName}",
+                                                    context,
+                                                    backgroundColor: Colors.green);
+                                                setState(() {});
+                                                Toast.show(
+                                                    "Deleted Client ${element.fullName}",
+                                                    context,
+                                                    backgroundColor: Colors.green);
+                                                setState(() {});
+                                              });
+                                            },
+                                            icon: Icon(
+                                              Icons.delete_outline,
+                                              color: Colors.grey,
+                                            ),
+                                          ))
+                                        ]))
+                                    .toList(),
+                              ),
+                            ],
+                          );
+                        }),
+                  ),
+                  SizedBox(
+                    height: 50.0,
+                  ),
+                  FutureBuilder<Object>(
+                      future: _clienteleProvider.getLeads(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
 
-                    return Column(
-                      children: [
-                        TitleWidget(title: "Leads"),
-                        DataTable(
-                          columns: [
-                            DataColumn(label: Text("ID")),
-                            DataColumn(label: Text('Full Name')),
-                            DataColumn(label: Text('Organization')),
-                            DataColumn(label: Text('Email')),
-                            DataColumn(label: Text('Mobile')),
-                            DataColumn(label: Text('Site Type')),
-                            DataColumn(label: Text('Source Type')),
-                            DataColumn(label: Text("Delete")),
+                        print("Line 74: ${snapshot.data}");
+
+                        _leadList = snapshot.data;
+
+                        if (_leadList.length == 0) {
+                          return Center(
+                            child: Text("No Data"),
+                          );
+                        }
+
+                        return Column(
+                          children: [
+                            TitleWidget(title: "Leads"),
+                            DataTable(
+                              columns: [
+                                DataColumn(label: Text("ID")),
+                                DataColumn(label: Text('Full Name')),
+                                DataColumn(label: Text('Organization')),
+                                DataColumn(label: Text('Email')),
+                                DataColumn(label: Text('Mobile')),
+                                DataColumn(label: Text('Site Type')),
+                                DataColumn(label: Text('Source Type')),
+                                DataColumn(label: Text("Delete")),
+                              ],
+                              rows: _leadList
+                                  .map((element) => DataRow(cells: <DataCell>[
+                                        //Extracting from Map element the value
+                                        DataCell(Text("${element.id}")),
+                                        DataCell(Text("${element.fullName}")),
+                                        DataCell(Text("${element.organization}")),
+                                        DataCell(Text("${element.email}")),
+                                        DataCell(Text("${element.mobileNumber}")),
+                                        DataCell(Text("${element.siteType}")),
+                                        DataCell(Text("${element.sourceType}")),
+                                        DataCell(IconButton(
+                                          onPressed: () {
+                                            _clienteleProvider
+                                                .deleteLead(element.id)
+                                                .then((value) {
+                                              Toast.show(
+                                                  "Deleting Lead ${element.fullName}",
+                                                  context,
+                                                  backgroundColor: Colors.green);
+                                              setState(() {});
+                                              Toast.show(
+                                                  "Deleted Lead ${element.fullName}",
+                                                  context,
+                                                  backgroundColor: Colors.green);
+                                              setState(() {});
+                                            });
+                                          },
+                                          icon: Icon(
+                                            Icons.delete_outline,
+                                            color: Colors.grey,
+                                          ),
+                                        ))
+                                      ]))
+                                  .toList(),
+                            ),
                           ],
-                          rows: _leadList
-                              .map((element) => DataRow(cells: <DataCell>[
-                                    //Extracting from Map element the value
-                                    DataCell(Text("${element.id}")),
-                                    DataCell(Text("${element.fullName}")),
-                                    DataCell(Text("${element.organization}")),
-                                    DataCell(Text("${element.email}")),
-                                    DataCell(Text("${element.mobileNumber}")),
-                                    DataCell(Text("${element.siteType}")),
-                                    DataCell(Text("${element.sourceType}")),
-                                    DataCell(IconButton(
-                                      onPressed: () {
-                                        _clienteleProvider
-                                            .deleteLead(element.id)
-                                            .then((value) {
-                                          Toast.show(
-                                              "Deleting Lead ${element.fullName}",
-                                              context,
-                                              backgroundColor: Colors.green);
-                                          setState(() {});
-                                          Toast.show(
-                                              "Deleted Lead ${element.fullName}",
-                                              context,
-                                              backgroundColor: Colors.green);
-                                          setState(() {});
-                                        });
-                                      },
-                                      icon: Icon(
-                                        Icons.delete_outline,
-                                        color: Colors.grey,
-                                      ),
-                                    ))
-                                  ]))
-                              .toList(),
-                        ),
-                      ],
-                    );
-                  }),
-              SizedBox(
-                height: 50.0,
-              ),
-              FutureBuilder<Object>(
-                  future: _clienteleProvider.getProspects(),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
+                        );
+                      }),
+                  SizedBox(
+                    height: 50.0,
+                  ),
+                  FutureBuilder<Object>(
+                      future: _clienteleProvider.getProspects(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
 
-                    print("Line 74: ${snapshot.data}");
+                        print("Line 74: ${snapshot.data}");
 
-                    _prospectList = snapshot.data;
+                        _prospectList = snapshot.data;
 
-                    if (_prospectList.length == 0) {
-                      return Center(
-                        child: Text("No Data"),
-                      );
-                    }
+                        if (_prospectList.length == 0) {
+                          return Center(
+                            child: Text("No Data"),
+                          );
+                        }
 
-                    return Column(
-                      children: [
-                        TitleWidget(title: "Prospects"),
-                        DataTable(
-                          columns: [
-                            DataColumn(label: Text("ID")),
-                            DataColumn(label: Text('Full Name')),
-                            DataColumn(label: Text('Organization')),
-                            DataColumn(label: Text('Email')),
-                            DataColumn(label: Text('Mobile')),
-                            DataColumn(label: Text('Site Type')),
-                            DataColumn(label: Text('Source Type')),
-                            DataColumn(label: Text('Delete')),
+                        return Column(
+                          children: [
+                            TitleWidget(title: "Prospects"),
+                            DataTable(
+                              columns: [
+                                DataColumn(label: Text("ID")),
+                                DataColumn(label: Text('Full Name')),
+                                DataColumn(label: Text('Organization')),
+                                DataColumn(label: Text('Email')),
+                                DataColumn(label: Text('Mobile')),
+                                DataColumn(label: Text('Site Type')),
+                                DataColumn(label: Text('Source Type')),
+                                DataColumn(label: Text('Delete')),
+                              ],
+                              rows: _prospectList
+                                  .map((element) => DataRow(cells: <DataCell>[
+                                        DataCell(Text("${element.id}")),
+                                        DataCell(Text("${element.fullName}")),
+                                        DataCell(Text("${element.organization}")),
+                                        DataCell(Text("${element.email}")),
+                                        DataCell(Text("${element.mobileNumber}")),
+                                        DataCell(Text("${element.siteType}")),
+                                        DataCell(Text("${element.sourceType}")),
+                                        DataCell(IconButton(
+                                          onPressed: () {
+                                            _clienteleProvider
+                                                .deleteProspect(element.id)
+                                                .then((value) {
+                                              Toast.show(
+                                                  "Deleting Prospect ${element.fullName}",
+                                                  context,
+                                                  backgroundColor: Colors.green);
+                                              setState(() {});
+                                              Toast.show(
+                                                  "Deleted Prospect ${element.fullName}",
+                                                  context,
+                                                  backgroundColor: Colors.green);
+                                              setState(() {});
+                                            });
+                                          },
+                                          icon: Icon(
+                                            Icons.delete_outline,
+                                            color: Colors.grey,
+                                          ),
+                                        ))
+                                      ]))
+                                  .toList(),
+                            ),
                           ],
-                          rows: _prospectList
-                              .map((element) => DataRow(cells: <DataCell>[
-                                    DataCell(Text("${element.id}")),
-                                    DataCell(Text("${element.fullName}")),
-                                    DataCell(Text("${element.organization}")),
-                                    DataCell(Text("${element.email}")),
-                                    DataCell(Text("${element.mobileNumber}")),
-                                    DataCell(Text("${element.siteType}")),
-                                    DataCell(Text("${element.sourceType}")),
-                                    DataCell(IconButton(
-                                      onPressed: () {
-                                        _clienteleProvider
-                                            .deleteProspect(element.id)
-                                            .then((value) {
-                                          Toast.show(
-                                              "Deleting Prospect ${element.fullName}",
-                                              context,
-                                              backgroundColor: Colors.green);
-                                          setState(() {});
-                                          Toast.show(
-                                              "Deleted Prospect ${element.fullName}",
-                                              context,
-                                              backgroundColor: Colors.green);
-                                          setState(() {});
-                                        });
-                                      },
-                                      icon: Icon(
-                                        Icons.delete_outline,
-                                        color: Colors.grey,
-                                      ),
-                                    ))
-                                  ]))
-                              .toList(),
-                        ),
-                      ],
-                    );
-                  }),
-              SizedBox(
-                height: 50.0,
+                        );
+                      }),
+                  SizedBox(
+                    height: 50.0,
+                  ),
+                ],
               ),
             ],
           ),

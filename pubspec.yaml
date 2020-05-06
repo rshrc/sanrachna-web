@@ -16,7 +16,7 @@ dependencies:
   flutter_speed_dial:
   http:
   logger_flutter:
-  google_fonts:
+  google_fonts: ^1.0.0
   toast:
   path_provider:
   open_file:
@@ -42,8 +42,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/
   #   - images/a_dot_ham.jpeg
   # example:
   # fonts:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sanrachna_web/models/material_model.dart';
 import 'package:sanrachna_web/providers/material_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
@@ -28,332 +29,469 @@ class _MaterialPageState extends State<MaterialPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 50.0,),
             Container(
-              width: MediaQuery.of(context).size.width,
-              child: FutureBuilder<Object>(
-                  future: _materialProvider.getCivil(),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-
-                    print("Line 40: ${snapshot.data}");
-
-                    _civil = snapshot.data;
-
-                    return Column(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width / 8,
+              decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  border: Border.symmetric(
+                      vertical: BorderSide(color: Colors.white, width: 2.0))),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 50.0,),
+                  ListTile(
+                    title: Row(
                       children: [
-                        TitleWidget(title: "Civil"),
-                        DataTable(
-                          columns: [
-                            DataColumn(label: Text('Particulars')),
-                            DataColumn(label: Text('Rate')),
-                            DataColumn(label: Text('Unit')),
-                            DataColumn(label: Text('Quantity')),
-                            DataColumn(label: Text('Prospect')),
-                            DataColumn(label: Text("Delete")),
-
-                          ],
-                          rows: _civil
-                              .map((element) => DataRow(cells: <DataCell>[
-                            //Extracting from Map element the value
-                            DataCell(Text("${element.particulars}")),
-                            DataCell(Text("${element.rate}")),
-                            DataCell(Text("${element.unit}")),
-                            DataCell(Text("${element.quantity}")),
-                            DataCell(Text("${element.prospect}")),
-                            DataCell(IconButton(
-                              onPressed: () {
-                                _materialProvider
-                                    .deleteCivil(int.parse(element.sno))
-                                    .then((value) {
-                                  Toast.show(
-                                      "Deleting Material ${element.particulars}",
-                                      context,
-                                      backgroundColor: Colors.green);
-                                  setState(() {});
-                                  Toast.show(
-                                      "Deleted Labour ${element.particulars}",
-                                      context,
-                                      backgroundColor: Colors.green);
-                                  setState(() {});
-                                });
-                              },
-                              icon: Icon(
-                                Icons.delete_outline,
-                                color: Colors.grey,
-                              ),
-                            ))
-                          ]))
-                              .toList(),
+                        Icon(Icons.settings_applications, color: Colors.white, size: 20.0,),
+                        SizedBox(width: 8.0,),
+                        Text(
+                          "Ply",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
                         ),
                       ],
-                    );
-                  }),
+                    ),
+                    onTap: (){
+
+                    },
+                  ),
+                  SizedBox(height: 20.0,),
+                  ListTile(
+                    title: Row(
+                      children: [
+                        Icon(Icons.location_city, color: Colors.white, size: 20.0,),
+                        SizedBox(width: 8.0,),
+                        Text(
+                          "Civil",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    onTap: (){
+
+                    },
+                  ),
+                  SizedBox(height: 20.0,),
+                  ListTile(
+                    title: Row(
+                      children: [
+                        Icon(Icons.dashboard, color: Colors.white, size: 20.0,),
+                        SizedBox(width: 8.0,),
+                        Text(
+                          "Tiles",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    onTap: (){
+
+                    },
+                  ),
+                  SizedBox(height: 20.0,),
+                  ListTile(
+                    title: Row(
+                      children: [
+                        Icon(Icons.format_paint, color: Colors.white, size: 20.0,),
+                        SizedBox(width: 8.0,),
+                        Text(
+                          "Paint",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    onTap: (){
+
+                    },
+                  ),
+                  SizedBox(height: 20.0,),
+                  ListTile(
+                    title: Row(
+                      children: [
+                        Icon(Icons.lightbulb_outline, color: Colors.white, size: 20.0,),
+                        SizedBox(width: 8.0,),
+                        Text(
+                          "Electric",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    onTap: (){
+
+                    },
+                  ),
+                  SizedBox(height: 20.0,),
+                  ListTile(
+                    title: Row(
+                      children: [
+                        Icon(Icons.transfer_within_a_station, color: Colors.white, size: 20.0,),
+                        SizedBox(width: 8.0,),
+                        Text(
+                          "Plumbing",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    onTap: (){
+
+                    },
+                  ),
+                  SizedBox(height: 20.0,),
+
+
+                ],
+              ),
             ),
-            SizedBox(height: 50.0,),
-            FutureBuilder<Object>(
-                future: _materialProvider.getElectric(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(height: 50.0,),
+                Container(
+                  width: MediaQuery.of(context).size.width/1.2,
+                  child: FutureBuilder<Object>(
+                      future: _materialProvider.getCivil(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
 
-                  print("Line 74: ${snapshot.data}");
+                        print("Line 40: ${snapshot.data}");
 
-                  _electric = snapshot.data;
+                        _civil = snapshot.data;
 
-                  if(_electric.length == 0) {
-                    return Center(
-                      child: Text("No Data"),
-                    );
-                  }
+                        return Column(
+                          children: [
+                            TitleWidget(title: "Civil"),
+                            DataTable(
+                              columns: [
+                                DataColumn(label: Text('Particulars')),
+                                DataColumn(label: Text('Rate')),
+                                DataColumn(label: Text('Unit')),
+                                DataColumn(label: Text('Quantity')),
+                                DataColumn(label: Text('Prospect')),
+                                DataColumn(label: Text("Delete")),
 
-                  return Column(
-                    children: [
-                      TitleWidget(title: "Electric"),
-                      DataTable(
-                        columns: [
-                          DataColumn(label: Text('Particulars')),
-                          DataColumn(label: Text('Rate')),
-                          DataColumn(label: Text('Unit')),
-                          DataColumn(label: Text('Quantity')),
-                          DataColumn(label: Text('Prospect')),
-
-                        ],
-                        rows: _electric
-                            .map((element) => DataRow(cells: <DataCell>[
-                          //Extracting from Map element the value
-                          DataCell(Text("${element.particulars}")),
-                          DataCell(Text("${element.rate}")),
-                          DataCell(Text("${element.unit}")),
-                          DataCell(Text("${element.quantity}")),
-                          DataCell(Text("${element.prospect}")),
-
-                        ]))
-                            .toList(),
-                      ),
-                    ],
-                  );
-                }),
-            SizedBox(height: 50.0,),
-            FutureBuilder<Object>(
-                future: _materialProvider.getPaint(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-
-                  print("Line 74: ${snapshot.data}");
-
-                  _paint = snapshot.data;
-
-                  if(_paint.length == 0) {
-                    return Center(
-                      child: Text("No Data"),
-                    );
-                  }
-
-                  return Column(
-                    children: [
-                      TitleWidget(title: "Paint"),
-                      DataTable(
-                        columns: [
-                          DataColumn(label: Text('Particulars')),
-                          DataColumn(label: Text('Rate')),
-                          DataColumn(label: Text('Unit')),
-                          DataColumn(label: Text('Quantity')),
-                          DataColumn(label: Text('Prospect')),
-                          DataColumn(label: Text("Delete")),
-
-                        ],
-                        rows: _paint
-                            .map((element) => DataRow(cells: <DataCell>[
-                          //Extracting from Map element the value
-                          DataCell(Text("${element.particulars}")),
-                          DataCell(Text("${element.rate}")),
-                          DataCell(Text("${element.unit}")),
-                          DataCell(Text("${element.quantity}")),
-                          DataCell(Text("${element.prospect}")),
-                          DataCell(IconButton(
-                            onPressed: () {
-                              _materialProvider
-                                  .deletePaint(int.parse(element.sno))
-                                  .then((value) {
-                                Toast.show(
-                                    "Deleting Material ${element.particulars}",
-                                    context,
-                                    backgroundColor: Colors.green);
-                                setState(() {});
-                                Toast.show(
-                                    "Deleted Labour ${element.particulars}",
-                                    context,
-                                    backgroundColor: Colors.green);
-                                setState(() {});
-                              });
-                            },
-                            icon: Icon(
-                              Icons.delete_outline,
-                              color: Colors.grey,
+                              ],
+                              rows: _civil
+                                  .map((element) => DataRow(cells: <DataCell>[
+                                //Extracting from Map element the value
+                                DataCell(Text("${element.particulars}")),
+                                DataCell(Text("${element.rate}")),
+                                DataCell(Text("${element.unit}")),
+                                DataCell(Text("${element.quantity}")),
+                                DataCell(Text("${element.prospect}")),
+                                DataCell(IconButton(
+                                  onPressed: () {
+                                    _materialProvider
+                                        .deleteCivil(int.parse(element.sno))
+                                        .then((value) {
+                                      Toast.show(
+                                          "Deleting Material ${element.particulars}",
+                                          context,
+                                          backgroundColor: Colors.green);
+                                      setState(() {});
+                                      Toast.show(
+                                          "Deleted Labour ${element.particulars}",
+                                          context,
+                                          backgroundColor: Colors.green);
+                                      setState(() {});
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.delete_outline,
+                                    color: Colors.grey,
+                                  ),
+                                ))
+                              ]))
+                                  .toList(),
                             ),
-                          ))
-                        ]))
-                            .toList(),
-                      ),
-                    ],
-                  );
-                }),
-            SizedBox(height: 50.0,),
-            FutureBuilder<Object>(
-                future: _materialProvider.getTiles(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
+                          ],
+                        );
+                      }),
+                ),
+                SizedBox(height: 50.0,),
+                FutureBuilder<Object>(
+                    future: _materialProvider.getElectric(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
 
-                  print("Line 74: ${snapshot.data}");
+                      print("Line 74: ${snapshot.data}");
 
-                  _tiles = snapshot.data;
+                      _electric = snapshot.data;
 
-                  if(_tiles.length == 0) {
-                    return Center(
-                      child: Text("No Data"),
-                    );
-                  }
+                      if(_electric.length == 0) {
+                        return Center(
+                          child: Text("No Data"),
+                        );
+                      }
 
-                  return Column(
-                    children: [
-                      TitleWidget(title: "Tiles"),
-                      DataTable(
-                        columns: [
-                          DataColumn(label: Text('Particulars')),
-                          DataColumn(label: Text('Rate')),
-                          DataColumn(label: Text('Unit')),
-                          DataColumn(label: Text('Quantity')),
-                          DataColumn(label: Text('Prospect')),
+                      return Column(
+                        children: [
+                          TitleWidget(title: "Electric"),
+                          DataTable(
+                            columns: [
+                              DataColumn(label: Text('Particulars')),
+                              DataColumn(label: Text('Rate')),
+                              DataColumn(label: Text('Unit')),
+                              DataColumn(label: Text('Quantity')),
+                              DataColumn(label: Text('Prospect')),
 
+                            ],
+                            rows: _electric
+                                .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.particulars}")),
+                              DataCell(Text("${element.rate}")),
+                              DataCell(Text("${element.unit}")),
+                              DataCell(Text("${element.quantity}")),
+                              DataCell(Text("${element.prospect}")),
+
+                            ]))
+                                .toList(),
+                          ),
                         ],
-                        rows: _tiles
-                            .map((element) => DataRow(cells: <DataCell>[
-                          //Extracting from Map element the value
-                          DataCell(Text("${element.particulars}")),
-                          DataCell(Text("${element.rate}")),
-                          DataCell(Text("${element.unit}")),
-                          DataCell(Text("${element.quantity}")),
-                          DataCell(Text("${element.prospect}")),
+                      );
+                    }),
+                SizedBox(height: 50.0,),
+                FutureBuilder<Object>(
+                    future: _materialProvider.getPaint(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
 
-                        ]))
-                            .toList(),
-                      ),
-                    ],
-                  );
-                }),
-            SizedBox(height: 50.0,),
-            FutureBuilder<Object>(
-                future: _materialProvider.getPlumbing(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
+                      print("Line 74: ${snapshot.data}");
 
-                  print("Line 74: ${snapshot.data}");
+                      _paint = snapshot.data;
 
-                  _plumbing = snapshot.data;
+                      if(_paint.length == 0) {
+                        return Center(
+                          child: Text("No Data"),
+                        );
+                      }
 
-                  if(_plumbing.length == 0) {
-                    return Center(
-                      child: Text("No Data"),
-                    );
-                  }
+                      return Column(
+                        children: [
+                          TitleWidget(title: "Paint"),
+                          DataTable(
+                            columns: [
+                              DataColumn(label: Text('Particulars')),
+                              DataColumn(label: Text('Rate')),
+                              DataColumn(label: Text('Unit')),
+                              DataColumn(label: Text('Quantity')),
+                              DataColumn(label: Text('Prospect')),
+                              DataColumn(label: Text("Delete")),
 
-                  return Column(
-                    children: [
-                      TitleWidget(title: "Plumbing"),
-                      DataTable(
-                        columns: [
-                          DataColumn(label: Text('Particulars')),
-                          DataColumn(label: Text('Rate')),
-                          DataColumn(label: Text('Unit')),
-                          DataColumn(label: Text('Quantity')),
-                          DataColumn(label: Text('Prospect')),
-
+                            ],
+                            rows: _paint
+                                .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.particulars}")),
+                              DataCell(Text("${element.rate}")),
+                              DataCell(Text("${element.unit}")),
+                              DataCell(Text("${element.quantity}")),
+                              DataCell(Text("${element.prospect}")),
+                              DataCell(IconButton(
+                                onPressed: () {
+                                  _materialProvider
+                                      .deletePaint(int.parse(element.sno))
+                                      .then((value) {
+                                    Toast.show(
+                                        "Deleting Material ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                    Toast.show(
+                                        "Deleted Labour ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.grey,
+                                ),
+                              ))
+                            ]))
+                                .toList(),
+                          ),
                         ],
-                        rows: _plumbing
-                            .map((element) => DataRow(cells: <DataCell>[
-                          //Extracting from Map element the value
-                          DataCell(Text("${element.particulars}")),
-                          DataCell(Text("${element.rate}")),
-                          DataCell(Text("${element.unit}")),
-                          DataCell(Text("${element.quantity}")),
-                          DataCell(Text("${element.prospect}")),
+                      );
+                    }),
+                SizedBox(height: 50.0,),
+                FutureBuilder<Object>(
+                    future: _materialProvider.getTiles(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
 
-                        ]))
-                            .toList(),
-                      ),
-                    ],
-                  );
-                }),
-            SizedBox(height: 50.0,),
-            FutureBuilder<Object>(
-                future: _materialProvider.getPly(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
+                      print("Line 74: ${snapshot.data}");
 
-                  print("Line 74: ${snapshot.data}");
+                      _tiles = snapshot.data;
 
-                  _ply = snapshot.data;
+                      if(_tiles.length == 0) {
+                        return Center(
+                          child: Text("No Data"),
+                        );
+                      }
 
-                  if(_ply.length == 0) {
-                    return Center(
-                      child: Text("No Data"),
-                    );
-                  }
+                      return Column(
+                        children: [
+                          TitleWidget(title: "Tiles"),
+                          DataTable(
+                            columns: [
+                              DataColumn(label: Text('Particulars')),
+                              DataColumn(label: Text('Rate')),
+                              DataColumn(label: Text('Unit')),
+                              DataColumn(label: Text('Quantity')),
+                              DataColumn(label: Text('Prospect')),
 
-                  return Column(
-                    children: [
-                      TitleWidget(title: "Ply"),
-                      DataTable(
-                        columns: [
-                          DataColumn(label: Text('Particulars')),
-                          DataColumn(label: Text('Rate')),
-                          DataColumn(label: Text('Unit')),
-                          DataColumn(label: Text('Quantity')),
-                          DataColumn(label: Text('Prospect')),
+                            ],
+                            rows: _tiles
+                                .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.particulars}")),
+                              DataCell(Text("${element.rate}")),
+                              DataCell(Text("${element.unit}")),
+                              DataCell(Text("${element.quantity}")),
+                              DataCell(Text("${element.prospect}")),
 
+                            ]))
+                                .toList(),
+                          ),
                         ],
-                        rows: _ply
-                            .map((element) => DataRow(cells: <DataCell>[
-                          //Extracting from Map element the value
-                          DataCell(Text("${element.particulars}")),
-                          DataCell(Text("${element.rate}")),
-                          DataCell(Text("${element.unit}")),
-                          DataCell(Text("${element.quantity}")),
-                          DataCell(Text("${element.prospect}")),
+                      );
+                    }),
+                SizedBox(height: 50.0,),
+                FutureBuilder<Object>(
+                    future: _materialProvider.getPlumbing(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
 
-                        ]))
-                            .toList(),
-                      ),
-                    ],
-                  );
-                })
+                      print("Line 74: ${snapshot.data}");
+
+                      _plumbing = snapshot.data;
+
+                      if(_plumbing.length == 0) {
+                        return Center(
+                          child: Text("No Data"),
+                        );
+                      }
+
+                      return Column(
+                        children: [
+                          TitleWidget(title: "Plumbing"),
+                          DataTable(
+                            columns: [
+                              DataColumn(label: Text('Particulars')),
+                              DataColumn(label: Text('Rate')),
+                              DataColumn(label: Text('Unit')),
+                              DataColumn(label: Text('Quantity')),
+                              DataColumn(label: Text('Prospect')),
+
+                            ],
+                            rows: _plumbing
+                                .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.particulars}")),
+                              DataCell(Text("${element.rate}")),
+                              DataCell(Text("${element.unit}")),
+                              DataCell(Text("${element.quantity}")),
+                              DataCell(Text("${element.prospect}")),
+
+                            ]))
+                                .toList(),
+                          ),
+                        ],
+                      );
+                    }),
+                SizedBox(height: 50.0,),
+                FutureBuilder<Object>(
+                    future: _materialProvider.getPly(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+
+                      print("Line 74: ${snapshot.data}");
+
+                      _ply = snapshot.data;
+
+                      if(_ply.length == 0) {
+                        return Center(
+                          child: Text("No Data"),
+                        );
+                      }
+
+                      return Column(
+                        children: [
+                          TitleWidget(title: "Ply"),
+                          DataTable(
+                            columns: [
+                              DataColumn(label: Text('Particulars')),
+                              DataColumn(label: Text('Rate')),
+                              DataColumn(label: Text('Unit')),
+                              DataColumn(label: Text('Quantity')),
+                              DataColumn(label: Text('Prospect')),
+
+                            ],
+                            rows: _ply
+                                .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.particulars}")),
+                              DataCell(Text("${element.rate}")),
+                              DataCell(Text("${element.unit}")),
+                              DataCell(Text("${element.quantity}")),
+                              DataCell(Text("${element.prospect}")),
+
+                            ]))
+                                .toList(),
+                          ),
+                        ],
+                      );
+                    })
+              ],
+            ),
           ],
         ),
       ),

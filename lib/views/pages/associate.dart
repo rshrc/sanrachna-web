@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sanrachna_web/models/associate_model.dart';
 import 'package:sanrachna_web/providers/associate_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
@@ -25,23 +26,88 @@ class _AssociatePageState extends State<AssociatePage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Column(
-              children: [
-                Text("Labour"),
-                Text("Supervisor"),
-                Text("Vendor"),
-              ],
+            Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width / 8,
+              decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  border: Border.symmetric(
+                      vertical: BorderSide(color: Colors.white, width: 2.0))),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ListTile(
+                    title: Row(
+                      children: [
+                        Icon(Icons.settings, color: Colors.white, size: 20.0,),
+                        SizedBox(width: 8.0,),
+                        Text(
+                          "Labour",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    onTap: (){
+
+                    },
+                  ),
+                  SizedBox(height: 20.0,),
+                  ListTile(
+                    title: Row(
+                      children: [
+                        Icon(Icons.shopping_cart, color: Colors.white, size: 20.0,),
+                        SizedBox(width: 8.0,),
+                        Text(
+                          "Vendor",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    onTap: (){
+
+                    },
+                  ),
+                  SizedBox(height: 20.0,),
+                  ListTile(
+                    title: Row(
+                      children: [
+                        Icon(Icons.supervisor_account, color: Colors.white, size: 20.0,),
+                        SizedBox(width: 8.0,),
+                        Text(
+                          "Supervisor",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    onTap: (){
+
+                    },
+                  ),
+
+                ],
+              ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: 50.0,
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery.of(context).size.width/1.15,
                   child: FutureBuilder<Object>(
                       future: _associateProvider.getLabours(),
                       builder: (context, snapshot) {
@@ -61,7 +127,7 @@ class _AssociatePageState extends State<AssociatePage> {
                             TitleWidget(title: "Labour"),
                             DataTable(
                               columns: [
-                                DataColumn(label: Text('ID')),
+//                                DataColumn(label: Text('ID')),
                                 DataColumn(label: Text('Full Name')),
                                 DataColumn(label: Text('Organization')),
                                 DataColumn(label: Text("Email")),
@@ -70,12 +136,14 @@ class _AssociatePageState extends State<AssociatePage> {
                               ],
                               rows: _labourList
                                   .map((element) => DataRow(cells: <DataCell>[
-                                        DataCell(Text("${element.id}")),
+//                                        DataCell(Text("${element.id}")),
                                         //Extracting from Map element the value
                                         DataCell(Text("${element.fullName}")),
-                                        DataCell(Text("${element.organization}")),
+                                        DataCell(
+                                            Text("${element.organization}")),
                                         DataCell(Text("${element.email}")),
-                                        DataCell(Text("${element.mobileNumber}")),
+                                        DataCell(
+                                            Text("${element.mobileNumber}")),
 
                                         DataCell(IconButton(
                                           onPressed: () {
@@ -85,12 +153,14 @@ class _AssociatePageState extends State<AssociatePage> {
                                               Toast.show(
                                                   "Deleting Labour ${element.fullName}",
                                                   context,
-                                                  backgroundColor: Colors.green);
+                                                  backgroundColor:
+                                                      Colors.green);
                                               setState(() {});
                                               Toast.show(
                                                   "Deleted Labour ${element.fullName}",
                                                   context,
-                                                  backgroundColor: Colors.green);
+                                                  backgroundColor:
+                                                      Colors.green);
                                               setState(() {});
                                             });
                                           },
@@ -320,7 +390,7 @@ class _AssociatePageState extends State<AssociatePage> {
         child: AlertDialog(
           shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
           content: Container(
-            width: MediaQuery.of(context).size.width/2,
+            width: MediaQuery.of(context).size.width / 2,
             child: Column(
               children: <Widget>[
                 Text("Add Labour"),
@@ -385,12 +455,18 @@ class _AssociatePageState extends State<AssociatePage> {
           ),
           actions: <Widget>[
             FlatButton(
-                child: Text("CANCEL", style: TextStyle(color: Colors.redAccent, fontSize: 16.0),),
+                child: Text(
+                  "CANCEL",
+                  style: TextStyle(color: Colors.redAccent, fontSize: 16.0),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 }),
             FlatButton(
-                child: Text("ADD", style: TextStyle(color: Colors.blue ,fontSize: 16.0),),
+                child: Text(
+                  "ADD",
+                  style: TextStyle(color: Colors.blue, fontSize: 16.0),
+                ),
                 onPressed: () {
                   // add it
                   switch (associate) {
