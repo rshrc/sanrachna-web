@@ -29,6 +29,7 @@ class _AssociatePageState extends State<AssociatePage> {
       body: SingleChildScrollView(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               height: MediaQuery.of(context).size.height,
@@ -38,9 +39,10 @@ class _AssociatePageState extends State<AssociatePage> {
                   border: Border.symmetric(
                       vertical: BorderSide(color: Colors.white, width: 2.0))),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(height: 50.0,),
                   ListTile(
                     title: Row(
                       children: [
@@ -128,16 +130,10 @@ class _AssociatePageState extends State<AssociatePage> {
                 ],
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 50.0,
-                ),
-                _dataBuilder(state: dataBuilderState),
-              ],
-            ),
+            SizedBox(width: MediaQuery.of(context).size.width/5,),
+            Padding(
+                padding: EdgeInsets.only(top: 50.0),
+                child: _dataBuilder(state: dataBuilderState)),
           ],
         ),
       ),
