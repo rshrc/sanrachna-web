@@ -306,9 +306,9 @@ class _ClientalePageState extends State<ClientalePage> {
     TextEditingController _emailController = TextEditingController();
     TextEditingController _siteTypeController = TextEditingController();
     TextEditingController _sourceTypeController = TextEditingController();
-    String dropdownValue = "COMMERCIAL";
+    String _siteType = "COMMERCIAL";
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
-    String dropdownValue2 = "ONLINE";
+    String _sourceType = "ONLINE";
 
     await showDialog<String>(
       context: context,
@@ -384,7 +384,7 @@ class _ClientalePageState extends State<ClientalePage> {
                     child: Container(
                       width: MediaQuery.of(context).size.width/2.1,
                       child: DropdownButton<String>(
-                        value: dropdownValue,
+                        value: _siteType,
                         icon: Icon(Icons.keyboard_arrow_down),
                         iconSize: 24,
                         elevation: 8,
@@ -394,7 +394,7 @@ class _ClientalePageState extends State<ClientalePage> {
 
                         onChanged: (String newValue) {
                           setState(() {
-                            dropdownValue = newValue;
+                            _siteType = newValue;
                           });
                         },
                         items: <String>['COMMERCIAL', 'HOME', 'OFFICE']
@@ -415,7 +415,7 @@ class _ClientalePageState extends State<ClientalePage> {
                     child: Container(
                       width: MediaQuery.of(context).size.width/2.05,
                       child: DropdownButton<String>(
-                        value: dropdownValue2,
+                        value: _sourceType,
                         icon: Icon(Icons.keyboard_arrow_down),
                         iconSize: 24,
                         elevation: 8,
@@ -425,7 +425,7 @@ class _ClientalePageState extends State<ClientalePage> {
 
                         onChanged: (String newValue) {
                           setState(() {
-                            dropdownValue2 = newValue;
+                            _sourceType = newValue;
                           });
                         },
                         items: <String>['ONLINE', 'OFFLINE']
@@ -461,8 +461,8 @@ class _ClientalePageState extends State<ClientalePage> {
                         organization: _organizationController.text,
                         mobileNumber: _mobileNumberController.text,
                         email: _emailController.text,
-                        siteType: _siteTypeController.text,
-                        sourceType: _sourceTypeController.text,
+                        siteType: _siteType,
+                        sourceType: _sourceType,
                       )
                           .then((value) {
                         Toast.show(
