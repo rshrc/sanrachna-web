@@ -125,6 +125,8 @@ class _ServicePageState extends State<ServicePage> {
     TextEditingController _rateController = TextEditingController();
     TextEditingController _prospectController = TextEditingController();
 
+    String dropdownProspectValue = 'COMMERCIAL';
+
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
 
     await showDialog<String>(
@@ -192,6 +194,37 @@ class _ServicePageState extends State<ServicePage> {
                         labelStyle: _labelTextStyle,
                       ),
                     ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width/2.1,
+                        child: DropdownButton<String>(
+                          value: dropdownProspectValue,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 8,
+                          style: TextStyle(
+                              color: Colors.blue
+                          ),
+
+                          onChanged: (String newValue) {
+                            setState(() {
+                              dropdownProspectValue = newValue;
+                            });
+                          },
+                          items: <String>['COMMERCIAL', 'HOME', 'OFFICE']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          })
+                              .toList(),
+                        ),
+                      )
                   ),
                 ),
               ],
