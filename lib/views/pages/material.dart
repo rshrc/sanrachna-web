@@ -6,7 +6,6 @@ import 'package:sanrachna_web/providers/material_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
 import 'package:toast/toast.dart';
 
-
 class MaterialPage extends StatefulWidget {
   @override
   _MaterialPageState createState() => _MaterialPageState();
@@ -14,6 +13,7 @@ class MaterialPage extends StatefulWidget {
 
 class _MaterialPageState extends State<MaterialPage> {
   bool _dialVisible = true;
+  String selectedMaterialType = "ply";
 
   List<MaterialModel> _tiles = [];
   List<MaterialModel> _civil = [];
@@ -23,7 +23,6 @@ class _MaterialPageState extends State<MaterialPage> {
   List<MaterialModel> _ply = [];
 
   MaterialProvider _materialProvider = MaterialProvider();
-
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +43,20 @@ class _MaterialPageState extends State<MaterialPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 50.0,),
+                  SizedBox(
+                    height: 50.0,
+                  ),
                   ListTile(
                     title: Row(
                       children: [
-                        Icon(Icons.settings_applications, color: Colors.white, size: 20.0,),
-                        SizedBox(width: 8.0,),
+                        Icon(
+                          Icons.settings_applications,
+                          color: Colors.white,
+                          size: 20.0,
+                        ),
+                        SizedBox(
+                          width: 8.0,
+                        ),
                         Text(
                           "Ply",
                           style: GoogleFonts.exo(
@@ -59,16 +66,26 @@ class _MaterialPageState extends State<MaterialPage> {
                         ),
                       ],
                     ),
-                    onTap: (){
-
+                    onTap: () {
+                      setState(() {
+                        selectedMaterialType = "ply";
+                      });
                     },
                   ),
-                  SizedBox(height: 20.0,),
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   ListTile(
                     title: Row(
                       children: [
-                        Icon(Icons.location_city, color: Colors.white, size: 20.0,),
-                        SizedBox(width: 8.0,),
+                        Icon(
+                          Icons.location_city,
+                          color: Colors.white,
+                          size: 20.0,
+                        ),
+                        SizedBox(
+                          width: 8.0,
+                        ),
                         Text(
                           "Civil",
                           style: GoogleFonts.exo(
@@ -78,16 +95,26 @@ class _MaterialPageState extends State<MaterialPage> {
                         ),
                       ],
                     ),
-                    onTap: (){
-
+                    onTap: () {
+                      setState(() {
+                        selectedMaterialType = "civil";
+                      });
                     },
                   ),
-                  SizedBox(height: 20.0,),
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   ListTile(
                     title: Row(
                       children: [
-                        Icon(Icons.dashboard, color: Colors.white, size: 20.0,),
-                        SizedBox(width: 8.0,),
+                        Icon(
+                          Icons.dashboard,
+                          color: Colors.white,
+                          size: 20.0,
+                        ),
+                        SizedBox(
+                          width: 8.0,
+                        ),
                         Text(
                           "Tiles",
                           style: GoogleFonts.exo(
@@ -97,16 +124,26 @@ class _MaterialPageState extends State<MaterialPage> {
                         ),
                       ],
                     ),
-                    onTap: (){
-
+                    onTap: () {
+                      setState(() {
+                        selectedMaterialType = "tiles";
+                      });
                     },
                   ),
-                  SizedBox(height: 20.0,),
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   ListTile(
                     title: Row(
                       children: [
-                        Icon(Icons.format_paint, color: Colors.white, size: 20.0,),
-                        SizedBox(width: 8.0,),
+                        Icon(
+                          Icons.format_paint,
+                          color: Colors.white,
+                          size: 20.0,
+                        ),
+                        SizedBox(
+                          width: 8.0,
+                        ),
                         Text(
                           "Paint",
                           style: GoogleFonts.exo(
@@ -116,16 +153,26 @@ class _MaterialPageState extends State<MaterialPage> {
                         ),
                       ],
                     ),
-                    onTap: (){
-
+                    onTap: () {
+                      setState(() {
+                        selectedMaterialType = "paint";
+                      });
                     },
                   ),
-                  SizedBox(height: 20.0,),
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   ListTile(
                     title: Row(
                       children: [
-                        Icon(Icons.lightbulb_outline, color: Colors.white, size: 20.0,),
-                        SizedBox(width: 8.0,),
+                        Icon(
+                          Icons.lightbulb_outline,
+                          color: Colors.white,
+                          size: 20.0,
+                        ),
+                        SizedBox(
+                          width: 8.0,
+                        ),
                         Text(
                           "Electric",
                           style: GoogleFonts.exo(
@@ -135,16 +182,26 @@ class _MaterialPageState extends State<MaterialPage> {
                         ),
                       ],
                     ),
-                    onTap: (){
-
+                    onTap: () {
+                      setState(() {
+                        selectedMaterialType = "electric";
+                      });
                     },
                   ),
-                  SizedBox(height: 20.0,),
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   ListTile(
                     title: Row(
                       children: [
-                        Icon(Icons.transfer_within_a_station, color: Colors.white, size: 20.0,),
-                        SizedBox(width: 8.0,),
+                        Icon(
+                          Icons.transfer_within_a_station,
+                          color: Colors.white,
+                          size: 20.0,
+                        ),
+                        SizedBox(
+                          width: 8.0,
+                        ),
                         Text(
                           "Plumbing",
                           style: GoogleFonts.exo(
@@ -154,344 +211,24 @@ class _MaterialPageState extends State<MaterialPage> {
                         ),
                       ],
                     ),
-                    onTap: (){
-
+                    onTap: () {
+                      setState(() {
+                        selectedMaterialType = "plumbing";
+                      });
                     },
                   ),
-                  SizedBox(height: 20.0,),
-
-
+                  SizedBox(
+                    height: 20.0,
+                  ),
                 ],
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(height: 50.0,),
-                Container(
-                  width: MediaQuery.of(context).size.width/1.2,
-                  child: FutureBuilder<Object>(
-                      future: _materialProvider.getCivil(),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-
-                        print("Line 40: ${snapshot.data}");
-
-                        _civil = snapshot.data;
-
-                        return Column(
-                          children: [
-                            TitleWidget(title: "Civil"),
-                            DataTable(
-                              columns: [
-                                DataColumn(label: Text('Particulars')),
-                                DataColumn(label: Text('Rate')),
-                                DataColumn(label: Text('Unit')),
-                                DataColumn(label: Text('Quantity')),
-                                DataColumn(label: Text('Prospect')),
-                                DataColumn(label: Text("Delete")),
-
-                              ],
-                              rows: _civil
-                                  .map((element) => DataRow(cells: <DataCell>[
-                                //Extracting from Map element the value
-                                DataCell(Text("${element.particulars}")),
-                                DataCell(Text("${element.rate}")),
-                                DataCell(Text("${element.unit}")),
-                                DataCell(Text("${element.quantity}")),
-                                DataCell(Text("${element.prospect}")),
-                                DataCell(IconButton(
-                                  onPressed: () {
-                                    _materialProvider
-                                        .deleteCivil(int.parse(element.sno))
-                                        .then((value) {
-                                      Toast.show(
-                                          "Deleting Material ${element.particulars}",
-                                          context,
-                                          backgroundColor: Colors.green);
-                                      setState(() {});
-                                      Toast.show(
-                                          "Deleted Labour ${element.particulars}",
-                                          context,
-                                          backgroundColor: Colors.green);
-                                      setState(() {});
-                                    });
-                                  },
-                                  icon: Icon(
-                                    Icons.delete_outline,
-                                    color: Colors.grey,
-                                  ),
-                                ))
-                              ]))
-                                  .toList(),
-                            ),
-                          ],
-                        );
-                      }),
-                ),
-                SizedBox(height: 50.0,),
-                FutureBuilder<Object>(
-                    future: _materialProvider.getElectric(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-
-                      print("Line 74: ${snapshot.data}");
-
-                      _electric = snapshot.data;
-
-                      if(_electric.length == 0) {
-                        return Center(
-                          child: Text("No Data"),
-                        );
-                      }
-
-                      return Column(
-                        children: [
-                          TitleWidget(title: "Electric"),
-                          DataTable(
-                            columns: [
-                              DataColumn(label: Text('Particulars')),
-                              DataColumn(label: Text('Rate')),
-                              DataColumn(label: Text('Unit')),
-                              DataColumn(label: Text('Quantity')),
-                              DataColumn(label: Text('Prospect')),
-
-                            ],
-                            rows: _electric
-                                .map((element) => DataRow(cells: <DataCell>[
-                              //Extracting from Map element the value
-                              DataCell(Text("${element.particulars}")),
-                              DataCell(Text("${element.rate}")),
-                              DataCell(Text("${element.unit}")),
-                              DataCell(Text("${element.quantity}")),
-                              DataCell(Text("${element.prospect}")),
-
-                            ]))
-                                .toList(),
-                          ),
-                        ],
-                      );
-                    }),
-                SizedBox(height: 50.0,),
-                FutureBuilder<Object>(
-                    future: _materialProvider.getPaint(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-
-                      print("Line 74: ${snapshot.data}");
-
-                      _paint = snapshot.data;
-
-                      if(_paint.length == 0) {
-                        return Center(
-                          child: Text("No Data"),
-                        );
-                      }
-
-                      return Column(
-                        children: [
-                          TitleWidget(title: "Paint"),
-                          DataTable(
-                            columns: [
-                              DataColumn(label: Text('Particulars')),
-                              DataColumn(label: Text('Rate')),
-                              DataColumn(label: Text('Unit')),
-                              DataColumn(label: Text('Quantity')),
-                              DataColumn(label: Text('Prospect')),
-                              DataColumn(label: Text("Delete")),
-
-                            ],
-                            rows: _paint
-                                .map((element) => DataRow(cells: <DataCell>[
-                              //Extracting from Map element the value
-                              DataCell(Text("${element.particulars}")),
-                              DataCell(Text("${element.rate}")),
-                              DataCell(Text("${element.unit}")),
-                              DataCell(Text("${element.quantity}")),
-                              DataCell(Text("${element.prospect}")),
-                              DataCell(IconButton(
-                                onPressed: () {
-                                  _materialProvider
-                                      .deletePaint(int.parse(element.sno))
-                                      .then((value) {
-                                    Toast.show(
-                                        "Deleting Material ${element.particulars}",
-                                        context,
-                                        backgroundColor: Colors.green);
-                                    setState(() {});
-                                    Toast.show(
-                                        "Deleted Labour ${element.particulars}",
-                                        context,
-                                        backgroundColor: Colors.green);
-                                    setState(() {});
-                                  });
-                                },
-                                icon: Icon(
-                                  Icons.delete_outline,
-                                  color: Colors.grey,
-                                ),
-                              ))
-                            ]))
-                                .toList(),
-                          ),
-                        ],
-                      );
-                    }),
-                SizedBox(height: 50.0,),
-                FutureBuilder<Object>(
-                    future: _materialProvider.getTiles(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-
-                      print("Line 74: ${snapshot.data}");
-
-                      _tiles = snapshot.data;
-
-                      if(_tiles.length == 0) {
-                        return Center(
-                          child: Text("No Data"),
-                        );
-                      }
-
-                      return Column(
-                        children: [
-                          TitleWidget(title: "Tiles"),
-                          DataTable(
-                            columns: [
-                              DataColumn(label: Text('Particulars')),
-                              DataColumn(label: Text('Rate')),
-                              DataColumn(label: Text('Unit')),
-                              DataColumn(label: Text('Quantity')),
-                              DataColumn(label: Text('Prospect')),
-
-                            ],
-                            rows: _tiles
-                                .map((element) => DataRow(cells: <DataCell>[
-                              //Extracting from Map element the value
-                              DataCell(Text("${element.particulars}")),
-                              DataCell(Text("${element.rate}")),
-                              DataCell(Text("${element.unit}")),
-                              DataCell(Text("${element.quantity}")),
-                              DataCell(Text("${element.prospect}")),
-
-                            ]))
-                                .toList(),
-                          ),
-                        ],
-                      );
-                    }),
-                SizedBox(height: 50.0,),
-                FutureBuilder<Object>(
-                    future: _materialProvider.getPlumbing(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-
-                      print("Line 74: ${snapshot.data}");
-
-                      _plumbing = snapshot.data;
-
-                      if(_plumbing.length == 0) {
-                        return Center(
-                          child: Text("No Data"),
-                        );
-                      }
-
-                      return Column(
-                        children: [
-                          TitleWidget(title: "Plumbing"),
-                          DataTable(
-                            columns: [
-                              DataColumn(label: Text('Particulars')),
-                              DataColumn(label: Text('Rate')),
-                              DataColumn(label: Text('Unit')),
-                              DataColumn(label: Text('Quantity')),
-                              DataColumn(label: Text('Prospect')),
-
-                            ],
-                            rows: _plumbing
-                                .map((element) => DataRow(cells: <DataCell>[
-                              //Extracting from Map element the value
-                              DataCell(Text("${element.particulars}")),
-                              DataCell(Text("${element.rate}")),
-                              DataCell(Text("${element.unit}")),
-                              DataCell(Text("${element.quantity}")),
-                              DataCell(Text("${element.prospect}")),
-
-                            ]))
-                                .toList(),
-                          ),
-                        ],
-                      );
-                    }),
-                SizedBox(height: 50.0,),
-                FutureBuilder<Object>(
-                    future: _materialProvider.getPly(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-
-                      print("Line 74: ${snapshot.data}");
-
-                      _ply = snapshot.data;
-
-                      if(_ply.length == 0) {
-                        return Center(
-                          child: Text("No Data"),
-                        );
-                      }
-
-                      return Column(
-                        children: [
-                          TitleWidget(title: "Ply"),
-                          DataTable(
-                            columns: [
-                              DataColumn(label: Text('Particulars')),
-                              DataColumn(label: Text('Rate')),
-                              DataColumn(label: Text('Unit')),
-                              DataColumn(label: Text('Quantity')),
-                              DataColumn(label: Text('Prospect')),
-
-                            ],
-                            rows: _ply
-                                .map((element) => DataRow(cells: <DataCell>[
-                              //Extracting from Map element the value
-                              DataCell(Text("${element.particulars}")),
-                              DataCell(Text("${element.rate}")),
-                              DataCell(Text("${element.unit}")),
-                              DataCell(Text("${element.quantity}")),
-                              DataCell(Text("${element.prospect}")),
-
-                            ]))
-                                .toList(),
-                          ),
-                        ],
-                      );
-                    })
-              ],
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 5,
             ),
+            Padding(
+                padding: EdgeInsets.only(top: 50.0),
+                child: _dataBuilder(state: selectedMaterialType))
           ],
         ),
       ),
@@ -523,13 +260,13 @@ class _MaterialPageState extends State<MaterialPage> {
                 _addMaterialDialog(context, material: "tiles");
               }),
           SpeedDialChild(
-            child: Icon(Icons.location_city),
-            backgroundColor: Colors.blue,
-            label: 'Add Civil',
-            labelStyle: TextStyle(fontSize: 18.0),
+              child: Icon(Icons.location_city),
+              backgroundColor: Colors.blue,
+              label: 'Add Civil',
+              labelStyle: TextStyle(fontSize: 18.0),
               onTap: () {
                 _addMaterialDialog(context, material: "civil");
-              }          ),
+              }),
           SpeedDialChild(
               child: Icon(Icons.lightbulb_outline),
               backgroundColor: Colors.red,
@@ -539,14 +276,14 @@ class _MaterialPageState extends State<MaterialPage> {
                 _addMaterialDialog(context, material: "electric");
               }),
           SpeedDialChild(
-            child: Icon(Icons.format_paint),
-            backgroundColor: Colors.blue,
-            label: 'Add Paint',
-            labelStyle: TextStyle(fontSize: 18.0),
+              child: Icon(Icons.format_paint),
+              backgroundColor: Colors.blue,
+              label: 'Add Paint',
+              labelStyle: TextStyle(fontSize: 18.0),
               onTap: () {
                 _addMaterialDialog(context, material: "paint");
-              }
-          ),SpeedDialChild(
+              }),
+          SpeedDialChild(
               child: Icon(Icons.settings),
               backgroundColor: Colors.red,
               label: 'Add Ply',
@@ -555,17 +292,337 @@ class _MaterialPageState extends State<MaterialPage> {
                 _addMaterialDialog(context, material: "ply");
               }),
           SpeedDialChild(
-            child: Icon(Icons.transfer_within_a_station),
-            backgroundColor: Colors.blue,
-            label: 'Add Plumbing',
-            labelStyle: TextStyle(fontSize: 18.0),
+              child: Icon(Icons.transfer_within_a_station),
+              backgroundColor: Colors.blue,
+              label: 'Add Plumbing',
+              labelStyle: TextStyle(fontSize: 18.0),
               onTap: () {
                 _addMaterialDialog(context, material: "plumbing");
-              }
-          ),
+              }),
         ],
       ),
     );
+  }
+
+  Widget _dataBuilder({String state}) {
+    switch (state) {
+      case 'civil':
+        return FutureBuilder<Object>(
+            future: _materialProvider.getCivil(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              print("Line 40: ${snapshot.data}");
+
+              _civil = snapshot.data;
+
+              return Column(
+                children: [
+                  TitleWidget(title: "Civil"),
+                  DataTable(
+                    columns: [
+                      DataColumn(label: Text('Particulars')),
+                      DataColumn(label: Text('Rate')),
+                      DataColumn(label: Text('Unit')),
+                      DataColumn(label: Text('Quantity')),
+                      DataColumn(label: Text('Prospect')),
+                      DataColumn(label: Text("Delete")),
+                    ],
+                    rows: _civil
+                        .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.particulars}")),
+                              DataCell(Text("${element.rate}")),
+                              DataCell(Text("${element.unit}")),
+                              DataCell(Text("${element.quantity}")),
+                              DataCell(Text("${element.prospect}")),
+                              DataCell(IconButton(
+                                onPressed: () {
+                                  _materialProvider
+                                      .deleteCivil(int.parse(element.sno))
+                                      .then((value) {
+                                    Toast.show(
+                                        "Deleting Material ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                    Toast.show(
+                                        "Deleted Labour ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.grey,
+                                ),
+                              ))
+                            ]))
+                        .toList(),
+                  ),
+                ],
+              );
+            });
+        break;
+      case 'electric':
+        return FutureBuilder<Object>(
+            future: _materialProvider.getElectric(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              print("Line 74: ${snapshot.data}");
+
+              _electric = snapshot.data;
+
+              if (_electric.length == 0) {
+                return Center(
+                  child: Text("No Data"),
+                );
+              }
+
+              return Column(
+                children: [
+                  TitleWidget(title: "Electric"),
+                  DataTable(
+                    columns: [
+                      DataColumn(label: Text('Particulars')),
+                      DataColumn(label: Text('Rate')),
+                      DataColumn(label: Text('Unit')),
+                      DataColumn(label: Text('Quantity')),
+                      DataColumn(label: Text('Prospect')),
+                    ],
+                    rows: _electric
+                        .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.particulars}")),
+                              DataCell(Text("${element.rate}")),
+                              DataCell(Text("${element.unit}")),
+                              DataCell(Text("${element.quantity}")),
+                              DataCell(Text("${element.prospect}")),
+                            ]))
+                        .toList(),
+                  ),
+                ],
+              );
+            });
+        break;
+      case 'tiles':
+        return FutureBuilder<Object>(
+            future: _materialProvider.getTiles(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              print("Line 74: ${snapshot.data}");
+
+              _tiles = snapshot.data;
+
+              if (_tiles.length == 0) {
+                return Center(
+                  child: Text("No Data"),
+                );
+              }
+
+              return Column(
+                children: [
+                  TitleWidget(title: "Tiles"),
+                  DataTable(
+                    columns: [
+                      DataColumn(label: Text('Particulars')),
+                      DataColumn(label: Text('Rate')),
+                      DataColumn(label: Text('Unit')),
+                      DataColumn(label: Text('Quantity')),
+                      DataColumn(label: Text('Prospect')),
+                    ],
+                    rows: _tiles
+                        .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.particulars}")),
+                              DataCell(Text("${element.rate}")),
+                              DataCell(Text("${element.unit}")),
+                              DataCell(Text("${element.quantity}")),
+                              DataCell(Text("${element.prospect}")),
+                            ]))
+                        .toList(),
+                  ),
+                ],
+              );
+            });
+        break;
+      case 'ply':
+        return FutureBuilder<Object>(
+            future: _materialProvider.getPly(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              print("Line 74: ${snapshot.data}");
+
+              _ply = snapshot.data;
+
+              if (_ply.length == 0) {
+                return Center(
+                  child: Text("No Data"),
+                );
+              }
+
+              return Column(
+                children: [
+                  TitleWidget(title: "Ply"),
+                  DataTable(
+                    columns: [
+                      DataColumn(label: Text('Particulars')),
+                      DataColumn(label: Text('Rate')),
+                      DataColumn(label: Text('Unit')),
+                      DataColumn(label: Text('Quantity')),
+                      DataColumn(label: Text('Prospect')),
+                    ],
+                    rows: _ply
+                        .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.particulars}")),
+                              DataCell(Text("${element.rate}")),
+                              DataCell(Text("${element.unit}")),
+                              DataCell(Text("${element.quantity}")),
+                              DataCell(Text("${element.prospect}")),
+                            ]))
+                        .toList(),
+                  ),
+                ],
+              );
+            });
+        break;
+      case 'paint':
+        return FutureBuilder<Object>(
+            future: _materialProvider.getPaint(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              print("Line 74: ${snapshot.data}");
+
+              _paint = snapshot.data;
+
+              if (_paint.length == 0) {
+                return Center(
+                  child: Text("No Data"),
+                );
+              }
+
+              return Column(
+                children: [
+                  TitleWidget(title: "Paint"),
+                  DataTable(
+                    columns: [
+                      DataColumn(label: Text('Particulars')),
+                      DataColumn(label: Text('Rate')),
+                      DataColumn(label: Text('Unit')),
+                      DataColumn(label: Text('Quantity')),
+                      DataColumn(label: Text('Prospect')),
+                      DataColumn(label: Text("Delete")),
+                    ],
+                    rows: _paint
+                        .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.particulars}")),
+                              DataCell(Text("${element.rate}")),
+                              DataCell(Text("${element.unit}")),
+                              DataCell(Text("${element.quantity}")),
+                              DataCell(Text("${element.prospect}")),
+                              DataCell(IconButton(
+                                onPressed: () {
+                                  _materialProvider
+                                      .deletePaint(int.parse(element.sno))
+                                      .then((value) {
+                                    Toast.show(
+                                        "Deleting Material ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                    Toast.show(
+                                        "Deleted Labour ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.grey,
+                                ),
+                              ))
+                            ]))
+                        .toList(),
+                  ),
+                ],
+              );
+            });
+        break;
+      case 'plumbing':
+        return FutureBuilder<Object>(
+            future: _materialProvider.getPlumbing(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              print("Line 74: ${snapshot.data}");
+
+              _plumbing = snapshot.data;
+
+              if (_plumbing.length == 0) {
+                return Center(
+                  child: Text("No Data"),
+                );
+              }
+
+              return Column(
+                children: [
+                  TitleWidget(title: "Plumbing"),
+                  DataTable(
+                    columns: [
+                      DataColumn(label: Text('Particulars')),
+                      DataColumn(label: Text('Rate')),
+                      DataColumn(label: Text('Unit')),
+                      DataColumn(label: Text('Quantity')),
+                      DataColumn(label: Text('Prospect')),
+                    ],
+                    rows: _plumbing
+                        .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.particulars}")),
+                              DataCell(Text("${element.rate}")),
+                              DataCell(Text("${element.unit}")),
+                              DataCell(Text("${element.quantity}")),
+                              DataCell(Text("${element.prospect}")),
+                            ]))
+                        .toList(),
+                  ),
+                ],
+              );
+            });
+        break;
+    }
   }
 
   _addMaterialDialog(context, {material}) async {
@@ -585,7 +642,7 @@ class _MaterialPageState extends State<MaterialPage> {
         child: AlertDialog(
           shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
           content: Container(
-            width: MediaQuery.of(context).size.width/2,
+            width: MediaQuery.of(context).size.width / 2,
             child: Column(
               children: <Widget>[
                 Text("Add $material"),
@@ -664,24 +721,29 @@ class _MaterialPageState extends State<MaterialPage> {
           ),
           actions: <Widget>[
             FlatButton(
-                child: Text("CANCEL", style: TextStyle(color: Colors.redAccent, fontSize: 16.0),),
+                child: Text(
+                  "CANCEL",
+                  style: TextStyle(color: Colors.redAccent, fontSize: 16.0),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 }),
             FlatButton(
-                child: Text("ADD", style: TextStyle(color: Colors.blue ,fontSize: 16.0),),
+                child: Text(
+                  "ADD",
+                  style: TextStyle(color: Colors.blue, fontSize: 16.0),
+                ),
                 onPressed: () {
                   // add it
                   switch (material) {
                     case 'electric':
                       _materialProvider
                           .addCivil(
-                        particulars: _particularsController.text,
-                        rate: _rateController.text,
-                        unit: _unitController.text,
-                        quantity: _quantityController.text,
-                        prospect: int.parse(_prospectController.text)
-                      )
+                              particulars: _particularsController.text,
+                              rate: _rateController.text,
+                              unit: _unitController.text,
+                              quantity: _quantityController.text,
+                              prospect: int.parse(_prospectController.text))
                           .then((value) {
                         Toast.show(
                           "Added Civil Material",
@@ -699,12 +761,11 @@ class _MaterialPageState extends State<MaterialPage> {
                     case 'paint':
                       _materialProvider
                           .addPaint(
-                          particulars: _particularsController.text,
-                          rate: _rateController.text,
-                          unit: _unitController.text,
-                          quantity: _quantityController.text,
-                          prospect: _prospectController.text
-                      )
+                              particulars: _particularsController.text,
+                              rate: _rateController.text,
+                              unit: _unitController.text,
+                              quantity: _quantityController.text,
+                              prospect: _prospectController.text)
                           .then((value) {
                         Toast.show(
                           "Added Paint Material",
@@ -722,12 +783,11 @@ class _MaterialPageState extends State<MaterialPage> {
                     case 'plumbing':
                       _materialProvider
                           .addPlumbing(
-                          particulars: _particularsController.text,
-                          rate: _rateController.text,
-                          unit: _unitController.text,
-                          quantity: _quantityController.text,
-                          prospect: int.parse(_prospectController.text)
-                      )
+                              particulars: _particularsController.text,
+                              rate: _rateController.text,
+                              unit: _unitController.text,
+                              quantity: _quantityController.text,
+                              prospect: int.parse(_prospectController.text))
                           .then((value) {
                         Toast.show(
                           "Added Plumbing Material",
@@ -745,12 +805,11 @@ class _MaterialPageState extends State<MaterialPage> {
                     case 'ply':
                       _materialProvider
                           .addPly(
-                          particulars: _particularsController.text,
-                          rate: _rateController.text,
-                          unit: _unitController.text,
-                          quantity: _quantityController.text,
-                          prospect: int.parse(_prospectController.text)
-                      )
+                              particulars: _particularsController.text,
+                              rate: _rateController.text,
+                              unit: _unitController.text,
+                              quantity: _quantityController.text,
+                              prospect: int.parse(_prospectController.text))
                           .then((value) {
                         Toast.show(
                           "Added Ply Material",
@@ -765,29 +824,28 @@ class _MaterialPageState extends State<MaterialPage> {
                         });
                       });
                       break;
-                      case 'tiles':
-                    _materialProvider
-                        .addTiles(
-                        particulars: _particularsController.text,
-                        rate: _rateController.text,
-                        unit: _unitController.text,
-                        quantity: _quantityController.text,
-                        prospect: int.parse(_prospectController.text)
-                    )
-                        .then((value) {
-                      Toast.show(
-                        "Added Tiles Material",
-                        context,
-                        backgroundColor: Colors.green,
-                        duration: 3,
-                        textColor: Colors.white,
-                        border: Border.all(color: Colors.white),
-                      );
-                      setState(() {
-                        // Update Future Builder
+                    case 'tiles':
+                      _materialProvider
+                          .addTiles(
+                              particulars: _particularsController.text,
+                              rate: _rateController.text,
+                              unit: _unitController.text,
+                              quantity: _quantityController.text,
+                              prospect: int.parse(_prospectController.text))
+                          .then((value) {
+                        Toast.show(
+                          "Added Tiles Material",
+                          context,
+                          backgroundColor: Colors.green,
+                          duration: 3,
+                          textColor: Colors.white,
+                          border: Border.all(color: Colors.white),
+                        );
+                        setState(() {
+                          // Update Future Builder
+                        });
                       });
-                    });
-                    break;
+                      break;
                   }
                 })
           ],
@@ -795,5 +853,4 @@ class _MaterialPageState extends State<MaterialPage> {
       ),
     );
   }
-
 }

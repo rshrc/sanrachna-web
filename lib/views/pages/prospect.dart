@@ -43,7 +43,6 @@ class _ProspectPageState extends State<ProspectPage> {
                         TitleWidget(title: "Labour"),
                         DataTable(
                           columns: [
-                            DataColumn(label: Text('ID')),
                             DataColumn(label: Text('Email')),
                             DataColumn(label: Text('Full Name')),
                             DataColumn(label: Text('Organization')),
@@ -54,7 +53,6 @@ class _ProspectPageState extends State<ProspectPage> {
                           ],
                           rows: _prospectList
                               .map((element) => DataRow(cells: <DataCell>[
-                                    DataCell(Text("${element.id}")),
                                     DataCell(Text("${element.email}")),
                                     DataCell(Text("${element.fullName}")),
                                     DataCell(Text("${element.organization}")),
