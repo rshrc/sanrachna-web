@@ -58,7 +58,6 @@ class _ServicePageState extends State<ServicePage> {
                         TitleWidget(title: "Service"),
                         DataTable(
                           columns: [
-                            DataColumn(label: Text('ID')),
                             DataColumn(label: Text('Name')),
                             DataColumn(label: Text('Unit')),
                             DataColumn(label: Text('Rate')),
@@ -67,7 +66,6 @@ class _ServicePageState extends State<ServicePage> {
                           ],
                           rows: _serviceList
                               .map((element) => DataRow(cells: <DataCell>[
-                                    DataCell(Text("${element.id}")),
                                     DataCell(Text("${element.name}")),
                                     DataCell(Text("${element.unit}")),
                                     DataCell(Text("${element.rate}")),

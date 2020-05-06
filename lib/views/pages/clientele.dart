@@ -132,7 +132,7 @@ class _ClientalePageState extends State<ClientalePage> {
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 7,
+                width: MediaQuery.of(context).size.width / 12,
               ),
               Padding(
                   padding: EdgeInsets.only(top: 50.0),
@@ -216,7 +216,6 @@ class _ClientalePageState extends State<ClientalePage> {
                   TitleWidget(title: "Leads"),
                   DataTable(
                     columns: [
-                      DataColumn(label: Text("ID")),
                       DataColumn(label: Text('Full Name')),
                       DataColumn(label: Text('Organization')),
                       DataColumn(label: Text('Email')),
@@ -228,7 +227,6 @@ class _ClientalePageState extends State<ClientalePage> {
                     rows: _leadList
                         .map((element) => DataRow(cells: <DataCell>[
                               //Extracting from Map element the value
-                              DataCell(Text("${element.id}")),
                               DataCell(Text("${element.fullName}")),
                               DataCell(Text("${element.organization}")),
                               DataCell(Text("${element.email}")),
@@ -283,7 +281,6 @@ class _ClientalePageState extends State<ClientalePage> {
                   TitleWidget(title: "Clients"),
                   DataTable(
                     columns: [
-                      DataColumn(label: Text("ID")),
                       DataColumn(label: Text('Full Name')),
                       DataColumn(label: Text('Organization')),
                       DataColumn(label: Text('Email')),
@@ -295,7 +292,6 @@ class _ClientalePageState extends State<ClientalePage> {
                     rows: _clientList
                         .map((element) => DataRow(cells: <DataCell>[
                               //Extracting from Map element the value
-                              DataCell(Text("${element.id}")),
                               DataCell(Text("${element.fullName}")),
                               DataCell(Text("${element.organization}")),
                               DataCell(Text("${element.email}")),
@@ -356,7 +352,6 @@ class _ClientalePageState extends State<ClientalePage> {
                   TitleWidget(title: "Prospects"),
                   DataTable(
                     columns: [
-                      DataColumn(label: Text("ID")),
                       DataColumn(label: Text('Full Name')),
                       DataColumn(label: Text('Organization')),
                       DataColumn(label: Text('Email')),
@@ -367,7 +362,6 @@ class _ClientalePageState extends State<ClientalePage> {
                     ],
                     rows: _prospectList
                         .map((element) => DataRow(cells: <DataCell>[
-                              DataCell(Text("${element.id}")),
                               DataCell(Text("${element.fullName}")),
                               DataCell(Text("${element.organization}")),
                               DataCell(Text("${element.email}")),

@@ -280,7 +280,6 @@ class _AssociatePageState extends State<AssociatePage> {
                   TitleWidget(title: "Supervisor"),
                   DataTable(
                     columns: [
-                      DataColumn(label: Text('ID')),
                       DataColumn(label: Text('Full Name')),
                       DataColumn(label: Text('Organization')),
                       DataColumn(label: Text("Email")),
@@ -289,7 +288,6 @@ class _AssociatePageState extends State<AssociatePage> {
                     ],
                     rows: _supervisorList
                         .map((element) => DataRow(cells: <DataCell>[
-                              DataCell(Text("${element.id}")),
                               //Extracting from Map element the value
                               DataCell(Text("${element.fullName}")),
                               DataCell(Text("${element.organization}")),
@@ -349,7 +347,6 @@ class _AssociatePageState extends State<AssociatePage> {
                   TitleWidget(title: "Vendor"),
                   DataTable(
                     columns: [
-                      DataColumn(label: Text('ID')),
                       DataColumn(label: Text('Full Name')),
                       DataColumn(label: Text('Organization')),
                       DataColumn(label: Text("Email")),
@@ -358,7 +355,6 @@ class _AssociatePageState extends State<AssociatePage> {
                     ],
                     rows: _vendorList
                         .map((element) => DataRow(cells: <DataCell>[
-                              DataCell(Text("${element.id}")),
                               DataCell(Text("${element.fullName}")),
                               DataCell(Text("${element.organization}")),
                               DataCell(Text("${element.email}")),
