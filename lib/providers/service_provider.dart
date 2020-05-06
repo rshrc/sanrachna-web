@@ -21,7 +21,7 @@ class ServiceProvider implements ServiceAPIProvider {
     };
 
     http.Response response = await http.post(
-        "http://sanrachna.pythonanywhere.com/api/database/service/",
+        "https://sanrachna.pythonanywhere.com/api/database/service/",
         body: body);
 
     print(response.statusCode);
@@ -31,7 +31,7 @@ class ServiceProvider implements ServiceAPIProvider {
   @override
   Future<String> deleteServices(int id) async {
     http.Response response = await http.delete(
-      'http://sanrachna.pythonanywhere.com/api/database/service/$id/delete/',
+      'https://sanrachna.pythonanywhere.com/api/database/service/$id/delete/',
     );
 
     print("Line 74: ${response.body}");
@@ -42,7 +42,7 @@ class ServiceProvider implements ServiceAPIProvider {
   @override
   Future<List<ServiceModel>> getServices() async {
     http.Response response = await http
-        .get('http://sanrachna.pythonanywhere.com/api/database/service/');
+        .get('https://sanrachna.pythonanywhere.com/api/database/service/');
 
     print("Line 48: ${response.body}");
 

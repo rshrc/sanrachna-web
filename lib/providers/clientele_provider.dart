@@ -84,7 +84,7 @@ class ClienteleProvider implements ClientaleAPIProvider {
   @override
   Future<String> deleteClient(int id) async {
     http.Response response = await http.delete(
-      'http://sanrachna.pythonanywhere.com/api/clientele/client/$id/delete/',
+      'https://sanrachna.pythonanywhere.com/api/clientele/client/$id/delete/',
     );
 
     print("Line 89: ${response.body}");
@@ -95,7 +95,7 @@ class ClienteleProvider implements ClientaleAPIProvider {
   @override
   Future<String> deleteLead(int id) async {
     http.Response response = await http.delete(
-      'http://sanrachna.pythonanywhere.com/api/clientele/lead/$id/delete/',
+      'https://sanrachna.pythonanywhere.com/api/clientele/lead/$id/delete/',
     );
 
     print("Line 100: ${response.body}");
@@ -106,7 +106,7 @@ class ClienteleProvider implements ClientaleAPIProvider {
   @override
   Future<String> deleteProspect(int id) async {
     http.Response response = await http.delete(
-      'http://sanrachna.pythonanywhere.com/api/clientele/prospect/$id/delete/',
+      'https://sanrachna.pythonanywhere.com/api/clientele/prospect/$id/delete/',
     );
 
     print("Line 111: ${response.body}");

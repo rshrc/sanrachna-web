@@ -28,7 +28,7 @@ class ProspectProvider implements ProspectAPIProvider {
     };
 
     http.Response response = await http
-        .post('http://sanrachna.pythonanywhere.com/api/prospect/list/', body: payload);
+        .post('https://sanrachna.pythonanywhere.com/api/prospect/list/', body: payload);
 
     print("Line 48: ${response.body} $payload");
 
@@ -38,7 +38,7 @@ class ProspectProvider implements ProspectAPIProvider {
   @override
   Future<String> deleteProspect(int id) async {
     http.Response response = await http.delete(
-      'http://sanrachna.pythonanywhere.com/api/prospect/prospect/$id/delete/',
+      'https://sanrachna.pythonanywhere.com/api/prospect/prospect/$id/delete/',
     );
 
     print("Line 74: ${response.body}");
@@ -49,7 +49,7 @@ class ProspectProvider implements ProspectAPIProvider {
   @override
   Future<List<ProspectModel>> getProspects() async {
     http.Response response = await http
-        .get('http://sanrachna.pythonanywhere.com/api/prospect/list/');
+        .get('https://sanrachna.pythonanywhere.com/api/prospect/list/');
 
     print("Line 48: ${response.body}");
 

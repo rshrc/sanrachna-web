@@ -1,5 +1,5 @@
 class Constants {
-  static String server = "http://sanrachna.pythonanywhere.com/api";
+  static String server = "https://sanrachna.pythonanywhere.com/api";
 
   /// Associate APIs
   static String labourAssociateAPI = "$server/associate/labour/";

@@ -24,7 +24,7 @@ class AssociateProvider implements AssociateAPIProvider {
     };
 
     http.Response response = await http.post(
-        'http://sanrachna.pythonanywhere.com/api/associate/labour/',
+        'https://sanrachna.pythonanywhere.com/api/associate/labour/',
         body: payload);
 
     print("Line 18: ${response.body}");
@@ -47,7 +47,7 @@ class AssociateProvider implements AssociateAPIProvider {
     };
 
     http.Response response = await http.post(
-        'http://sanrachna.pythonanywhere.com/api/associate/supervisor/',
+        'https://sanrachna.pythonanywhere.com/api/associate/supervisor/',
         body: payload);
 
     print("Line 52: ${response.body}");
@@ -70,7 +70,7 @@ class AssociateProvider implements AssociateAPIProvider {
     };
 
     http.Response response = await http.post(
-        'http://sanrachna.pythonanywhere.com/api/associate/vendor/',
+        'https://sanrachna.pythonanywhere.com/api/associate/vendor/',
         body: payload);
 
     print("Line 74: ${response.body}");
@@ -81,7 +81,7 @@ class AssociateProvider implements AssociateAPIProvider {
   @override
   Future<String> deleteLabour(int id) async {
     http.Response response = await http.delete(
-        'http://sanrachna.pythonanywhere.com/api/associate/labour/$id/delete/',
+        'https://sanrachna.pythonanywhere.com/api/associate/labour/$id/delete/',
         );
 
     print("Line 74: ${response.body}");
@@ -93,7 +93,7 @@ class AssociateProvider implements AssociateAPIProvider {
   @override
   Future<String> deleteSupervisor(int id) async {
     http.Response response = await http.delete(
-      'http://sanrachna.pythonanywhere.com/api/associate/supervisor/$id/delete/',
+      'https://sanrachna.pythonanywhere.com/api/associate/supervisor/$id/delete/',
     );
 
     print("Line 99: ${response.body}");
@@ -104,7 +104,7 @@ class AssociateProvider implements AssociateAPIProvider {
   @override
   Future<String> deleteVendor(int id) async {
     http.Response response = await http.delete(
-      'http://sanrachna.pythonanywhere.com/api/associate/vendor/$id/delete/',
+      'https://sanrachna.pythonanywhere.com/api/associate/vendor/$id/delete/',
     );
 
     print("Line 110: ${response.body}");
@@ -115,7 +115,7 @@ class AssociateProvider implements AssociateAPIProvider {
   @override
   Future<List<AssociateModel>> getLabours() async {
     http.Response response = await http
-        .get('http://sanrachna.pythonanywhere.com/api/associate/labour/');
+        .get('https://sanrachna.pythonanywhere.com/api/associate/labour/');
 
     print("Line 48: ${response.body}");
 
@@ -133,7 +133,7 @@ class AssociateProvider implements AssociateAPIProvider {
   @override
   Future<List<AssociateModel>> getSupervisors() async {
     http.Response response = await http
-        .get('http://sanrachna.pythonanywhere.com/api/associate/supervisor/');
+        .get('https://sanrachna.pythonanywhere.com/api/associate/supervisor/');
 
     print("Line 73: ${response.body}");
 
@@ -151,7 +151,7 @@ class AssociateProvider implements AssociateAPIProvider {
   @override
   Future<List<AssociateModel>> getVendors() async {
     http.Response response = await http
-        .get('http://sanrachna.pythonanywhere.com/api/associate/vendor/');
+        .get('https://sanrachna.pythonanywhere.com/api/associate/vendor/');
 
     print("Line 90: ${response.body}");
 
