@@ -133,6 +133,9 @@ class _ProspectPageState extends State<ProspectPage> {
 
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
 
+    String _siteType = 'COMMERCIAL';
+    String _sourceType = 'ONLINE';
+
     await showDialog<String>(
       context: context,
       child: Container(
@@ -203,30 +206,64 @@ class _ProspectPageState extends State<ProspectPage> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _siteTypeController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Site Type',
-                        hintText: 'Site Type',
-                        labelStyle: _labelTextStyle,
-                      ),
-                    ),
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width/2.1,
+                        child: DropdownButton<String>(
+                          value: _siteType,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 8,
+                          style: TextStyle(
+                              color: Colors.blue
+                          ),
+
+                          onChanged: (String newValue) {
+                            setState(() {
+                              _siteType = newValue;
+                            });
+                          },
+                          items: <String>['COMMERCIAL', 'HOME', 'OFFICE']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          })
+                              .toList(),
+                        ),
+                      )
                   ),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _sourceTypeController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Source Type',
-                        hintText: 'Source Type',
-                        labelStyle: _labelTextStyle,
-                      ),
-                    ),
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width/2.05,
+                        child: DropdownButton<String>(
+                          value: _sourceType,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 8,
+                          style: TextStyle(
+                              color: Colors.blue
+                          ),
+
+                          onChanged: (String newValue) {
+                            setState(() {
+                              _sourceType = newValue;
+                            });
+                          },
+                          items: <String>['ONLINE', 'OFFLINE']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          })
+                              .toList(),
+                        ),
+                      )
                   ),
                 ),
               ],
@@ -253,8 +290,8 @@ class _ProspectPageState extends State<ProspectPage> {
                         organization: _organizationController.text,
                         mobileNumber: _mobileNumberController.text,
                         email: _emailController.text,
-                        siteType: _siteTypeController.text,
-                        sourceType: _sourceTypeController.text,
+                        siteType: _siteType,
+                        sourceType: _sourceType,
                       )
                           .then((value) {
                         Toast.show(
