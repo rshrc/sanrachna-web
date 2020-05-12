@@ -198,31 +198,36 @@ class _ServicePageState extends State<ServicePage> {
                   ),
                 ),
                 Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 2.1,
-                        child: DropdownButton<ProspectModel>(
-                          value: dropdownProspectValue,
-                          icon: Icon(Icons.keyboard_arrow_down),
-                          iconSize: 24,
-                          elevation: 8,
-                          style: TextStyle(color: Colors.blue),
-                          onChanged: (ProspectModel prospectModel) {
-                            setState(() {
-                              dropdownProspectValue = prospectModel;
-                              prospectId = prospectModel.id;
-                            });
-                          },
-                          items: _prospectList
-                              .map<DropdownMenuItem<ProspectModel>>((ProspectModel value) {
-                            return DropdownMenuItem<ProspectModel>(
-                              value: value,
-                              child: Text(value.fullName),
-                            );
-                          }).toList(),
-                        ),
-                      )),
+                  child: Row(
+                    children: [
+                      Text("Prospect: "),
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 3,
+                            child: DropdownButton<ProspectModel>(
+                              value: dropdownProspectValue,
+                              icon: Icon(Icons.keyboard_arrow_down),
+                              iconSize: 24,
+                              elevation: 8,
+                              style: TextStyle(color: Colors.blue),
+                              onChanged: (ProspectModel prospectModel) {
+                                setState(() {
+                                  dropdownProspectValue = prospectModel;
+                                  prospectId = prospectModel.id;
+                                });
+                              },
+                              items: _prospectList
+                                  .map<DropdownMenuItem<ProspectModel>>((ProspectModel value) {
+                                return DropdownMenuItem<ProspectModel>(
+                                  value: value,
+                                  child: Text(value.fullName),
+                                );
+                              }).toList(),
+                            ),
+                          )),
+                    ],
+                  ),
                 ),
               ],
             ),

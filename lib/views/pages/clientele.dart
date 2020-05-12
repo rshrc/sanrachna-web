@@ -480,56 +480,66 @@ class _ClientalePageState extends State<ClientalePage> {
                   ),
                 ),
                 Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 2.1,
-                        child: DropdownButton<String>(
-                          value: _siteType,
-                          icon: Icon(Icons.keyboard_arrow_down),
-                          iconSize: 24,
-                          elevation: 8,
-                          style: TextStyle(color: Colors.blue),
-                          onChanged: (String newValue) {
-                            setState(() {
-                              _siteType = newValue;
-                            });
-                          },
-                          items: <String>['COMMERCIAL', 'HOME', 'OFFICE']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      )),
+                  child: Row(
+                    children: [
+                      Text("Site Type: "),
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 3,
+                            child: DropdownButton<String>(
+                              value: _siteType,
+                              icon: Icon(Icons.keyboard_arrow_down),
+                              iconSize: 24,
+                              elevation: 8,
+                              style: TextStyle(color: Colors.blue),
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  _siteType = newValue;
+                                });
+                              },
+                              items: <String>['COMMERCIAL', 'HOME', 'OFFICE']
+                                  .map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          )),
+                    ],
+                  ),
                 ),
                 Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 2.05,
-                        child: DropdownButton<String>(
-                          value: _sourceType,
-                          icon: Icon(Icons.keyboard_arrow_down),
-                          iconSize: 24,
-                          elevation: 8,
-                          style: TextStyle(color: Colors.blue),
-                          onChanged: (String newValue) {
-                            setState(() {
-                              _sourceType = newValue;
-                            });
-                          },
-                          items: <String>['ONLINE', 'OFFLINE']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      )),
+                  child: Row(
+                    children: [
+                      Text("Source Type: "),
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 3,
+                            child: DropdownButton<String>(
+                              value: _sourceType,
+                              icon: Icon(Icons.keyboard_arrow_down),
+                              iconSize: 24,
+                              elevation: 8,
+                              style: TextStyle(color: Colors.blue),
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  _sourceType = newValue;
+                                });
+                              },
+                              items: <String>['ONLINE', 'OFFLINE']
+                                  .map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          )),
+                    ],
+                  ),
                 ),
               ],
             ),
