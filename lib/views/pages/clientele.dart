@@ -3,9 +3,10 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sanrachna_web/models/clientele_model.dart';
 import 'package:sanrachna_web/providers/clientele_provider.dart';
-import 'package:sanrachna_web/utils/constants.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
 import 'package:toast/toast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class ClientalePage extends StatefulWidget {
   @override
@@ -160,7 +161,7 @@ class _ClientalePageState extends State<ClientalePage> {
           shape: CircleBorder(),
           children: [
             SpeedDialChild(
-                child: Icon(Icons.accessibility),
+                child: Icon(FontAwesomeIcons.male),
                 backgroundColor: Colors.red,
                 label: 'Add Client',
                 labelStyle: TextStyle(fontSize: 18.0),
@@ -168,7 +169,7 @@ class _ClientalePageState extends State<ClientalePage> {
                   _addClienteleDialog(context, clientele: 'client');
                 }),
             SpeedDialChild(
-              child: Icon(Icons.brush),
+              child: Icon(FontAwesomeIcons.briefcase),
               backgroundColor: Colors.blue,
               label: 'Add Leads',
               labelStyle: TextStyle(fontSize: 18.0),
@@ -177,8 +178,8 @@ class _ClientalePageState extends State<ClientalePage> {
               },
             ),
             SpeedDialChild(
-              child: Icon(Icons.keyboard_voice),
-              backgroundColor: Colors.green,
+              child: Icon(FontAwesomeIcons.users),
+              backgroundColor: Colors.red,
               label: 'Add Prospects',
               labelStyle: TextStyle(fontSize: 18.0),
               onTap: () {

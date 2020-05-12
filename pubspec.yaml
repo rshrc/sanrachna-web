@@ -1,5 +1,5 @@
 name: sanrachna_web
-description: A new Flutter project.
+description: Sanrachna, a client administration website (django backend)
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -23,7 +23,7 @@ dependencies:
   url_launcher:
   pdf:
   printing:
-
+  font_awesome_flutter:
 
 
 

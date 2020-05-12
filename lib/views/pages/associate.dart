@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sanrachna_web/models/associate_model.dart';
 import 'package:sanrachna_web/providers/associate_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
-import 'package:logger/logger.dart';
 import 'package:toast/toast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AssociatePage extends StatefulWidget {
   @override
@@ -157,7 +157,7 @@ class _AssociatePageState extends State<AssociatePage> {
         shape: CircleBorder(),
         children: [
           SpeedDialChild(
-            child: Icon(Icons.accessibility),
+            child: Icon(Icons.settings),
             backgroundColor: Colors.red,
             label: 'Add Labour',
             labelStyle: TextStyle(fontSize: 18.0),
@@ -166,7 +166,7 @@ class _AssociatePageState extends State<AssociatePage> {
             },
           ),
           SpeedDialChild(
-            child: Icon(Icons.brush),
+            child: Icon(Icons.people_outline),
             backgroundColor: Colors.blue,
             label: 'Add Supervisor',
             labelStyle: TextStyle(fontSize: 18.0),
@@ -175,8 +175,8 @@ class _AssociatePageState extends State<AssociatePage> {
             },
           ),
           SpeedDialChild(
-            child: Icon(Icons.keyboard_voice),
-            backgroundColor: Colors.green,
+            child: Icon(Icons.add_shopping_cart),
+            backgroundColor: Colors.red,
             label: 'Add Vendor',
             labelStyle: TextStyle(fontSize: 18.0),
             onTap: () {
