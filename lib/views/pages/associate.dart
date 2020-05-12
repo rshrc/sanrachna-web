@@ -45,8 +45,15 @@ class _AssociatePageState extends State<AssociatePage> {
                   SizedBox(
                     height: 50.0,
                   ),
-                  ListTile(
-                    title: Row(
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: () {
+                      setState(() {
+                        dataBuilderState = 'labour';
+                      });
+                    },
+                    child: Row(
                       children: [
                         Icon(
                           Icons.settings,
@@ -65,17 +72,19 @@ class _AssociatePageState extends State<AssociatePage> {
                         ),
                       ],
                     ),
-                    onTap: () {
-                      setState(() {
-                        dataBuilderState = 'labour';
-                      });
-                    },
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
-                  ListTile(
-                    title: Row(
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: () {
+                      setState(() {
+                        dataBuilderState = 'vendor';
+                      });
+                    },
+                    child: Row(
                       children: [
                         Icon(
                           Icons.shopping_cart,
@@ -94,17 +103,19 @@ class _AssociatePageState extends State<AssociatePage> {
                         ),
                       ],
                     ),
-                    onTap: () {
-                      setState(() {
-                        dataBuilderState = 'vendor';
-                      });
-                    },
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
-                  ListTile(
-                    title: Row(
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: () {
+                      setState(() {
+                        dataBuilderState = 'supervisor';
+                      });
+                    },
+                    child: Row(
                       children: [
                         Icon(
                           Icons.supervisor_account,
@@ -123,11 +134,6 @@ class _AssociatePageState extends State<AssociatePage> {
                         ),
                       ],
                     ),
-                    onTap: () {
-                      setState(() {
-                        dataBuilderState = 'supervisor';
-                      });
-                    },
                   ),
                 ],
               ),

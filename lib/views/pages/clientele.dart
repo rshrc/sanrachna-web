@@ -44,8 +44,15 @@ class _ClientalePageState extends State<ClientalePage> {
                     SizedBox(
                       height: 50.0,
                     ),
-                    ListTile(
-                      title: Row(
+                    RaisedButton(
+                      color: Colors.redAccent,
+                      elevation: 0.0,
+                      onPressed: () {
+                        setState(() {
+                          dataBuilderState = 'leads';
+                        });
+                      },
+                      child: Row(
                         children: [
                           Icon(
                             Icons.directions_walk,
@@ -64,17 +71,19 @@ class _ClientalePageState extends State<ClientalePage> {
                           ),
                         ],
                       ),
-                      onTap: () {
-                        setState(() {
-                          dataBuilderState = 'leads';
-                        });
-                      },
                     ),
                     SizedBox(
                       height: 20.0,
                     ),
-                    ListTile(
-                      title: Row(
+                    RaisedButton(
+                      color: Colors.redAccent,
+                      elevation: 0.0,
+                      onPressed: () {
+                        setState(() {
+                          dataBuilderState = 'clients';
+                        });
+                      },
+                      child: Row(
                         children: [
                           Icon(
                             Icons.business_center,
@@ -93,17 +102,19 @@ class _ClientalePageState extends State<ClientalePage> {
                           ),
                         ],
                       ),
-                      onTap: () {
-                        setState(() {
-                          dataBuilderState = 'clients';
-                        });
-                      },
                     ),
                     SizedBox(
                       height: 20.0,
                     ),
-                    ListTile(
-                      title: Row(
+                    RaisedButton(
+                      color: Colors.redAccent,
+                      elevation: 0.0,
+                      onPressed: () {
+                        setState(() {
+                          dataBuilderState = 'prospects';
+                        });
+                      },
+                      child: Row(
                         children: [
                           Icon(
                             Icons.pages,
@@ -122,11 +133,6 @@ class _ClientalePageState extends State<ClientalePage> {
                           ),
                         ],
                       ),
-                      onTap: () {
-                        setState(() {
-                          dataBuilderState = 'prospects';
-                        });
-                      },
                     ),
                   ],
                 ),

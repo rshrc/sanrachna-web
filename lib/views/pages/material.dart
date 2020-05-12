@@ -46,8 +46,15 @@ class _MaterialPageState extends State<MaterialPage> {
                   SizedBox(
                     height: 50.0,
                   ),
-                  ListTile(
-                    title: Row(
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: () {
+                      setState(() {
+                        selectedMaterialType = "ply";
+                      });
+                    },
+                    child: Row(
                       children: [
                         Icon(
                           Icons.settings_applications,
@@ -66,17 +73,19 @@ class _MaterialPageState extends State<MaterialPage> {
                         ),
                       ],
                     ),
-                    onTap: () {
-                      setState(() {
-                        selectedMaterialType = "ply";
-                      });
-                    },
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
-                  ListTile(
-                    title: Row(
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: () {
+                      setState(() {
+                        selectedMaterialType = "civil";
+                      });
+                    },
+                    child: Row(
                       children: [
                         Icon(
                           Icons.location_city,
@@ -95,17 +104,19 @@ class _MaterialPageState extends State<MaterialPage> {
                         ),
                       ],
                     ),
-                    onTap: () {
-                      setState(() {
-                        selectedMaterialType = "civil";
-                      });
-                    },
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
-                  ListTile(
-                    title: Row(
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: () {
+                      setState(() {
+                        selectedMaterialType = "tiles";
+                      });
+                    },
+                    child: Row(
                       children: [
                         Icon(
                           Icons.dashboard,
@@ -124,17 +135,19 @@ class _MaterialPageState extends State<MaterialPage> {
                         ),
                       ],
                     ),
-                    onTap: () {
-                      setState(() {
-                        selectedMaterialType = "tiles";
-                      });
-                    },
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
-                  ListTile(
-                    title: Row(
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: () {
+                      setState(() {
+                        selectedMaterialType = "paint";
+                      });
+                    },
+                    child: Row(
                       children: [
                         Icon(
                           Icons.format_paint,
@@ -153,17 +166,19 @@ class _MaterialPageState extends State<MaterialPage> {
                         ),
                       ],
                     ),
-                    onTap: () {
-                      setState(() {
-                        selectedMaterialType = "paint";
-                      });
-                    },
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
-                  ListTile(
-                    title: Row(
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: () {
+                      setState(() {
+                        selectedMaterialType = "electric";
+                      });
+                    },
+                    child: Row(
                       children: [
                         Icon(
                           Icons.lightbulb_outline,
@@ -182,17 +197,19 @@ class _MaterialPageState extends State<MaterialPage> {
                         ),
                       ],
                     ),
-                    onTap: () {
-                      setState(() {
-                        selectedMaterialType = "electric";
-                      });
-                    },
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
-                  ListTile(
-                    title: Row(
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: () {
+                      setState(() {
+                        selectedMaterialType = "plumbing";
+                      });
+                    },
+                    child: Row(
                       children: [
                         Icon(
                           Icons.transfer_within_a_station,
@@ -211,11 +228,6 @@ class _MaterialPageState extends State<MaterialPage> {
                         ),
                       ],
                     ),
-                    onTap: () {
-                      setState(() {
-                        selectedMaterialType = "plumbing";
-                      });
-                    },
                   ),
                   SizedBox(
                     height: 20.0,
