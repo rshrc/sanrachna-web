@@ -3,6 +3,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sanrachna_web/models/associate_model.dart';
 import 'package:sanrachna_web/providers/associate_provider.dart';
+import 'package:sanrachna_web/providers/service_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
 import 'package:toast/toast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,6 +17,7 @@ class _AssociatePageState extends State<AssociatePage> {
   bool _dialVisible = true;
 
   AssociateProvider _associateProvider = AssociateProvider();
+  ServiceProvider _serviceProvider = ServiceProvider();
 
   List<AssociateModel> _labourList = [];
   List<AssociateModel> _supervisorList = [];
@@ -299,6 +301,7 @@ class _AssociatePageState extends State<AssociatePage> {
     );
   }
 
+  /// Data render for Labour, Vendor, Supervisor
   Widget _dataBuilder({String state}) {
     switch (state) {
       case 'labour':
@@ -522,6 +525,7 @@ class _AssociatePageState extends State<AssociatePage> {
     return null;
   }
 
+  /// Data render for Map data functionality
   Widget _mappingDataBuilder({String state}) {
     switch (state) {
       case 'map_ls':
@@ -529,6 +533,37 @@ class _AssociatePageState extends State<AssociatePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TitleWidget(title: "Labour/Supervisor", fontSize: 20.0),
+            SizedBox(height: 10.0),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FutureBuilder(
+                      future: _associateProvider.getLabours(),
+                      builder: (context, snap) {
+                        if (!snap.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        return Text("Labour Data is here!");
+                      }),
+                  FutureBuilder(
+                      future: _associateProvider.getSupervisors(),
+                      builder: (context, snap) {
+                        if (!snap.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        return Text("Supervisor Data is here!");
+                      }),
+                ],
+              ),
+            ),
           ],
         );
         break;
@@ -537,6 +572,37 @@ class _AssociatePageState extends State<AssociatePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TitleWidget(title: "Service/Supervisor", fontSize: 20.0),
+            SizedBox(height: 10.0),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FutureBuilder(
+                      future: _serviceProvider.getServices(),
+                      builder: (context, snap) {
+                        if (!snap.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        return Text("Service Data is here!");
+                      }),
+                  FutureBuilder(
+                      future: _associateProvider.getSupervisors(),
+                      builder: (context, snap) {
+                        if (!snap.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        return Text("Supervisor Data is here!");
+                      }),
+                ],
+              ),
+            ),
           ],
         );
         break;
@@ -545,6 +611,37 @@ class _AssociatePageState extends State<AssociatePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TitleWidget(title: "Material/Vendor", fontSize: 20.0),
+            SizedBox(height: 10.0),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FutureBuilder(
+                      future: _associateProvider.getLabours(),
+                      builder: (context, snap) {
+                        if (!snap.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        return Text("Material Data is here!");
+                      }),
+                  FutureBuilder(
+                      future: _associateProvider.getSupervisors(),
+                      builder: (context, snap) {
+                        if (!snap.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        return Text("Vendor Data is here!");
+                      }),
+                ],
+              ),
+            ),
           ],
         );
         break;
