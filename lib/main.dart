@@ -28,29 +28,20 @@ class _SanrachnaState extends State<Sanrachna> {
           indicatorColor: Colors.yellow,
           splashColor: Colors.yellow),
       home: DefaultTabController(
-        length: 5,
+        length: 4,
         child: Scaffold(
           appBar: AppBar(
             bottom: TabBar(
               // labelStyle: GoogleFonts.exo2(fontSize: 32.0, color: Colors.white),
               tabs: [
-                Tab(
-                  text: "Associate",
-                ),
+                Tab(text: "Associate"),
                 Tab(text: "Clientele"),
-                Tab(
-                  text: "Material",
-                ),
+                Tab(text: "Material"),
                 Tab(text: "Service"),
-                Tab(
-                  text: "Prospect",
-                ),
               ],
             ),
-            title: Text(
-              'Sanrachna',
-               style: GoogleFonts.pacifico(fontSize: 40.0)
-            ),
+            title:
+                Text('Sanrachna', style: GoogleFonts.pacifico(fontSize: 40.0)),
             centerTitle: true,
             actions: [
               IconButton(
@@ -76,7 +67,6 @@ class _SanrachnaState extends State<Sanrachna> {
               ClientalePage(),
               MaterialPage(),
               ServicePage(),
-              ProspectPage(),
             ],
           ),
         ),
