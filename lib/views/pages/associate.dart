@@ -135,7 +135,9 @@ class _AssociatePageState extends State<AssociatePage> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 12.0,),
+                  SizedBox(
+                    height: 12.0,
+                  ),
                   RaisedButton(
                     color: Colors.redAccent,
                     elevation: 0.0,
@@ -160,7 +162,9 @@ class _AssociatePageState extends State<AssociatePage> {
                     color: Colors.redAccent,
                     elevation: 0.0,
                     onPressed: () {
-                      /// todo
+                      setState(() {
+                        dataBuilderState = 'map_ls';
+                      });
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -185,7 +189,9 @@ class _AssociatePageState extends State<AssociatePage> {
                     color: Colors.redAccent,
                     elevation: 0.0,
                     onPressed: () {
-                      /// todo
+                      setState(() {
+                        dataBuilderState = 'map_ss';
+                      });
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -210,7 +216,9 @@ class _AssociatePageState extends State<AssociatePage> {
                     color: Colors.redAccent,
                     elevation: 0.0,
                     onPressed: () {
-                      /// todo
+                      setState(() {
+                        dataBuilderState = 'map_mv';
+                      });
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -490,8 +498,58 @@ class _AssociatePageState extends State<AssociatePage> {
                 ],
               );
             });
+
+      /// when we are switching to the map interface (Labour/Supervisor)
+
+      case 'map_ls':
+        return _mappingDataBuilder(state: state);
+        break;
+
+      /// when we are switching to (Service/Supervisor)
+
+      case 'map_ss':
+        return _mappingDataBuilder(state: state);
+
+        break;
+
+      /// when we are switching to (Material/Vendor)
+
+      case 'map_mv':
+        return _mappingDataBuilder(state: state);
+
         break;
     }
+    return null;
+  }
+
+  Widget _mappingDataBuilder({String state}) {
+    switch (state) {
+      case 'map_ls':
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TitleWidget(title: "Labour/Supervisor", fontSize: 20.0),
+          ],
+        );
+        break;
+      case 'map_ss':
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TitleWidget(title: "Service/Supervisor", fontSize: 20.0),
+          ],
+        );
+        break;
+      case 'map_mv':
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TitleWidget(title: "Material/Vendor", fontSize: 20.0),
+          ],
+        );
+        break;
+    }
+    return null;
   }
 
   _addAssociateDialog(context, {associate}) async {

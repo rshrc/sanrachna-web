@@ -4,8 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 class TitleWidget extends StatelessWidget {
 
   String title;
+  double fontSize;
 
-  TitleWidget({this.title});
+  TitleWidget({this.title, this.fontSize});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class TitleWidget extends StatelessWidget {
         decoration: BoxDecoration(color: Colors.redAccent, borderRadius: BorderRadius.circular(16.0)),
         child: Center(
           child: Text(title,
-              style: GoogleFonts.exo2(fontSize: 26.0, color: Colors.white)
+              style: GoogleFonts.exo2(fontSize: fontSize ?? 26.0, color: Colors.white)
           ),
         ),
       ),
