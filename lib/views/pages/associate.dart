@@ -33,7 +33,7 @@ class _AssociatePageState extends State<AssociatePage> {
           children: [
             Container(
               height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width / 8,
+              width: MediaQuery.of(context).size.width / 7,
               decoration: BoxDecoration(
                   color: Colors.redAccent,
                   border: Border.symmetric(
@@ -127,6 +127,99 @@ class _AssociatePageState extends State<AssociatePage> {
                         ),
                         Text(
                           "Supervisor",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 12.0,),
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: null,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Map Data",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: () {
+                      /// todo
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 8.0,
+                        ),
+                        Text(
+                          "Labour/Supervisor",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: () {
+                      /// todo
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 8.0,
+                        ),
+                        Text(
+                          "Services/Supervisor",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: () {
+                      /// todo
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 8.0,
+                        ),
+                        Text(
+                          "Material/Vendor",
                           style: GoogleFonts.exo(
                               color: Colors.white,
                               fontSize: 16.0,
