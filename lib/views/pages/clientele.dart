@@ -418,6 +418,7 @@ class _ClientalePageState extends State<ClientalePage> {
     TextEditingController _sourceTypeController = TextEditingController();
     String _siteType = "COMMERCIAL";
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
+    TextStyle _hintTextStyle = TextStyle(color: Colors.black, fontSize: 10.0);
     String _sourceType = "ONLINE";
 
     await showDialog<String>(
@@ -428,62 +429,67 @@ class _ClientalePageState extends State<ClientalePage> {
         child: AlertDialog(
           shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
           content: Container(
-            width: MediaQuery.of(context).size.width / 2,
+            height: MediaQuery.of(context).size.height / 2,
+            width: MediaQuery.of(context).size.width / 3,
             child: Column(
               children: <Widget>[
                 Text("Add Labour"),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: TextField(
                       controller: _fullNameController,
                       autofocus: true,
                       decoration: InputDecoration(
-                        labelText: 'Full Name',
-                        hintText: 'Full Name',
+                        labelText: 'Full Name *',
+                        hintText: 'John Doe',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle
                       ),
                     ),
                   ),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: TextField(
                       controller: _organizationController,
                       autofocus: true,
                       decoration: InputDecoration(
                         labelText: 'Organization',
-                        hintText: 'Organization',
+                        hintText: 'Doe Org',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle,
                       ),
                     ),
                   ),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: TextField(
                       controller: _mobileNumberController,
                       autofocus: true,
                       decoration: InputDecoration(
-                        labelText: 'Mobile Number',
-                        hintText: 'Mobile Number',
+                        labelText: 'Mobile Number *',
+                        hintText: '1234567890',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle,
                       ),
                     ),
                   ),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: TextField(
                       controller: _emailController,
                       autofocus: true,
                       decoration: InputDecoration(
-                        labelText: 'Email ID',
-                        hintText: 'Email ID',
+                        labelText: 'Email ID *',
+                        hintText: 'johndoe@gmail.com',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle,
                       ),
                     ),
                   ),
@@ -493,9 +499,9 @@ class _ClientalePageState extends State<ClientalePage> {
                     children: [
                       Text("Site Type: "),
                       Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(4.0),
                           child: Container(
-                            width: MediaQuery.of(context).size.width / 3,
+                            width: MediaQuery.of(context).size.width / 6,
                             child: DropdownButton<String>(
                               value: _siteType,
                               icon: Icon(Icons.keyboard_arrow_down),
@@ -527,9 +533,9 @@ class _ClientalePageState extends State<ClientalePage> {
                     children: [
                       Text("Source Type: "),
                       Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(4.0),
                           child: Container(
-                            width: MediaQuery.of(context).size.width / 3,
+                            width: MediaQuery.of(context).size.width / 6,
                             child: DropdownButton<String>(
                               value: _sourceType,
                               icon: Icon(Icons.keyboard_arrow_down),
