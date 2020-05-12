@@ -144,6 +144,7 @@ class _ServicePageState extends State<ServicePage> {
     int prospectId = _prospectList[0].id;
 
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
+    TextStyle _hintTextStyle = TextStyle(color: Colors.black, fontSize: 10.0);
 
     await showDialog<String>(
       context: context,
@@ -153,6 +154,8 @@ class _ServicePageState extends State<ServicePage> {
         child: AlertDialog(
           shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
           content: Container(
+            height: MediaQuery.of(context).size.height / 2,
+            width: MediaQuery.of(context).size.width / 3,
             child: Column(
               children: <Widget>[
                 Text("Add Service"),
@@ -164,8 +167,9 @@ class _ServicePageState extends State<ServicePage> {
                       autofocus: true,
                       decoration: InputDecoration(
                         labelText: 'Name',
-                        hintText: 'Name',
+                        hintText: 'John Doe',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle
                       ),
                     ),
                   ),
@@ -180,6 +184,7 @@ class _ServicePageState extends State<ServicePage> {
                         labelText: 'Unit',
                         hintText: 'Unit',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle
                       ),
                     ),
                   ),
@@ -194,6 +199,7 @@ class _ServicePageState extends State<ServicePage> {
                         labelText: 'Rate',
                         hintText: 'Rate',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle
                       ),
                     ),
                   ),
@@ -205,7 +211,7 @@ class _ServicePageState extends State<ServicePage> {
                       Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            width: MediaQuery.of(context).size.width / 3,
+                            width: MediaQuery.of(context).size.width / 6,
                             child: DropdownButton<ProspectModel>(
                               value: dropdownProspectValue,
                               icon: Icon(Icons.keyboard_arrow_down),
