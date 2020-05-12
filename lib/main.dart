@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:printing/printing.dart';
-import 'package:sanrachna_web/providers/oq_provider.dart';
 import 'package:sanrachna_web/views/pages/associate.dart';
 import 'package:sanrachna_web/views/pages/clientele.dart';
-import 'package:sanrachna_web/views/pages/generate_quote_page.dart';
 import 'package:sanrachna_web/views/pages/material.dart';
-import 'package:sanrachna_web/views/pages/prospect.dart';
 import 'package:sanrachna_web/views/pages/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 

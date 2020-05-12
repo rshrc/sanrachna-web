@@ -329,7 +329,6 @@ class _MaterialPageState extends State<MaterialPage> {
                       DataColumn(label: Text('Rate')),
                       DataColumn(label: Text('Unit')),
                       DataColumn(label: Text('Quantity')),
-                      DataColumn(label: Text('Prospect')),
                       DataColumn(label: Text("Delete")),
                     ],
                     rows: _civil
@@ -339,7 +338,6 @@ class _MaterialPageState extends State<MaterialPage> {
                               DataCell(Text("${element.rate}")),
                               DataCell(Text("${element.unit}")),
                               DataCell(Text("${element.quantity}")),
-                              DataCell(Text("${element.prospect}")),
                               DataCell(IconButton(
                                 onPressed: () {
                                   _materialProvider
@@ -351,7 +349,7 @@ class _MaterialPageState extends State<MaterialPage> {
                                         backgroundColor: Colors.green);
                                     setState(() {});
                                     Toast.show(
-                                        "Deleted Labour ${element.particulars}",
+                                        "Deleted Material ${element.particulars}",
                                         context,
                                         backgroundColor: Colors.green);
                                     setState(() {});
@@ -398,7 +396,7 @@ class _MaterialPageState extends State<MaterialPage> {
                       DataColumn(label: Text('Rate')),
                       DataColumn(label: Text('Unit')),
                       DataColumn(label: Text('Quantity')),
-                      DataColumn(label: Text('Prospect')),
+                      DataColumn(label: Text('Delete')),
                     ],
                     rows: _electric
                         .map((element) => DataRow(cells: <DataCell>[
@@ -407,7 +405,28 @@ class _MaterialPageState extends State<MaterialPage> {
                               DataCell(Text("${element.rate}")),
                               DataCell(Text("${element.unit}")),
                               DataCell(Text("${element.quantity}")),
-                              DataCell(Text("${element.prospect}")),
+                              DataCell(IconButton(
+                                onPressed: () {
+                                  _materialProvider
+                                      .deleteElectric(int.parse(element.sno))
+                                      .then((value) {
+                                    Toast.show(
+                                        "Deleting Material ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                    Toast.show(
+                                        "Deleted Material ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.grey,
+                                ),
+                              ))
                             ]))
                         .toList(),
                   ),
@@ -444,7 +463,7 @@ class _MaterialPageState extends State<MaterialPage> {
                       DataColumn(label: Text('Rate')),
                       DataColumn(label: Text('Unit')),
                       DataColumn(label: Text('Quantity')),
-                      DataColumn(label: Text('Prospect')),
+                      DataColumn(label: Text('Delete')),
                     ],
                     rows: _tiles
                         .map((element) => DataRow(cells: <DataCell>[
@@ -453,7 +472,28 @@ class _MaterialPageState extends State<MaterialPage> {
                               DataCell(Text("${element.rate}")),
                               DataCell(Text("${element.unit}")),
                               DataCell(Text("${element.quantity}")),
-                              DataCell(Text("${element.prospect}")),
+                              DataCell(IconButton(
+                                onPressed: () {
+                                  _materialProvider
+                                      .deleteTiles(int.parse(element.sno))
+                                      .then((value) {
+                                    Toast.show(
+                                        "Deleting Material ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                    Toast.show(
+                                        "Deleted Material ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.grey,
+                                ),
+                              ))
                             ]))
                         .toList(),
                   ),
@@ -490,7 +530,7 @@ class _MaterialPageState extends State<MaterialPage> {
                       DataColumn(label: Text('Rate')),
                       DataColumn(label: Text('Unit')),
                       DataColumn(label: Text('Quantity')),
-                      DataColumn(label: Text('Prospect')),
+                      DataColumn(label: Text("Delete")),
                     ],
                     rows: _ply
                         .map((element) => DataRow(cells: <DataCell>[
@@ -499,7 +539,28 @@ class _MaterialPageState extends State<MaterialPage> {
                               DataCell(Text("${element.rate}")),
                               DataCell(Text("${element.unit}")),
                               DataCell(Text("${element.quantity}")),
-                              DataCell(Text("${element.prospect}")),
+                              DataCell(IconButton(
+                                onPressed: () {
+                                  _materialProvider
+                                      .deletePly(int.parse(element.sno))
+                                      .then((value) {
+                                    Toast.show(
+                                        "Deleting Material ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                    Toast.show(
+                                        "Deleted Material ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.grey,
+                                ),
+                              ))
                             ]))
                         .toList(),
                   ),
@@ -536,7 +597,6 @@ class _MaterialPageState extends State<MaterialPage> {
                       DataColumn(label: Text('Rate')),
                       DataColumn(label: Text('Unit')),
                       DataColumn(label: Text('Quantity')),
-                      DataColumn(label: Text('Prospect')),
                       DataColumn(label: Text("Delete")),
                     ],
                     rows: _paint
@@ -546,7 +606,6 @@ class _MaterialPageState extends State<MaterialPage> {
                               DataCell(Text("${element.rate}")),
                               DataCell(Text("${element.unit}")),
                               DataCell(Text("${element.quantity}")),
-                              DataCell(Text("${element.prospect}")),
                               DataCell(IconButton(
                                 onPressed: () {
                                   _materialProvider
@@ -605,7 +664,7 @@ class _MaterialPageState extends State<MaterialPage> {
                       DataColumn(label: Text('Rate')),
                       DataColumn(label: Text('Unit')),
                       DataColumn(label: Text('Quantity')),
-                      DataColumn(label: Text('Prospect')),
+                      DataColumn(label: Text("Delete")),
                     ],
                     rows: _plumbing
                         .map((element) => DataRow(cells: <DataCell>[
@@ -614,7 +673,28 @@ class _MaterialPageState extends State<MaterialPage> {
                               DataCell(Text("${element.rate}")),
                               DataCell(Text("${element.unit}")),
                               DataCell(Text("${element.quantity}")),
-                              DataCell(Text("${element.prospect}")),
+                              DataCell(IconButton(
+                                onPressed: () {
+                                  _materialProvider
+                                      .deletePlumbing(int.parse(element.sno))
+                                      .then((value) {
+                                    Toast.show(
+                                        "Deleting Material ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                    Toast.show(
+                                        "Deleted Labour ${element.particulars}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.grey,
+                                ),
+                              ))
                             ]))
                         .toList(),
                   ),
