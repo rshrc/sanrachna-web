@@ -725,6 +725,7 @@ class _MaterialPageState extends State<MaterialPage> {
     TextEditingController _prospectController = TextEditingController();
 
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
+    TextStyle _hintTextStyle = TextStyle(color: Colors.black, fontSize: 10.0);
 
     await showDialog<String>(
       context: context,
@@ -734,7 +735,8 @@ class _MaterialPageState extends State<MaterialPage> {
         child: AlertDialog(
           shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
           content: Container(
-            width: MediaQuery.of(context).size.width / 2,
+            height: MediaQuery.of(context).size.height / 2,
+            width: MediaQuery.of(context).size.width / 3,
             child: Column(
               children: <Widget>[
                 Text("Add $material"),
@@ -748,6 +750,7 @@ class _MaterialPageState extends State<MaterialPage> {
                         labelText: 'Particulars',
                         hintText: 'Particulars',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle,
                       ),
                     ),
                   ),
@@ -762,6 +765,7 @@ class _MaterialPageState extends State<MaterialPage> {
                         labelText: 'Rate',
                         hintText: 'Rate',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle,
                       ),
                     ),
                   ),
@@ -776,6 +780,7 @@ class _MaterialPageState extends State<MaterialPage> {
                         labelText: 'Unit',
                         hintText: 'Unit',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle,
                       ),
                     ),
                   ),
@@ -790,6 +795,7 @@ class _MaterialPageState extends State<MaterialPage> {
                         labelText: 'Quantity',
                         hintText: 'Quantity',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle,
                       ),
                     ),
                   ),
@@ -804,6 +810,7 @@ class _MaterialPageState extends State<MaterialPage> {
                         labelText: 'Prospect',
                         hintText: 'Prospect',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle,
                       ),
                     ),
                   ),
