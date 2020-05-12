@@ -97,6 +97,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_full_pdf_viewer:
+    dependency: "direct main"
+    description:
+      name: flutter_full_pdf_viewer
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.6"
   flutter_speed_dial:
     dependency: "direct main"
     description:
@@ -259,7 +266,7 @@ packages:
     description:
       path: printing
       ref: HEAD
-      resolved-ref: a68edc4e9a2c353c0fa41f907e542f663445d594
+      resolved-ref: "50b8cb5a1f0c7ec513ccbb42ccdbbe97dbe3b68c"
       url: "https://github.com/DavBfr/dart_pdf"
     source: git
     version: "3.4.0"
