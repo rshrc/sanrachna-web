@@ -408,6 +408,7 @@ class _AssociatePageState extends State<AssociatePage> {
     TextEditingController _emailController = TextEditingController();
 
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
+    TextStyle _hintTextStyle = TextStyle(color: Colors.black, fontSize: 10.0);
 
     await showDialog<String>(
       context: context,
@@ -417,7 +418,8 @@ class _AssociatePageState extends State<AssociatePage> {
         child: AlertDialog(
           shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
           content: Container(
-            width: MediaQuery.of(context).size.width / 2,
+            height: MediaQuery.of(context).size.height / 2,
+            width: MediaQuery.of(context).size.width / 3,
             child: Column(
               children: <Widget>[
                 Text("Add Labour"),
@@ -428,9 +430,10 @@ class _AssociatePageState extends State<AssociatePage> {
                       controller: _fullNameController,
                       autofocus: true,
                       decoration: InputDecoration(
-                        labelText: 'Full Name',
-                        hintText: 'Full Name',
+                        labelText: 'Full Name *',
+                        hintText: 'John Doe',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle,
                       ),
                     ),
                   ),
@@ -443,8 +446,9 @@ class _AssociatePageState extends State<AssociatePage> {
                       autofocus: true,
                       decoration: InputDecoration(
                         labelText: 'Organization',
-                        hintText: 'Organization',
+                        hintText: 'Doe Org',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle,
                       ),
                     ),
                   ),
@@ -456,9 +460,10 @@ class _AssociatePageState extends State<AssociatePage> {
                       controller: _mobileNumberController,
                       autofocus: true,
                       decoration: InputDecoration(
-                        labelText: 'Mobile Number',
-                        hintText: 'Mobile Number',
+                        labelText: 'Mobile Number *',
+                        hintText: '1234567890',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle,
                       ),
                     ),
                   ),
@@ -470,9 +475,10 @@ class _AssociatePageState extends State<AssociatePage> {
                       controller: _emailController,
                       autofocus: true,
                       decoration: InputDecoration(
-                        labelText: 'Email ID',
-                        hintText: 'Email ID',
+                        labelText: 'Email ID *',
+                        hintText: 'johndoe@gmail.com',
                         labelStyle: _labelTextStyle,
+                        hintStyle: _hintTextStyle,
                       ),
                     ),
                   ),
