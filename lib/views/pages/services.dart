@@ -57,6 +57,7 @@ class _ServicePageState extends State<ServicePage> {
                       children: [
                         TitleWidget(title: "Service"),
                         DataTable(
+                          columnSpacing: 132,
                           columns: [
                             DataColumn(label: Text('Name')),
                             DataColumn(label: Text('Unit')),

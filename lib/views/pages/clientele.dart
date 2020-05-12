@@ -7,7 +7,6 @@ import 'package:sanrachna_web/views/widgets/title_widget.dart';
 import 'package:toast/toast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 class ClientalePage extends StatefulWidget {
   @override
   _ClientalePageState createState() => _ClientalePageState();
@@ -133,7 +132,7 @@ class _ClientalePageState extends State<ClientalePage> {
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 12,
+                width: MediaQuery.of(context).size.width / 16,
               ),
               Padding(
                   padding: EdgeInsets.only(top: 50.0),
@@ -216,6 +215,7 @@ class _ClientalePageState extends State<ClientalePage> {
                 children: [
                   TitleWidget(title: "Leads"),
                   DataTable(
+                    columnSpacing: 80,
                     columns: [
                       DataColumn(label: Text('Full Name')),
                       DataColumn(label: Text('Organization')),
@@ -281,6 +281,7 @@ class _ClientalePageState extends State<ClientalePage> {
                 children: [
                   TitleWidget(title: "Clients"),
                   DataTable(
+                    columnSpacing: 80,
                     columns: [
                       DataColumn(label: Text('Full Name')),
                       DataColumn(label: Text('Organization')),
@@ -352,6 +353,7 @@ class _ClientalePageState extends State<ClientalePage> {
                 children: [
                   TitleWidget(title: "Prospects"),
                   DataTable(
+                    columnSpacing: 80,
                     columns: [
                       DataColumn(label: Text('Full Name')),
                       DataColumn(label: Text('Organization')),
@@ -499,8 +501,11 @@ class _ClientalePageState extends State<ClientalePage> {
                                   _siteType = newValue;
                                 });
                               },
-                              items: <String>['COMMERCIAL', 'HOME', 'OFFICE']
-                                  .map<DropdownMenuItem<String>>((String value) {
+                              items: <String>[
+                                'COMMERCIAL',
+                                'HOME',
+                                'OFFICE'
+                              ].map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value),
@@ -530,8 +535,10 @@ class _ClientalePageState extends State<ClientalePage> {
                                   _sourceType = newValue;
                                 });
                               },
-                              items: <String>['ONLINE', 'OFFLINE']
-                                  .map<DropdownMenuItem<String>>((String value) {
+                              items: <String>[
+                                'ONLINE',
+                                'OFFLINE'
+                              ].map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value),

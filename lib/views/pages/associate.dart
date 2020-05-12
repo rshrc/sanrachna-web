@@ -42,7 +42,9 @@ class _AssociatePageState extends State<AssociatePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 50.0,),
+                  SizedBox(
+                    height: 50.0,
+                  ),
                   ListTile(
                     title: Row(
                       children: [
@@ -130,7 +132,9 @@ class _AssociatePageState extends State<AssociatePage> {
                 ],
               ),
             ),
-            SizedBox(width: MediaQuery.of(context).size.width/5,),
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 16,
+            ),
             Padding(
                 padding: EdgeInsets.only(top: 50.0),
                 child: _dataBuilder(state: dataBuilderState)),
@@ -209,8 +213,8 @@ class _AssociatePageState extends State<AssociatePage> {
                 children: [
                   TitleWidget(title: "Labour"),
                   DataTable(
+                    columnSpacing: 132.0,
                     columns: [
-//                                DataColumn(label: Text('ID')),
                       DataColumn(label: Text('Full Name')),
                       DataColumn(label: Text('Organization')),
                       DataColumn(label: Text("Email")),
@@ -219,13 +223,11 @@ class _AssociatePageState extends State<AssociatePage> {
                     ],
                     rows: _labourList
                         .map((element) => DataRow(cells: <DataCell>[
-//                                        DataCell(Text("${element.id}")),
                               //Extracting from Map element the value
                               DataCell(Text("${element.fullName}")),
                               DataCell(Text("${element.organization}")),
                               DataCell(Text("${element.email}")),
                               DataCell(Text("${element.mobileNumber}")),
-
                               DataCell(IconButton(
                                 onPressed: () {
                                   _associateProvider
@@ -279,6 +281,7 @@ class _AssociatePageState extends State<AssociatePage> {
                 children: [
                   TitleWidget(title: "Supervisor"),
                   DataTable(
+                    columnSpacing: 132.0,
                     columns: [
                       DataColumn(label: Text('Full Name')),
                       DataColumn(label: Text('Organization')),
@@ -346,6 +349,7 @@ class _AssociatePageState extends State<AssociatePage> {
                 children: [
                   TitleWidget(title: "Vendor"),
                   DataTable(
+                    columnSpacing: 132.0,
                     columns: [
                       DataColumn(label: Text('Full Name')),
                       DataColumn(label: Text('Organization')),
