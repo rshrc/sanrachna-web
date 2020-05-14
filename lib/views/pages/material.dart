@@ -320,7 +320,7 @@ class _MaterialPageState extends State<MaterialPage> {
     switch (state) {
       case 'civil':
         return FutureBuilder<Object>(
-            future: _materialProvider.getCivil(),
+            future: _materialProvider.getMaterials(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -353,7 +353,7 @@ class _MaterialPageState extends State<MaterialPage> {
                               DataCell(IconButton(
                                 onPressed: () {
                                   _materialProvider
-                                      .deleteCivil(int.parse(element.sno))
+                                      .deleteMaterial(int.parse(element.sno))
                                       .then((value) {
                                     Toast.show(
                                         "Deleting Material ${element.particulars}",
@@ -381,7 +381,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'electric':
         return FutureBuilder<Object>(
-            future: _materialProvider.getElectric(),
+            future: _materialProvider.getMaterials(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -420,7 +420,7 @@ class _MaterialPageState extends State<MaterialPage> {
                               DataCell(IconButton(
                                 onPressed: () {
                                   _materialProvider
-                                      .deleteElectric(int.parse(element.sno))
+                                      .deleteMaterial(int.parse(element.sno))
                                       .then((value) {
                                     Toast.show(
                                         "Deleting Material ${element.particulars}",
@@ -448,7 +448,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'tiles':
         return FutureBuilder<Object>(
-            future: _materialProvider.getTiles(),
+            future: _materialProvider.getMaterials(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -487,7 +487,7 @@ class _MaterialPageState extends State<MaterialPage> {
                               DataCell(IconButton(
                                 onPressed: () {
                                   _materialProvider
-                                      .deleteTiles(int.parse(element.sno))
+                                      .deleteMaterial(int.parse(element.sno))
                                       .then((value) {
                                     Toast.show(
                                         "Deleting Material ${element.particulars}",
@@ -515,7 +515,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'ply':
         return FutureBuilder<Object>(
-            future: _materialProvider.getPly(),
+            future: _materialProvider.getMaterials(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -554,7 +554,7 @@ class _MaterialPageState extends State<MaterialPage> {
                               DataCell(IconButton(
                                 onPressed: () {
                                   _materialProvider
-                                      .deletePly(int.parse(element.sno))
+                                      .deleteMaterial(int.parse(element.sno))
                                       .then((value) {
                                     Toast.show(
                                         "Deleting Material ${element.particulars}",
@@ -582,7 +582,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'paint':
         return FutureBuilder<Object>(
-            future: _materialProvider.getPaint(),
+            future: _materialProvider.getMaterials(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -621,7 +621,7 @@ class _MaterialPageState extends State<MaterialPage> {
                               DataCell(IconButton(
                                 onPressed: () {
                                   _materialProvider
-                                      .deletePaint(int.parse(element.sno))
+                                      .deleteMaterial(int.parse(element.sno))
                                       .then((value) {
                                     Toast.show(
                                         "Deleting Material ${element.particulars}",
@@ -649,7 +649,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'plumbing':
         return FutureBuilder<Object>(
-            future: _materialProvider.getPlumbing(),
+            future: _materialProvider.getMaterials(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -688,7 +688,7 @@ class _MaterialPageState extends State<MaterialPage> {
                               DataCell(IconButton(
                                 onPressed: () {
                                   _materialProvider
-                                      .deletePlumbing(int.parse(element.sno))
+                                      .deleteMaterial(int.parse(element.sno))
                                       .then((value) {
                                     Toast.show(
                                         "Deleting Material ${element.particulars}",
@@ -708,6 +708,8 @@ class _MaterialPageState extends State<MaterialPage> {
                                 ),
                               ))
                             ]))
+
+                        /// .where function available here
                         .toList(),
                   ),
                 ],
@@ -837,15 +839,16 @@ class _MaterialPageState extends State<MaterialPage> {
                   switch (material) {
                     case 'electric':
                       _materialProvider
-                          .addCivil(
+                          .addMaterials(
                               particulars: _particularsController.text,
                               rate: _rateController.text,
                               unit: _unitController.text,
                               quantity: _quantityController.text,
-                              prospect: int.parse(_prospectController.text))
+                              prospect: int.parse(_prospectController.text),
+                              type: "ELECTRIC")
                           .then((value) {
                         Toast.show(
-                          "Added Civil Material",
+                          "Added Electic Material",
                           context,
                           backgroundColor: Colors.green,
                           duration: 3,
@@ -859,12 +862,13 @@ class _MaterialPageState extends State<MaterialPage> {
                       break;
                     case 'paint':
                       _materialProvider
-                          .addPaint(
+                          .addMaterials(
                               particulars: _particularsController.text,
                               rate: _rateController.text,
                               unit: _unitController.text,
                               quantity: _quantityController.text,
-                              prospect: _prospectController.text)
+                              prospect: int.parse(_prospectController.text),
+                              type: "PAINT")
                           .then((value) {
                         Toast.show(
                           "Added Paint Material",
@@ -881,12 +885,13 @@ class _MaterialPageState extends State<MaterialPage> {
                       break;
                     case 'plumbing':
                       _materialProvider
-                          .addPlumbing(
+                          .addMaterials(
                               particulars: _particularsController.text,
                               rate: _rateController.text,
                               unit: _unitController.text,
                               quantity: _quantityController.text,
-                              prospect: int.parse(_prospectController.text))
+                              prospect: int.parse(_prospectController.text),
+                              type: "PLUMBING")
                           .then((value) {
                         Toast.show(
                           "Added Plumbing Material",
@@ -903,12 +908,13 @@ class _MaterialPageState extends State<MaterialPage> {
                       break;
                     case 'ply':
                       _materialProvider
-                          .addPly(
+                          .addMaterials(
                               particulars: _particularsController.text,
                               rate: _rateController.text,
                               unit: _unitController.text,
                               quantity: _quantityController.text,
-                              prospect: int.parse(_prospectController.text))
+                              prospect: int.parse(_prospectController.text),
+                              type: "PLY")
                           .then((value) {
                         Toast.show(
                           "Added Ply Material",
@@ -925,12 +931,13 @@ class _MaterialPageState extends State<MaterialPage> {
                       break;
                     case 'tiles':
                       _materialProvider
-                          .addTiles(
+                          .addMaterials(
                               particulars: _particularsController.text,
                               rate: _rateController.text,
                               unit: _unitController.text,
                               quantity: _quantityController.text,
-                              prospect: int.parse(_prospectController.text))
+                              prospect: int.parse(_prospectController.text),
+                              type: "TILES")
                           .then((value) {
                         Toast.show(
                           "Added Tiles Material",
