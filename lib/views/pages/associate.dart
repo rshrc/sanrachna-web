@@ -6,6 +6,7 @@ import 'package:sanrachna_web/models/material_model.dart';
 import 'package:sanrachna_web/models/service_model.dart';
 import 'package:sanrachna_web/providers/associate_provider.dart';
 import 'package:sanrachna_web/providers/labour_list_provider.dart';
+import 'package:sanrachna_web/providers/map_provider.dart';
 import 'package:sanrachna_web/providers/material_provider.dart';
 import 'package:sanrachna_web/providers/service_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
@@ -539,6 +540,8 @@ class _AssociatePageState extends State<AssociatePage> {
 
     switch (state) {
       case 'map_ls':
+        int _labourId, _supervisorId;
+
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -578,6 +581,7 @@ class _AssociatePageState extends State<AssociatePage> {
                                   onChanged: (AssociateModel labour) {
                                     setState(() {
                                       _dropdownLabourValue = labour;
+                                      _labourId = labour.id;
                                     });
                                   },
                                   items: _laboursList
@@ -595,8 +599,9 @@ class _AssociatePageState extends State<AssociatePage> {
                                       padding: EdgeInsets.only(top: 40.0),
                                       shrinkWrap: true,
                                       itemCount: _laboursList.length,
-                                      itemBuilder: (context, index){
-                                        return Text("${_laboursList[index].fullName}");
+                                      itemBuilder: (context, index) {
+                                        return Text(
+                                            "${_laboursList[index].fullName}");
                                       }),
                                 )
                               ],
@@ -629,6 +634,8 @@ class _AssociatePageState extends State<AssociatePage> {
                               onChanged: (AssociateModel supervisor) {
                                 setState(() {
                                   _dropdownSupervisorValue = supervisor;
+                                  _supervisorId = supervisor.id;
+                                  print("Line 638: $_supervisorId");
                                 });
                               },
                               items: _supervisorList
@@ -646,8 +653,9 @@ class _AssociatePageState extends State<AssociatePage> {
                                   padding: EdgeInsets.only(top: 40.0),
                                   shrinkWrap: true,
                                   itemCount: _supervisorList.length,
-                                  itemBuilder: (context, index){
-                                    return Text("${_supervisorList[index].fullName}");
+                                  itemBuilder: (context, index) {
+                                    return Text(
+                                        "${_supervisorList[index].fullName}");
                                   }),
                             )
                           ],
@@ -661,9 +669,24 @@ class _AssociatePageState extends State<AssociatePage> {
                           "Map",
                           style: TextStyle(color: Colors.white),
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          if (_labourId != null && _supervisorId != null) {
+                            await MapProvider.mapLabourToSupervisor(
+                              labourId: _labourId,
+                              supervisorId: _supervisorId,
+                            ).then((value) {
+                              Toast.show("Mapped data", context,
+                                  backgroundColor: Colors.green, duration: 2);
+                              setState(() {});
+                            });
+                          } else {
+                            Toast.show("Select Data", context);
+                          }
+                        },
                       ),
-                      SizedBox(height: 40.0,)
+                      SizedBox(
+                        height: 40.0,
+                      )
                     ],
                   )
                 ],
@@ -726,7 +749,7 @@ class _AssociatePageState extends State<AssociatePage> {
                                   padding: EdgeInsets.only(top: 40.0),
                                   shrinkWrap: true,
                                   itemCount: _serviceList.length,
-                                  itemBuilder: (context, index){
+                                  itemBuilder: (context, index) {
                                     return Text("${_serviceList[index].name}");
                                   }),
                             )
@@ -775,8 +798,9 @@ class _AssociatePageState extends State<AssociatePage> {
                                   padding: EdgeInsets.only(top: 40.0),
                                   shrinkWrap: true,
                                   itemCount: _supervisorList.length,
-                                  itemBuilder: (context, index){
-                                    return Text("${_supervisorList[index].fullName}");
+                                  itemBuilder: (context, index) {
+                                    return Text(
+                                        "${_supervisorList[index].fullName}");
                                   }),
                             )
                           ],
@@ -792,7 +816,9 @@ class _AssociatePageState extends State<AssociatePage> {
                         ),
                         onPressed: () {},
                       ),
-                      SizedBox(height: 40.0,)
+                      SizedBox(
+                        height: 40.0,
+                      )
                     ],
                   )
                 ],
