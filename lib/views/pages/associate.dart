@@ -530,6 +530,9 @@ class _AssociatePageState extends State<AssociatePage> {
 
   /// Data render for Map data functionality
   Widget _mappingDataBuilder({String state}) {
+
+    AssociateProvider _associateProvider = AssociateProvider();
+
     switch (state) {
       case 'map_ls':
         return Column(
@@ -543,7 +546,7 @@ class _AssociatePageState extends State<AssociatePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FutureBuilder(
-                      future: LabourListProvider.getLabours(),
+                      future: _associateProvider.getLabours(),
                       builder: (context, snap) {
                         if (!snap.hasData) {
                           return Center(
@@ -554,6 +557,8 @@ class _AssociatePageState extends State<AssociatePage> {
                         List<AssociateModel> _laboursList = snap.data;
 
                         AssociateModel _dropdownLabourValue = _laboursList[0];
+
+                        print("Line 558: $_laboursList");
 
                         return DropdownButton<AssociateModel>(
                           value: _dropdownLabourValue,
