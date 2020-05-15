@@ -620,6 +620,14 @@ class _AssociatePageState extends State<AssociatePage> {
                           }).toList(),
                         );
                       }),
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    child: Text(
+                      "Map",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {},
+                  )
                 ],
               ),
             ),
@@ -708,6 +716,14 @@ class _AssociatePageState extends State<AssociatePage> {
                           }).toList(),
                         );
                       }),
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    child: Text(
+                      "Map",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {},
+                  )
                 ],
               ),
             ),
@@ -795,6 +811,14 @@ class _AssociatePageState extends State<AssociatePage> {
                           }).toList(),
                         );
                       }),
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    child: Text(
+                      "Map",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {},
+                  )
                 ],
               ),
             )
