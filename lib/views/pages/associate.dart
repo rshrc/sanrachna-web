@@ -782,13 +782,18 @@ class _AssociatePageState extends State<AssociatePage> {
                           ],
                         );
                       }),
-                  RaisedButton(
-                    color: Colors.redAccent,
-                    child: Text(
-                      "Map",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {},
+                  Column(
+                    children: [
+                      RaisedButton(
+                        color: Colors.redAccent,
+                        child: Text(
+                          "Map",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {},
+                      ),
+                      SizedBox(height: 40.0,)
+                    ],
                   )
                 ],
               ),
