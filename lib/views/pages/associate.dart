@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sanrachna_web/models/associate_model.dart';
+import 'package:sanrachna_web/models/service_model.dart';
 import 'package:sanrachna_web/providers/associate_provider.dart';
 import 'package:sanrachna_web/providers/labour_list_provider.dart';
+import 'package:sanrachna_web/providers/material_provider.dart';
 import 'package:sanrachna_web/providers/service_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
 import 'package:toast/toast.dart';
@@ -532,6 +534,8 @@ class _AssociatePageState extends State<AssociatePage> {
   Widget _mappingDataBuilder({String state}) {
 
     AssociateProvider _associateProvider = AssociateProvider();
+    ServiceProvider _serviceProvider = ServiceProvider();
+    MaterialProvider _materialProvider = MaterialProvider();
 
     switch (state) {
       case 'map_ls':
@@ -642,7 +646,32 @@ class _AssociatePageState extends State<AssociatePage> {
                           );
                         }
 
-                        return Text("Service Data is here!");
+                        List<ServiceModel> _serviceList = snap.data;
+
+                        ServiceModel _dropdownLabourValue = _serviceList[0];
+
+                        print("Line 558: $_serviceList");
+
+                        return DropdownButton<ServiceModel>(
+                          value: _dropdownLabourValue,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 8,
+                          style: TextStyle(color: Colors.blue),
+                          onChanged: (ServiceModel labour) {
+                            setState(() {
+                              _dropdownLabourValue = labour;
+                            });
+                          },
+                          items: _serviceList
+                              .map<DropdownMenuItem<ServiceModel>>(
+                                  (ServiceModel value) {
+                                return DropdownMenuItem<ServiceModel>(
+                                  value: value,
+                                  child: Text(value.name),
+                                );
+                              }).toList(),
+                        );
                       }),
                   FutureBuilder(
                       future: _associateProvider.getSupervisors(),
@@ -653,7 +682,31 @@ class _AssociatePageState extends State<AssociatePage> {
                           );
                         }
 
-                        return Text("Supervisor Data is here!");
+                        List<AssociateModel> _supervisorList = snap.data;
+
+                        AssociateModel _dropdownSupervisorValue =
+                        _supervisorList[0];
+
+                        return DropdownButton<AssociateModel>(
+                          value: _dropdownSupervisorValue,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 8,
+                          style: TextStyle(color: Colors.blue),
+                          onChanged: (AssociateModel supervisor) {
+                            setState(() {
+                              _dropdownSupervisorValue = supervisor;
+                            });
+                          },
+                          items: _supervisorList
+                              .map<DropdownMenuItem<AssociateModel>>(
+                                  (AssociateModel value) {
+                                return DropdownMenuItem<AssociateModel>(
+                                  value: value,
+                                  child: Text(value.fullName),
+                                );
+                              }).toList(),
+                        );
                       }),
                 ],
               ),
@@ -673,7 +726,7 @@ class _AssociatePageState extends State<AssociatePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FutureBuilder(
-                      future: _associateProvider.getLabours(),
+                      future: _materialProvider.getMaterials(),
                       builder: (context, snap) {
                         if (!snap.hasData) {
                           return Center(
@@ -681,7 +734,32 @@ class _AssociatePageState extends State<AssociatePage> {
                           );
                         }
 
-                        return Text("Material Data is here!");
+                        List<ServiceModel> _serviceList = snap.data;
+
+                        ServiceModel _dropdownLabourValue = _serviceList[0];
+
+                        print("Line 558: $_serviceList");
+
+                        return DropdownButton<ServiceModel>(
+                          value: _dropdownLabourValue,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 8,
+                          style: TextStyle(color: Colors.blue),
+                          onChanged: (ServiceModel labour) {
+                            setState(() {
+                              _dropdownLabourValue = labour;
+                            });
+                          },
+                          items: _serviceList
+                              .map<DropdownMenuItem<ServiceModel>>(
+                                  (ServiceModel value) {
+                                return DropdownMenuItem<ServiceModel>(
+                                  value: value,
+                                  child: Text(value.name),
+                                );
+                              }).toList(),
+                        );
                       }),
                   FutureBuilder(
                       future: _associateProvider.getSupervisors(),
@@ -692,11 +770,35 @@ class _AssociatePageState extends State<AssociatePage> {
                           );
                         }
 
-                        return Text("Vendor Data is here!");
+                        List<AssociateModel> _supervisorList = snap.data;
+
+                        AssociateModel _dropdownSupervisorValue =
+                        _supervisorList[0];
+
+                        return DropdownButton<AssociateModel>(
+                          value: _dropdownSupervisorValue,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 8,
+                          style: TextStyle(color: Colors.blue),
+                          onChanged: (AssociateModel supervisor) {
+                            setState(() {
+                              _dropdownSupervisorValue = supervisor;
+                            });
+                          },
+                          items: _supervisorList
+                              .map<DropdownMenuItem<AssociateModel>>(
+                                  (AssociateModel value) {
+                                return DropdownMenuItem<AssociateModel>(
+                                  value: value,
+                                  child: Text(value.fullName),
+                                );
+                              }).toList(),
+                        );
                       }),
                 ],
               ),
-            ),
+            )
           ],
         );
         break;
