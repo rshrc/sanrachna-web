@@ -549,42 +549,61 @@ class _AssociatePageState extends State<AssociatePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  FutureBuilder(
-                      future: _associateProvider.getLabours(),
-                      builder: (context, snap) {
-                        if (!snap.hasData) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
+                  Column(
+                    children: [
+                      FutureBuilder(
+                          future: _associateProvider.getLabours(),
+                          builder: (context, snap) {
+                            if (!snap.hasData) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
 
-                        List<AssociateModel> _laboursList = snap.data;
+                            List<AssociateModel> _laboursList = snap.data;
 
-                        AssociateModel _dropdownLabourValue = _laboursList[0];
+                            AssociateModel _dropdownLabourValue =
+                                _laboursList[0];
 
-                        print("Line 558: $_laboursList");
+                            print("Line 558: $_laboursList");
 
-                        return DropdownButton<AssociateModel>(
-                          value: _dropdownLabourValue,
-                          icon: Icon(Icons.keyboard_arrow_down),
-                          iconSize: 24,
-                          elevation: 8,
-                          style: TextStyle(color: Colors.blue),
-                          onChanged: (AssociateModel labour) {
-                            setState(() {
-                              _dropdownLabourValue = labour;
-                            });
-                          },
-                          items: _laboursList
-                              .map<DropdownMenuItem<AssociateModel>>(
-                                  (AssociateModel value) {
-                            return DropdownMenuItem<AssociateModel>(
-                              value: value,
-                              child: Text(value.fullName),
+                            return Column(
+                              children: [
+                                DropdownButton<AssociateModel>(
+                                  value: _dropdownLabourValue,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 24,
+                                  elevation: 8,
+                                  style: TextStyle(color: Colors.blue),
+                                  onChanged: (AssociateModel labour) {
+                                    setState(() {
+                                      _dropdownLabourValue = labour;
+                                    });
+                                  },
+                                  items: _laboursList
+                                      .map<DropdownMenuItem<AssociateModel>>(
+                                          (AssociateModel value) {
+                                    return DropdownMenuItem<AssociateModel>(
+                                      value: value,
+                                      child: Text(value.fullName),
+                                    );
+                                  }).toList(),
+                                ),
+                                Container(
+                                  width: 100.0,
+                                  child: ListView.builder(
+                                      padding: EdgeInsets.only(top: 40.0),
+                                      shrinkWrap: true,
+                                      itemCount: _laboursList.length,
+                                      itemBuilder: (context, index){
+                                        return Text("${_laboursList[index].fullName}");
+                                      }),
+                                )
+                              ],
                             );
-                          }).toList(),
-                        );
-                      }),
+                          }),
+                    ],
+                  ),
                   FutureBuilder(
                       future: _associateProvider.getSupervisors(),
                       builder: (context, snap) {
@@ -599,34 +618,53 @@ class _AssociatePageState extends State<AssociatePage> {
                         AssociateModel _dropdownSupervisorValue =
                             _supervisorList[0];
 
-                        return DropdownButton<AssociateModel>(
-                          value: _dropdownSupervisorValue,
-                          icon: Icon(Icons.keyboard_arrow_down),
-                          iconSize: 24,
-                          elevation: 8,
-                          style: TextStyle(color: Colors.blue),
-                          onChanged: (AssociateModel supervisor) {
-                            setState(() {
-                              _dropdownSupervisorValue = supervisor;
-                            });
-                          },
-                          items: _supervisorList
-                              .map<DropdownMenuItem<AssociateModel>>(
-                                  (AssociateModel value) {
-                            return DropdownMenuItem<AssociateModel>(
-                              value: value,
-                              child: Text(value.fullName),
-                            );
-                          }).toList(),
+                        return Column(
+                          children: [
+                            DropdownButton<AssociateModel>(
+                              value: _dropdownSupervisorValue,
+                              icon: Icon(Icons.keyboard_arrow_down),
+                              iconSize: 24,
+                              elevation: 8,
+                              style: TextStyle(color: Colors.blue),
+                              onChanged: (AssociateModel supervisor) {
+                                setState(() {
+                                  _dropdownSupervisorValue = supervisor;
+                                });
+                              },
+                              items: _supervisorList
+                                  .map<DropdownMenuItem<AssociateModel>>(
+                                      (AssociateModel value) {
+                                return DropdownMenuItem<AssociateModel>(
+                                  value: value,
+                                  child: Text(value.fullName),
+                                );
+                              }).toList(),
+                            ),
+                            Container(
+                              width: 100.0,
+                              child: ListView.builder(
+                                  padding: EdgeInsets.only(top: 40.0),
+                                  shrinkWrap: true,
+                                  itemCount: _supervisorList.length,
+                                  itemBuilder: (context, index){
+                                    return Text("${_supervisorList[index].fullName}");
+                                  }),
+                            )
+                          ],
                         );
                       }),
-                  RaisedButton(
-                    color: Colors.redAccent,
-                    child: Text(
-                      "Map",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {},
+                  Column(
+                    children: [
+                      RaisedButton(
+                        color: Colors.redAccent,
+                        child: Text(
+                          "Map",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {},
+                      ),
+                      SizedBox(height: 40.0,)
+                    ],
                   )
                 ],
               ),
