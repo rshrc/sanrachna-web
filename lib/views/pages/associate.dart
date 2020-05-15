@@ -698,25 +698,39 @@ class _AssociatePageState extends State<AssociatePage> {
 
                         print("Line 558: $_serviceList");
 
-                        return DropdownButton<ServiceModel>(
-                          value: _dropdownLabourValue,
-                          icon: Icon(Icons.keyboard_arrow_down),
-                          iconSize: 24,
-                          elevation: 8,
-                          style: TextStyle(color: Colors.blue),
-                          onChanged: (ServiceModel labour) {
-                            setState(() {
-                              _dropdownLabourValue = labour;
-                            });
-                          },
-                          items: _serviceList
-                              .map<DropdownMenuItem<ServiceModel>>(
-                                  (ServiceModel value) {
-                            return DropdownMenuItem<ServiceModel>(
-                              value: value,
-                              child: Text(value.name),
-                            );
-                          }).toList(),
+                        return Column(
+                          children: [
+                            DropdownButton<ServiceModel>(
+                              value: _dropdownLabourValue,
+                              icon: Icon(Icons.keyboard_arrow_down),
+                              iconSize: 24,
+                              elevation: 8,
+                              style: TextStyle(color: Colors.blue),
+                              onChanged: (ServiceModel labour) {
+                                setState(() {
+                                  _dropdownLabourValue = labour;
+                                });
+                              },
+                              items: _serviceList
+                                  .map<DropdownMenuItem<ServiceModel>>(
+                                      (ServiceModel value) {
+                                return DropdownMenuItem<ServiceModel>(
+                                  value: value,
+                                  child: Text(value.name),
+                                );
+                              }).toList(),
+                            ),
+                            Container(
+                              width: 100.0,
+                              child: ListView.builder(
+                                  padding: EdgeInsets.only(top: 40.0),
+                                  shrinkWrap: true,
+                                  itemCount: _serviceList.length,
+                                  itemBuilder: (context, index){
+                                    return Text("${_serviceList[index].name}");
+                                  }),
+                            )
+                          ],
                         );
                       }),
                   FutureBuilder(
@@ -733,25 +747,39 @@ class _AssociatePageState extends State<AssociatePage> {
                         AssociateModel _dropdownSupervisorValue =
                             _supervisorList[0];
 
-                        return DropdownButton<AssociateModel>(
-                          value: _dropdownSupervisorValue,
-                          icon: Icon(Icons.keyboard_arrow_down),
-                          iconSize: 24,
-                          elevation: 8,
-                          style: TextStyle(color: Colors.blue),
-                          onChanged: (AssociateModel supervisor) {
-                            setState(() {
-                              _dropdownSupervisorValue = supervisor;
-                            });
-                          },
-                          items: _supervisorList
-                              .map<DropdownMenuItem<AssociateModel>>(
-                                  (AssociateModel value) {
-                            return DropdownMenuItem<AssociateModel>(
-                              value: value,
-                              child: Text(value.fullName),
-                            );
-                          }).toList(),
+                        return Column(
+                          children: [
+                            DropdownButton<AssociateModel>(
+                              value: _dropdownSupervisorValue,
+                              icon: Icon(Icons.keyboard_arrow_down),
+                              iconSize: 24,
+                              elevation: 8,
+                              style: TextStyle(color: Colors.blue),
+                              onChanged: (AssociateModel supervisor) {
+                                setState(() {
+                                  _dropdownSupervisorValue = supervisor;
+                                });
+                              },
+                              items: _supervisorList
+                                  .map<DropdownMenuItem<AssociateModel>>(
+                                      (AssociateModel value) {
+                                return DropdownMenuItem<AssociateModel>(
+                                  value: value,
+                                  child: Text(value.fullName),
+                                );
+                              }).toList(),
+                            ),
+                            Container(
+                              width: 100.0,
+                              child: ListView.builder(
+                                  padding: EdgeInsets.only(top: 40.0),
+                                  shrinkWrap: true,
+                                  itemCount: _supervisorList.length,
+                                  itemBuilder: (context, index){
+                                    return Text("${_supervisorList[index].fullName}");
+                                  }),
+                            )
+                          ],
                         );
                       }),
                   RaisedButton(
