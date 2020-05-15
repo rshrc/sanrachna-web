@@ -3,6 +3,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sanrachna_web/models/associate_model.dart';
 import 'package:sanrachna_web/providers/associate_provider.dart';
+import 'package:sanrachna_web/providers/labour_list_provider.dart';
 import 'package:sanrachna_web/providers/service_provider.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
 import 'package:toast/toast.dart';
@@ -24,6 +25,8 @@ class _AssociatePageState extends State<AssociatePage> {
   List<AssociateModel> _vendorList = [];
 
   String dataBuilderState = 'labour'; // initial state
+  String _selectedLabour = "LABOUR 1";
+  String _selectedSupervisor = "SUPERVISOR 1";
 
   @override
   Widget build(BuildContext context) {
@@ -540,15 +543,35 @@ class _AssociatePageState extends State<AssociatePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FutureBuilder(
-                      future: _associateProvider.getLabours(),
+                      future: LabourListProvider.getLabours(),
                       builder: (context, snap) {
                         if (!snap.hasData) {
                           return Center(
                             child: CircularProgressIndicator(),
                           );
                         }
-
-                        return Text("Labour Data is here!");
+                        return DropdownButton<String>(
+                          value: _selectedLabour,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 8,
+                          style: TextStyle(color: Colors.blue),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              _selectedLabour = newValue;
+                            });
+                          },
+                          items: <String>[
+                            'LABOUR 1',
+                            'LABOUR 2',
+                            'LABOUR 3'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        );
                       }),
                   FutureBuilder(
                       future: _associateProvider.getSupervisors(),
@@ -559,7 +582,28 @@ class _AssociatePageState extends State<AssociatePage> {
                           );
                         }
 
-                        return Text("Supervisor Data is here!");
+                        return  DropdownButton<String>(
+                          value: _selectedSupervisor,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 8,
+                          style: TextStyle(color: Colors.blue),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              _selectedSupervisor = newValue;
+                            });
+                          },
+                          items: <String>[
+                            'SUPERVISOR 1',
+                            'SUPERVISOR 2',
+                            'SUPERVISOR 3'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        );
                       }),
                 ],
               ),
