@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sanrachna_web/models/associate_model.dart';
+import 'package:sanrachna_web/models/material_model.dart';
 import 'package:sanrachna_web/models/service_model.dart';
 import 'package:sanrachna_web/providers/associate_provider.dart';
 import 'package:sanrachna_web/providers/labour_list_provider.dart';
@@ -532,7 +533,6 @@ class _AssociatePageState extends State<AssociatePage> {
 
   /// Data render for Map data functionality
   Widget _mappingDataBuilder({String state}) {
-
     AssociateProvider _associateProvider = AssociateProvider();
     ServiceProvider _serviceProvider = ServiceProvider();
     MaterialProvider _materialProvider = MaterialProvider();
@@ -666,11 +666,11 @@ class _AssociatePageState extends State<AssociatePage> {
                           items: _serviceList
                               .map<DropdownMenuItem<ServiceModel>>(
                                   (ServiceModel value) {
-                                return DropdownMenuItem<ServiceModel>(
-                                  value: value,
-                                  child: Text(value.name),
-                                );
-                              }).toList(),
+                            return DropdownMenuItem<ServiceModel>(
+                              value: value,
+                              child: Text(value.name),
+                            );
+                          }).toList(),
                         );
                       }),
                   FutureBuilder(
@@ -685,7 +685,7 @@ class _AssociatePageState extends State<AssociatePage> {
                         List<AssociateModel> _supervisorList = snap.data;
 
                         AssociateModel _dropdownSupervisorValue =
-                        _supervisorList[0];
+                            _supervisorList[0];
 
                         return DropdownButton<AssociateModel>(
                           value: _dropdownSupervisorValue,
@@ -701,11 +701,11 @@ class _AssociatePageState extends State<AssociatePage> {
                           items: _supervisorList
                               .map<DropdownMenuItem<AssociateModel>>(
                                   (AssociateModel value) {
-                                return DropdownMenuItem<AssociateModel>(
-                                  value: value,
-                                  child: Text(value.fullName),
-                                );
-                              }).toList(),
+                            return DropdownMenuItem<AssociateModel>(
+                              value: value,
+                              child: Text(value.fullName),
+                            );
+                          }).toList(),
                         );
                       }),
                 ],
@@ -734,35 +734,35 @@ class _AssociatePageState extends State<AssociatePage> {
                           );
                         }
 
-                        List<ServiceModel> _serviceList = snap.data;
+                        List<MaterialModel> _materialList = snap.data;
 
-                        ServiceModel _dropdownLabourValue = _serviceList[0];
+                        MaterialModel _dropdownMaterialValue = _materialList[0];
 
-                        print("Line 558: $_serviceList");
+                        print("Line 558: $_materialList");
 
-                        return DropdownButton<ServiceModel>(
-                          value: _dropdownLabourValue,
+                        return DropdownButton<MaterialModel>(
+                          value: _dropdownMaterialValue,
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 24,
                           elevation: 8,
                           style: TextStyle(color: Colors.blue),
-                          onChanged: (ServiceModel labour) {
+                          onChanged: (MaterialModel material) {
                             setState(() {
-                              _dropdownLabourValue = labour;
+                              _dropdownMaterialValue = material;
                             });
                           },
-                          items: _serviceList
-                              .map<DropdownMenuItem<ServiceModel>>(
-                                  (ServiceModel value) {
-                                return DropdownMenuItem<ServiceModel>(
-                                  value: value,
-                                  child: Text(value.name),
-                                );
-                              }).toList(),
+                          items: _materialList
+                              .map<DropdownMenuItem<MaterialModel>>(
+                                  (MaterialModel value) {
+                            return DropdownMenuItem<MaterialModel>(
+                              value: value,
+                              child: Text(value.particulars),
+                            );
+                          }).toList(),
                         );
                       }),
                   FutureBuilder(
-                      future: _associateProvider.getSupervisors(),
+                      future: _associateProvider.getVendors(),
                       builder: (context, snap) {
                         if (!snap.hasData) {
                           return Center(
@@ -770,30 +770,29 @@ class _AssociatePageState extends State<AssociatePage> {
                           );
                         }
 
-                        List<AssociateModel> _supervisorList = snap.data;
+                        List<AssociateModel> _vendorList = snap.data;
 
-                        AssociateModel _dropdownSupervisorValue =
-                        _supervisorList[0];
+                        AssociateModel _dropdownVendorValue = _vendorList[0];
 
                         return DropdownButton<AssociateModel>(
-                          value: _dropdownSupervisorValue,
+                          value: _dropdownVendorValue,
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 24,
                           elevation: 8,
                           style: TextStyle(color: Colors.blue),
-                          onChanged: (AssociateModel supervisor) {
+                          onChanged: (AssociateModel vendor) {
                             setState(() {
-                              _dropdownSupervisorValue = supervisor;
+                              _dropdownVendorValue = vendor;
                             });
                           },
-                          items: _supervisorList
+                          items: _vendorList
                               .map<DropdownMenuItem<AssociateModel>>(
                                   (AssociateModel value) {
-                                return DropdownMenuItem<AssociateModel>(
-                                  value: value,
-                                  child: Text(value.fullName),
-                                );
-                              }).toList(),
+                            return DropdownMenuItem<AssociateModel>(
+                              value: value,
+                              child: Text(value.fullName),
+                            );
+                          }).toList(),
                         );
                       }),
                 ],
