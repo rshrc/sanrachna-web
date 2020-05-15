@@ -550,25 +550,28 @@ class _AssociatePageState extends State<AssociatePage> {
                             child: CircularProgressIndicator(),
                           );
                         }
-                        return DropdownButton<String>(
-                          value: _selectedLabour,
+
+                        List<AssociateModel> _laboursList = snap.data;
+
+                        AssociateModel _dropdownLabourValue = _laboursList[0];
+
+                        return DropdownButton<AssociateModel>(
+                          value: _dropdownLabourValue,
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 24,
                           elevation: 8,
                           style: TextStyle(color: Colors.blue),
-                          onChanged: (String newValue) {
+                          onChanged: (AssociateModel labour) {
                             setState(() {
-                              _selectedLabour = newValue;
+                              _dropdownLabourValue = labour;
                             });
                           },
-                          items: <String>[
-                            'LABOUR 1',
-                            'LABOUR 2',
-                            'LABOUR 3'
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
+                          items: _laboursList
+                              .map<DropdownMenuItem<AssociateModel>>(
+                                  (AssociateModel value) {
+                            return DropdownMenuItem<AssociateModel>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value.fullName),
                             );
                           }).toList(),
                         );
@@ -582,25 +585,28 @@ class _AssociatePageState extends State<AssociatePage> {
                           );
                         }
 
-                        return  DropdownButton<String>(
-                          value: _selectedSupervisor,
+                        List<AssociateModel> _supervisorList = snap.data;
+
+                        AssociateModel _dropdownSupervisorValue =
+                            _supervisorList[0];
+
+                        return DropdownButton<AssociateModel>(
+                          value: _dropdownSupervisorValue,
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 24,
                           elevation: 8,
                           style: TextStyle(color: Colors.blue),
-                          onChanged: (String newValue) {
+                          onChanged: (AssociateModel supervisor) {
                             setState(() {
-                              _selectedSupervisor = newValue;
+                              _dropdownSupervisorValue = supervisor;
                             });
                           },
-                          items: <String>[
-                            'SUPERVISOR 1',
-                            'SUPERVISOR 2',
-                            'SUPERVISOR 3'
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
+                          items: _supervisorList
+                              .map<DropdownMenuItem<AssociateModel>>(
+                                  (AssociateModel value) {
+                            return DropdownMenuItem<AssociateModel>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value.fullName),
                             );
                           }).toList(),
                         );
