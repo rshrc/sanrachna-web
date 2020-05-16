@@ -1145,4 +1145,14 @@ class _AssociatePageState extends State<AssociatePage> {
 
     return data;
   }
+  List<Map<String, int>> _buildServiceMap(List<ServiceModel> services){
+    List<Map<String, int>> data = [];
+    services.forEach((service) {
+      data.add({
+        service.name : service.id
+      });
+    });
+
+    return data;
+  }
 }
