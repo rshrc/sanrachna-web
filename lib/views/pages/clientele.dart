@@ -21,6 +21,14 @@ class _ClientalePageState extends State<ClientalePage> {
   String dataBuilderState = 'leads'; // initial state
 
   ClienteleProvider _clienteleProvider = ClienteleProvider();
+  String _siteType = "COMMERCIAL";
+
+
+  onDropdownChanged(String value){
+    setState(() {
+      _siteType = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -416,7 +424,6 @@ class _ClientalePageState extends State<ClientalePage> {
     TextEditingController _emailController = TextEditingController();
     TextEditingController _siteTypeController = TextEditingController();
     TextEditingController _sourceTypeController = TextEditingController();
-    String _siteType = "COMMERCIAL";
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
     TextStyle _hintTextStyle = TextStyle(color: Colors.black, fontSize: 10.0);
     String _sourceType = "ONLINE";
@@ -508,11 +515,7 @@ class _ClientalePageState extends State<ClientalePage> {
                               iconSize: 24,
                               elevation: 8,
                               style: TextStyle(color: Colors.blue),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  _siteType = newValue;
-                                });
-                              },
+                              onChanged: onDropdownChanged,
                               items: <String>[
                                 'COMMERCIAL',
                                 'HOME',

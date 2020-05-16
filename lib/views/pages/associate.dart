@@ -30,8 +30,10 @@ class _AssociatePageState extends State<AssociatePage> {
 
   String dataBuilderState = 'labour'; // initial state
   String _selectedLabour = "SELECT LABOUR";
-  String _selectedSupervisor = "SUPERVISOR 1";
+  String _selectedSupervisor = "SELECT SUPERVISOR";
   String _dropdownSupervisorValue = "SELECT SUPERVISOR";
+  String _selectedService = "SELECT SERVICE";
+
 
 
   @override
@@ -728,30 +730,34 @@ class _AssociatePageState extends State<AssociatePage> {
                         }
 
                         List<ServiceModel> _serviceList = snap.data;
-
-                        ServiceModel _dropdownLabourValue = _serviceList[0];
+                        List<String> _serviceNames = [];
+                        _serviceNames?.clear();
+                        _serviceNames.add("SELECT SERVICE");
+                        _serviceList.forEach((element) {
+                          _serviceNames.add(element.name);
+                        });
 
                         print("Line 558: $_serviceList");
 
                         return Column(
                           children: [
-                            DropdownButton<ServiceModel>(
-                              value: _dropdownLabourValue,
+                            DropdownButton<String>(
+                              value: _selectedService,
                               icon: Icon(Icons.keyboard_arrow_down),
                               iconSize: 24,
                               elevation: 8,
                               style: TextStyle(color: Colors.blue),
-                              onChanged: (ServiceModel labour) {
+                              onChanged: (String service) {
                                 setState(() {
-                                  _dropdownLabourValue = labour;
+                                  _selectedService = service;
                                 });
                               },
-                              items: _serviceList
-                                  .map<DropdownMenuItem<ServiceModel>>(
-                                      (ServiceModel value) {
-                                return DropdownMenuItem<ServiceModel>(
+                              items: _serviceNames
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value.name),
+                                  child: Text(value),
                                 );
                               }).toList(),
                             ),
@@ -778,29 +784,32 @@ class _AssociatePageState extends State<AssociatePage> {
                         }
 
                         List<AssociateModel> _supervisorList = snap.data;
-
-                        AssociateModel _dropdownSupervisorValue =
-                            _supervisorList[0];
+                        List<String> _supervisorNames = [];
+                        _supervisorNames?.clear();
+                        _supervisorNames.add("SELECT SUPERVISOR");
+                        _supervisorList.forEach((element) {
+                          _supervisorNames.add(element.fullName);
+                        });
 
                         return Column(
                           children: [
-                            DropdownButton<AssociateModel>(
-                              value: _dropdownSupervisorValue,
+                            DropdownButton<String>(
+                              value: _selectedSupervisor,
                               icon: Icon(Icons.keyboard_arrow_down),
                               iconSize: 24,
                               elevation: 8,
                               style: TextStyle(color: Colors.blue),
-                              onChanged: (AssociateModel supervisor) {
+                              onChanged: (String supervisor) {
                                 setState(() {
-                                  _dropdownSupervisorValue = supervisor;
+                                  _selectedSupervisor = supervisor;
                                 });
                               },
-                              items: _supervisorList
-                                  .map<DropdownMenuItem<AssociateModel>>(
-                                      (AssociateModel value) {
-                                return DropdownMenuItem<AssociateModel>(
+                              items: _supervisorNames
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value.fullName),
+                                  child: Text(value),
                                 );
                               }).toList(),
                             ),
