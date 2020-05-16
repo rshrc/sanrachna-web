@@ -1123,6 +1123,7 @@ class _AssociatePageState extends State<AssociatePage> {
     );
   }
 
+  /// Building a list of map, with unique key,value pair to search the corresponding id of the selected supervisor
   List<Map<String, int>> _buildSupervisorMap(List<AssociateModel> supervisors){
 
     List<Map<String, int>> data = [];
@@ -1135,6 +1136,7 @@ class _AssociatePageState extends State<AssociatePage> {
     return data;
   }
 
+  /// Building a list of map, with unique key,value pair to search the corresponding id of the selected labour
   List<Map<String, int>> _buildLabourMap(List<AssociateModel> labours){
     List<Map<String, int>> data = [];
     labours.forEach((labour) {
@@ -1145,6 +1147,8 @@ class _AssociatePageState extends State<AssociatePage> {
 
     return data;
   }
+
+  /// Building a list of map, with unique key,value pair to search the corresponding id of the selected service
   List<Map<String, int>> _buildServiceMap(List<ServiceModel> services){
     List<Map<String, int>> data = [];
     services.forEach((service) {
