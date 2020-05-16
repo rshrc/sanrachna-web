@@ -29,8 +29,10 @@ class _AssociatePageState extends State<AssociatePage> {
   List<AssociateModel> _vendorList = [];
 
   String dataBuilderState = 'labour'; // initial state
-  String _selectedLabour = "LABOUR 1";
+  String _selectedLabour = "SELECT LABOUR";
   String _selectedSupervisor = "SUPERVISOR 1";
+  String _dropdownSupervisorValue = "SELECT SUPERVISOR";
+
 
   @override
   Widget build(BuildContext context) {
@@ -394,6 +396,7 @@ class _AssociatePageState extends State<AssociatePage> {
                 );
               }
 
+
               return Column(
                 children: [
                   TitleWidget(title: "Supervisor"),
@@ -565,31 +568,37 @@ class _AssociatePageState extends State<AssociatePage> {
 
                             List<AssociateModel> _laboursList = snap.data;
 
-                            AssociateModel _dropdownLabourValue =
-                                _laboursList[0];
+//                            AssociateModel _dropdownLabourValue =
+//                                _laboursList[0];
 
                             print("Line 558: $_laboursList");
 
+                            List<String> _labourNames = [];
+                            _labourNames?.clear();
+                            _labourNames.add("SELECT LABOUR");
+                            _laboursList.forEach((element) {
+                              _labourNames.add(element.fullName);
+                            });
+
                             return Column(
                               children: [
-                                DropdownButton<AssociateModel>(
-                                  value: _dropdownLabourValue,
+                                DropdownButton<String>(
+                                  value: _selectedLabour,
                                   icon: Icon(Icons.keyboard_arrow_down),
                                   iconSize: 24,
                                   elevation: 8,
                                   style: TextStyle(color: Colors.blue),
-                                  onChanged: (AssociateModel labour) {
+                                  onChanged: (String labour) {
                                     setState(() {
-                                      _dropdownLabourValue = labour;
-                                      _labourId = labour.id;
+                                      _selectedLabour = labour;
                                     });
                                   },
-                                  items: _laboursList
-                                      .map<DropdownMenuItem<AssociateModel>>(
-                                          (AssociateModel value) {
-                                    return DropdownMenuItem<AssociateModel>(
+                                  items: _labourNames
+                                      .map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                    return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value.fullName),
+                                      child: Text(value),
                                     );
                                   }).toList(),
                                 ),
@@ -619,31 +628,34 @@ class _AssociatePageState extends State<AssociatePage> {
                         }
 
                         List<AssociateModel> _supervisorList = snap.data;
+                        //_buildSupervisorMap(_supervisorList);
+                        List<String> _supervisorNames = [];
+                        _supervisorNames?.clear();
+                        _supervisorNames.add("SELECT SUPERVISOR");
+                        _supervisorList.forEach((element) {
+                          _supervisorNames.add(element.fullName);
+                        });
 
-                        AssociateModel _dropdownSupervisorValue =
-                            _supervisorList[0];
 
                         return Column(
                           children: [
-                            DropdownButton<AssociateModel>(
+                            DropdownButton<String>(
                               value: _dropdownSupervisorValue,
                               icon: Icon(Icons.keyboard_arrow_down),
                               iconSize: 24,
                               elevation: 8,
                               style: TextStyle(color: Colors.blue),
-                              onChanged: (AssociateModel supervisor) {
+                              onChanged: (String supervisor) {
                                 setState(() {
                                   _dropdownSupervisorValue = supervisor;
-                                  _supervisorId = supervisor.id;
-                                  print("Line 638: $_supervisorId");
                                 });
                               },
-                              items: _supervisorList
-                                  .map<DropdownMenuItem<AssociateModel>>(
-                                      (AssociateModel value) {
-                                return DropdownMenuItem<AssociateModel>(
+                              items: _supervisorNames
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value.fullName),
+                                  child: Text(value),
                                 );
                               }).toList(),
                             ),
@@ -1100,5 +1112,28 @@ class _AssociatePageState extends State<AssociatePage> {
         ),
       ),
     );
+  }
+
+  List<Map<String, int>> _buildSupervisorMap(List<AssociateModel> supervisors){
+
+    List<Map<String, int>> data = [];
+    supervisors.forEach((supervisor) {
+      data.add({
+        supervisor.fullName : supervisor.id
+      });
+    });
+
+    return data;
+  }
+
+  List<Map<String, int>> _buildLabourMap(List<AssociateModel> labours){
+    List<Map<String, int>> data = [];
+    labours.forEach((labour) {
+      data.add({
+        labour.fullName : labour.id
+      });
+    });
+
+    return data;
   }
 }
