@@ -601,6 +601,19 @@ class _AssociatePageState extends State<AssociatePage> {
 
                                     Constants.labourId =
                                         list[0][_selectedLabour].toString();
+
+                                    list.forEach((item) {
+                                      if (item[_selectedLabour] != null) {
+                                        _labourId =
+                                            item[_selectedLabour].toString();
+                                      }
+                                    });
+
+                                    print("Line 684 >>>>>>> : $_labourId");
+                                    Constants.labourId= _labourId;
+
+                                    print(
+                                        "Before exiting ::::::: ${Constants.labourId} Yeah Yeah value changed");
                                   },
                                   items: _labourNames
                                       .map<DropdownMenuItem<String>>(
