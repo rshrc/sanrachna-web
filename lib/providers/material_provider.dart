@@ -16,7 +16,7 @@ class MaterialProvider implements MaterialAPIProvider {
 
   @override
   Future<String> deleteMaterial(int id) async {
-    http.Response response = await http.get('http://sanrachna.pythonanywhere.com/api/database/material/$id/delete');
+    http.Response response = await http.get('https://sanrachna.pythonanywhere.com/api/database/material/$id/delete');
 
     print("Line 21: $response");
 
@@ -26,7 +26,7 @@ class MaterialProvider implements MaterialAPIProvider {
   @override
   Future<List<MaterialModel>> getMaterials() async {
     http.Response response =
-        await http.get('http://sanrachna.pythonanywhere.com/api/database/material/');
+        await http.get('https://sanrachna.pythonanywhere.com/api/database/material/');
 
     print("Line 29: $response");
 
