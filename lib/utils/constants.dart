@@ -24,5 +24,6 @@ class Constants {
 
   static String labourId;
   static String supervisorId;
-
+  static String vendorId;
+  static String materialId;
 }

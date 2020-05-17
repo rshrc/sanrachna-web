@@ -35,8 +35,6 @@ class _AssociatePageState extends State<AssociatePage> {
   String _dropdownSupervisorValue = "SELECT SUPERVISOR";
   String _selectedService = "SELECT SERVICE";
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -399,7 +397,6 @@ class _AssociatePageState extends State<AssociatePage> {
                 );
               }
 
-
               return Column(
                 children: [
                   TitleWidget(title: "Supervisor"),
@@ -599,9 +596,11 @@ class _AssociatePageState extends State<AssociatePage> {
                                     print("Line 598: $list");
                                     print("Line 599: $_selectedLabour");
 
-                                    print("Labour ID ${list[0][_selectedLabour]}");
+                                    print(
+                                        "Labour ID ${list[0][_selectedLabour]}");
 
-                                    Constants.labourId = list[0][_selectedLabour].toString();
+                                    Constants.labourId =
+                                        list[0][_selectedLabour].toString();
                                   },
                                   items: _labourNames
                                       .map<DropdownMenuItem<String>>(
@@ -648,7 +647,6 @@ class _AssociatePageState extends State<AssociatePage> {
 
                         _supervisorId = "";
 
-
                         return Column(
                           children: [
                             DropdownButton<String>(
@@ -663,19 +661,33 @@ class _AssociatePageState extends State<AssociatePage> {
                                   print("665: $_dropdownSupervisorValue");
                                 });
 
-                                var list = _buildSupervisorMap(_supervisorList);
+                                List<Map<String, dynamic>> list =
+                                    _buildSupervisorMap(_supervisorList);
                                 print("Line 657: $list");
                                 print("Line 660: $_dropdownSupervisorValue");
-
 
                                 // lets find the id
                                 // [{Tejas Sharma: 1}, {Devashish: 2}]
 
-                                Constants.supervisorId = list[0][_dropdownSupervisorValue].toString();
+                                Constants.supervisorId = list[0]
+                                        [_dropdownSupervisorValue]
+                                    .toString();
 
-                                print("Supervisor ID Line 672 : $_supervisorId");
+                                print(
+                                    "Supervisor ID Line 672 : $_supervisorId");
 
+                                list.forEach((item) {
+                                  if (item[_dropdownSupervisorValue] != null) {
+                                    _supervisorId =
+                                        item[_dropdownSupervisorValue].toString();
+                                  }
+                                });
 
+                                print("Line 684 >>>>>>> : $_supervisorId");
+                                Constants.supervisorId = _supervisorId;
+
+                                print(
+                                    "Before exiting ::::::: ${Constants.supervisorId} Yeah Yeah value changed");
                               },
                               items: _supervisorNames
                                   .map<DropdownMenuItem<String>>(
@@ -709,8 +721,8 @@ class _AssociatePageState extends State<AssociatePage> {
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () async {
-
-                          print("Line 712: Gonna Map ${Constants.labourId} & ${Constants.supervisorId}");
+                          print(
+                              "Line 712: Gonna Map ${Constants.labourId} & ${Constants.supervisorId}");
 
                           _labourId = Constants.labourId;
                           _supervisorId = Constants.supervisorId;
@@ -1155,25 +1167,20 @@ class _AssociatePageState extends State<AssociatePage> {
   }
 
   /// Building a list of map, with unique key,value pair to search the corresponding id of the selected supervisor
-  List<Map<String, int>> _buildSupervisorMap(List<AssociateModel> supervisors){
-
+  List<Map<String, int>> _buildSupervisorMap(List<AssociateModel> supervisors) {
     List<Map<String, int>> data = [];
     supervisors.forEach((supervisor) {
-      data.add({
-        supervisor.fullName : supervisor.id
-      });
+      data.add({supervisor.fullName: supervisor.id});
     });
 
     return data;
   }
 
   /// Building a list of map, with unique key,value pair to search the corresponding id of the selected labour
-  List<Map<String, int>> _buildLabourMap(List<AssociateModel> labours){
+  List<Map<String, int>> _buildLabourMap(List<AssociateModel> labours) {
     List<Map<String, int>> data = [];
     labours.forEach((labour) {
-      data.add({
-        labour.fullName : labour.id
-      });
+      data.add({labour.fullName: labour.id});
     });
 
     print("Line 1148: Labour Map : $data");
@@ -1182,12 +1189,10 @@ class _AssociatePageState extends State<AssociatePage> {
   }
 
   /// Building a list of map, with unique key,value pair to search the corresponding id of the selected service
-  List<Map<String, int>> _buildServiceMap(List<ServiceModel> services){
+  List<Map<String, int>> _buildServiceMap(List<ServiceModel> services) {
     List<Map<String, int>> data = [];
     services.forEach((service) {
-      data.add({
-        service.name : service.id
-      });
+      data.add({service.name: service.id});
     });
 
     return data;
