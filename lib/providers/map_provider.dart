@@ -16,4 +16,19 @@ class MapProvider {
 
     return response.statusCode;
   }
+
+  static Future<int> mapServiceToSupervisor({int serviceId, int supervisorId}) async {
+    Map<String, dynamic> data = {
+      'service': serviceId.toString(),
+      'supervisor': supervisorId.toString(),
+    };
+
+    http.Response response = await http.post(
+        'https://sanrachna.pythonanywhere.com/api/associate/mss/map/',
+        body: data);
+
+    print("Line 31: map_provider.dart: $response");
+
+    return response.statusCode;
+  }
 }

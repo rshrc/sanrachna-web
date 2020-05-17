@@ -26,4 +26,5 @@ class Constants {
   static String supervisorId;
   static String vendorId;
   static String materialId;
+  static String serviceId;
 }

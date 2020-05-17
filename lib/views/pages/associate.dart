@@ -32,8 +32,8 @@ class _AssociatePageState extends State<AssociatePage> {
   String dataBuilderState = 'labour'; // initial state
   String _selectedLabour = "SELECT LABOUR";
   String _selectedSupervisor = "SELECT SUPERVISOR";
-//  String _selectedSupervisor = "SELECT SUPERVISOR";
   String _selectedService = "SELECT SERVICE";
+  String _selectedMaterial = "SELECT MATERIAL";
 
   @override
   Widget build(BuildContext context) {
@@ -742,6 +742,8 @@ class _AssociatePageState extends State<AssociatePage> {
         );
         break;
       case 'map_ss':
+
+        String _serviceId, _supervisorId;
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -783,6 +785,22 @@ class _AssociatePageState extends State<AssociatePage> {
                                 setState(() {
                                   _selectedService = service;
                                 });
+
+                                List<Map<String, dynamic>> list =
+                                _buildServiceMap(_serviceList);
+
+                                list.forEach((item) {
+                                  if (item[_selectedService] != null) {
+                                    _serviceId =
+                                        item[_selectedService]
+                                            .toString();
+                                  }
+                                });
+
+                                Constants.serviceId = _serviceId;
+
+                                print("Supervisor : ${Constants.serviceId}");
+
                               },
                               items: _serviceNames
                                   .map<DropdownMenuItem<String>>(
@@ -835,6 +853,21 @@ class _AssociatePageState extends State<AssociatePage> {
                                 setState(() {
                                   _selectedSupervisor = supervisor;
                                 });
+
+                                List<Map<String, dynamic>> list =
+                                _buildSupervisorMap(_supervisorList);
+
+                                list.forEach((item) {
+                                  if (item[_selectedSupervisor] != null) {
+                                    _supervisorId =
+                                        item[_selectedSupervisor]
+                                            .toString();
+                                  }
+                                });
+
+                                Constants.supervisorId = _supervisorId;
+
+                                print("Supervisor : ${Constants.supervisorId}");
                               },
                               items: _supervisorNames
                                   .map<DropdownMenuItem<String>>(
@@ -867,7 +900,26 @@ class _AssociatePageState extends State<AssociatePage> {
                           "Map",
                           style: TextStyle(color: Colors.white),
                         ),
-                        onPressed: () {},
+                          onPressed: () async {
+                            print(
+                                "Line 905: Gonna Map ${Constants.labourId} & ${Constants.supervisorId}");
+
+                            _serviceId = Constants.serviceId;
+                            _supervisorId = Constants.supervisorId;
+
+                            if (_serviceId != null && _supervisorId != null) {
+                              await MapProvider.mapServiceToSupervisor(
+                                serviceId: int.parse(_serviceId),
+                                supervisorId: int.parse(_supervisorId),
+                              ).then((value) {
+                                Toast.show("Mapped data", context,
+                                    backgroundColor: Colors.green, duration: 2);
+                                setState(() {});
+                              });
+                            } else {
+                              Toast.show("Select Data", context);
+                            }
+                          }
                       ),
                       SizedBox(
                         height: 40.0,
