@@ -9,6 +9,7 @@ import 'package:sanrachna_web/providers/labour_list_provider.dart';
 import 'package:sanrachna_web/providers/map_provider.dart';
 import 'package:sanrachna_web/providers/material_provider.dart';
 import 'package:sanrachna_web/providers/service_provider.dart';
+import 'package:sanrachna_web/utils/constants.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
 import 'package:toast/toast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -545,7 +546,7 @@ class _AssociatePageState extends State<AssociatePage> {
 
     switch (state) {
       case 'map_ls':
-        int _labourId, _supervisorId;
+        String _labourId, _supervisorId;
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -570,9 +571,6 @@ class _AssociatePageState extends State<AssociatePage> {
 
                             List<AssociateModel> _laboursList = snap.data;
 
-//                            AssociateModel _dropdownLabourValue =
-//                                _laboursList[0];
-
                             print("Line 558: $_laboursList");
 
                             List<String> _labourNames = [];
@@ -581,6 +579,8 @@ class _AssociatePageState extends State<AssociatePage> {
                             _laboursList.forEach((element) {
                               _labourNames.add(element.fullName);
                             });
+
+                            _labourId = "";
 
                             return Column(
                               children: [
@@ -593,7 +593,15 @@ class _AssociatePageState extends State<AssociatePage> {
                                   onChanged: (String labour) {
                                     setState(() {
                                       _selectedLabour = labour;
+                                      print("Line 595: $_selectedLabour");
                                     });
+                                    var list = _buildLabourMap(_labourList);
+                                    print("Line 598: $list");
+                                    print("Line 599: $_selectedLabour");
+
+                                    print("Labour ID ${list[0][_selectedLabour]}");
+
+                                    Constants.labourId = list[0][_selectedLabour].toString();
                                   },
                                   items: _labourNames
                                       .map<DropdownMenuItem<String>>(
@@ -638,6 +646,8 @@ class _AssociatePageState extends State<AssociatePage> {
                           _supervisorNames.add(element.fullName);
                         });
 
+                        _supervisorId = "";
+
 
                         return Column(
                           children: [
@@ -650,7 +660,22 @@ class _AssociatePageState extends State<AssociatePage> {
                               onChanged: (String supervisor) {
                                 setState(() {
                                   _dropdownSupervisorValue = supervisor;
+                                  print("665: $_dropdownSupervisorValue");
                                 });
+
+                                var list = _buildSupervisorMap(_supervisorList);
+                                print("Line 657: $list");
+                                print("Line 660: $_dropdownSupervisorValue");
+
+
+                                // lets find the id
+                                // [{Tejas Sharma: 1}, {Devashish: 2}]
+
+                                Constants.supervisorId = list[0][_dropdownSupervisorValue].toString();
+
+                                print("Supervisor ID Line 672 : $_supervisorId");
+
+
                               },
                               items: _supervisorNames
                                   .map<DropdownMenuItem<String>>(
@@ -684,10 +709,16 @@ class _AssociatePageState extends State<AssociatePage> {
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () async {
+
+                          print("Line 712: Gonna Map ${Constants.labourId} & ${Constants.supervisorId}");
+
+                          _labourId = Constants.labourId;
+                          _supervisorId = Constants.supervisorId;
+
                           if (_labourId != null && _supervisorId != null) {
                             await MapProvider.mapLabourToSupervisor(
-                              labourId: _labourId,
-                              supervisorId: _supervisorId,
+                              labourId: int.parse(_labourId),
+                              supervisorId: int.parse(_supervisorId),
                             ).then((value) {
                               Toast.show("Mapped data", context,
                                   backgroundColor: Colors.green, duration: 2);
@@ -1144,6 +1175,8 @@ class _AssociatePageState extends State<AssociatePage> {
         labour.fullName : labour.id
       });
     });
+
+    print("Line 1148: Labour Map : $data");
 
     return data;
   }

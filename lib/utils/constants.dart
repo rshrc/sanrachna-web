@@ -21,4 +21,8 @@ class Constants {
   static String materialPlyAPI = "$server/database/material/ply/";
   static String materialPaintAPI = "$server/database/material/paint/";
   static String materialCivilAPI = "$server/database/material/civil/";
+
+  static String labourId;
+  static String supervisorId;
+
 }

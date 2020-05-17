@@ -4,8 +4,8 @@ class MapProvider {
   static Future<int> mapLabourToSupervisor(
       {int labourId, int supervisorId}) async {
     Map<String, dynamic> data = {
-      'labour': labourId,
-      'supervisor': supervisorId,
+      'labour': labourId.toString(),
+      'supervisor': supervisorId.toString(),
     };
 
     http.Response response = await http.post(
