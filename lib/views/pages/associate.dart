@@ -32,7 +32,7 @@ class _AssociatePageState extends State<AssociatePage> {
   String dataBuilderState = 'labour'; // initial state
   String _selectedLabour = "SELECT LABOUR";
   String _selectedSupervisor = "SELECT SUPERVISOR";
-  String _dropdownSupervisorValue = "SELECT SUPERVISOR";
+//  String _selectedSupervisor = "SELECT SUPERVISOR";
   String _selectedService = "SELECT SERVICE";
 
   @override
@@ -590,17 +590,9 @@ class _AssociatePageState extends State<AssociatePage> {
                                   onChanged: (String labour) {
                                     setState(() {
                                       _selectedLabour = labour;
-                                      print("Line 595: $_selectedLabour");
                                     });
-                                    var list = _buildLabourMap(_labourList);
-                                    print("Line 598: $list");
-                                    print("Line 599: $_selectedLabour");
-
-                                    print(
-                                        "Labour ID ${list[0][_selectedLabour]}");
-
-                                    Constants.labourId =
-                                        list[0][_selectedLabour].toString();
+                                    List<Map<String, dynamic>> list =
+                                        _buildLabourMap(_labourList);
 
                                     list.forEach((item) {
                                       if (item[_selectedLabour] != null) {
@@ -609,11 +601,9 @@ class _AssociatePageState extends State<AssociatePage> {
                                       }
                                     });
 
-                                    print("Line 684 >>>>>>> : $_labourId");
-                                    Constants.labourId= _labourId;
+                                    Constants.labourId = _labourId;
 
-                                    print(
-                                        "Before exiting ::::::: ${Constants.labourId} Yeah Yeah value changed");
+                                    print("Labour : ${Constants.labourId}");
                                   },
                                   items: _labourNames
                                       .map<DropdownMenuItem<String>>(
@@ -663,44 +653,30 @@ class _AssociatePageState extends State<AssociatePage> {
                         return Column(
                           children: [
                             DropdownButton<String>(
-                              value: _dropdownSupervisorValue,
+                              value: _selectedSupervisor,
                               icon: Icon(Icons.keyboard_arrow_down),
                               iconSize: 24,
                               elevation: 8,
                               style: TextStyle(color: Colors.blue),
                               onChanged: (String supervisor) {
                                 setState(() {
-                                  _dropdownSupervisorValue = supervisor;
-                                  print("665: $_dropdownSupervisorValue");
+                                  _selectedSupervisor = supervisor;
                                 });
 
                                 List<Map<String, dynamic>> list =
                                     _buildSupervisorMap(_supervisorList);
-                                print("Line 657: $list");
-                                print("Line 660: $_dropdownSupervisorValue");
-
-                                // lets find the id
-                                // [{Tejas Sharma: 1}, {Devashish: 2}]
-
-                                Constants.supervisorId = list[0]
-                                        [_dropdownSupervisorValue]
-                                    .toString();
-
-                                print(
-                                    "Supervisor ID Line 672 : $_supervisorId");
 
                                 list.forEach((item) {
-                                  if (item[_dropdownSupervisorValue] != null) {
+                                  if (item[_selectedSupervisor] != null) {
                                     _supervisorId =
-                                        item[_dropdownSupervisorValue].toString();
+                                        item[_selectedSupervisor]
+                                            .toString();
                                   }
                                 });
 
-                                print("Line 684 >>>>>>> : $_supervisorId");
                                 Constants.supervisorId = _supervisorId;
 
-                                print(
-                                    "Before exiting ::::::: ${Constants.supervisorId} Yeah Yeah value changed");
+                                print("Supervisor : ${Constants.supervisorId}");
                               },
                               items: _supervisorNames
                                   .map<DropdownMenuItem<String>>(
