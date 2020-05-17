@@ -12,7 +12,7 @@ class MapProvider {
         'https://sanrachna.pythonanywhere.com/api/associate/mls/map/',
         body: data);
 
-    print("Line 13: map_provider.dart: $response");
+    print("map_provider.dart: $response");
 
     return response.statusCode;
   }
@@ -27,8 +27,25 @@ class MapProvider {
         'https://sanrachna.pythonanywhere.com/api/associate/mss/map/',
         body: data);
 
-    print("Line 31: map_provider.dart: $response");
+    print("map_provider.dart: $response");
 
     return response.statusCode;
   }
+
+  static Future<int> mapMaterialToVendor({int materialId, int vendorId}) async {
+    Map<String, dynamic> data = {
+      'material': materialId.toString(),
+      'vendor': vendorId.toString(),
+    };
+
+    http.Response response = await http.post(
+        'https://sanrachna.pythonanywhere.com/api/associate/mmv/map/',
+        body: data);
+
+    print("map_provider.dart: $response");
+
+    return response.statusCode;
+  }
+
+
 }

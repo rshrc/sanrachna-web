@@ -963,6 +963,22 @@ class _AssociatePageState extends State<AssociatePage> {
                             setState(() {
                               _selectedMaterial = material;
                             });
+
+                            List<Map<String, dynamic>> list =
+                            _buildMaterialMap(_materialList);
+
+                            print("Line 970: $list");
+
+                            list.forEach((item) {
+                              if (item[_selectedMaterial] != null) {
+                                _materialId =
+                                    item[_selectedMaterial].toString();
+                              }
+                            });
+
+                            Constants.materialId = _materialId;
+
+                            print("Material : ${Constants.materialId}");
                           },
                           items: _materialNames
                               .map<DropdownMenuItem<String>>(
@@ -1031,7 +1047,26 @@ class _AssociatePageState extends State<AssociatePage> {
                       "Map",
                       style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      _materialId = Constants.materialId;
+                      _vendorId = Constants.vendorId;
+
+                      print("Line 1052: ${Constants.materialId}");
+                      print("Line 1053: ${Constants.vendorId}");
+
+                      if (_materialId != null && _vendorId != null) {
+                        await MapProvider.mapMaterialToVendor(
+                          materialId: int.parse(_materialId),
+                          vendorId: int.parse(_vendorId),
+                        ).then((value) {
+                          Toast.show("Mapped data", context,
+                              backgroundColor: Colors.green, duration: 2);
+                          setState(() {});
+                        });
+                      } else {
+                        Toast.show("Select Data", context);
+                      }
+                    },
                   )
                 ],
               ),
