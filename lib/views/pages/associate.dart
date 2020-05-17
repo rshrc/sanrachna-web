@@ -5,14 +5,12 @@ import 'package:sanrachna_web/models/associate_model.dart';
 import 'package:sanrachna_web/models/material_model.dart';
 import 'package:sanrachna_web/models/service_model.dart';
 import 'package:sanrachna_web/providers/associate_provider.dart';
-import 'package:sanrachna_web/providers/labour_list_provider.dart';
 import 'package:sanrachna_web/providers/map_provider.dart';
 import 'package:sanrachna_web/providers/material_provider.dart';
 import 'package:sanrachna_web/providers/service_provider.dart';
 import 'package:sanrachna_web/utils/constants.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
 import 'package:toast/toast.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AssociatePage extends StatefulWidget {
   @override
@@ -34,6 +32,7 @@ class _AssociatePageState extends State<AssociatePage> {
   String _selectedSupervisor = "SELECT SUPERVISOR";
   String _selectedService = "SELECT SERVICE";
   String _selectedMaterial = "SELECT MATERIAL";
+  String _selectedVendor = "SELECT VENDOR";
 
   @override
   Widget build(BuildContext context) {
@@ -669,8 +668,7 @@ class _AssociatePageState extends State<AssociatePage> {
                                 list.forEach((item) {
                                   if (item[_selectedSupervisor] != null) {
                                     _supervisorId =
-                                        item[_selectedSupervisor]
-                                            .toString();
+                                        item[_selectedSupervisor].toString();
                                   }
                                 });
 
@@ -742,7 +740,6 @@ class _AssociatePageState extends State<AssociatePage> {
         );
         break;
       case 'map_ss':
-
         String _serviceId, _supervisorId;
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -787,20 +784,18 @@ class _AssociatePageState extends State<AssociatePage> {
                                 });
 
                                 List<Map<String, dynamic>> list =
-                                _buildServiceMap(_serviceList);
+                                    _buildServiceMap(_serviceList);
 
                                 list.forEach((item) {
                                   if (item[_selectedService] != null) {
                                     _serviceId =
-                                        item[_selectedService]
-                                            .toString();
+                                        item[_selectedService].toString();
                                   }
                                 });
 
                                 Constants.serviceId = _serviceId;
 
                                 print("Supervisor : ${Constants.serviceId}");
-
                               },
                               items: _serviceNames
                                   .map<DropdownMenuItem<String>>(
@@ -855,13 +850,12 @@ class _AssociatePageState extends State<AssociatePage> {
                                 });
 
                                 List<Map<String, dynamic>> list =
-                                _buildSupervisorMap(_supervisorList);
+                                    _buildSupervisorMap(_supervisorList);
 
                                 list.forEach((item) {
                                   if (item[_selectedSupervisor] != null) {
                                     _supervisorId =
-                                        item[_selectedSupervisor]
-                                            .toString();
+                                        item[_selectedSupervisor].toString();
                                   }
                                 });
 
@@ -895,15 +889,12 @@ class _AssociatePageState extends State<AssociatePage> {
                   Column(
                     children: [
                       RaisedButton(
-                        color: Colors.redAccent,
-                        child: Text(
-                          "Map",
-                          style: TextStyle(color: Colors.white),
-                        ),
+                          color: Colors.redAccent,
+                          child: Text(
+                            "Map",
+                            style: TextStyle(color: Colors.white),
+                          ),
                           onPressed: () async {
-                            print(
-                                "Line 905: Gonna Map ${Constants.labourId} & ${Constants.supervisorId}");
-
                             _serviceId = Constants.serviceId;
                             _supervisorId = Constants.supervisorId;
 
@@ -919,8 +910,7 @@ class _AssociatePageState extends State<AssociatePage> {
                             } else {
                               Toast.show("Select Data", context);
                             }
-                          }
-                      ),
+                          }),
                       SizedBox(
                         height: 40.0,
                       )
@@ -933,6 +923,7 @@ class _AssociatePageState extends State<AssociatePage> {
         );
         break;
       case 'map_mv':
+        String _materialId, _vendorId;
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -953,28 +944,32 @@ class _AssociatePageState extends State<AssociatePage> {
                         }
 
                         List<MaterialModel> _materialList = snap.data;
-
-                        MaterialModel _dropdownMaterialValue = _materialList[0];
+                        List<String> _materialNames = [];
+                        _materialNames?.clear();
+                        _materialNames.add("SELECT MATERIAL");
+                        _materialList.forEach((element) {
+                          _materialNames.add(element.particulars);
+                        });
 
                         print("Line 558: $_materialList");
 
-                        return DropdownButton<MaterialModel>(
-                          value: _dropdownMaterialValue,
+                        return DropdownButton<String>(
+                          value: _selectedMaterial,
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 24,
                           elevation: 8,
                           style: TextStyle(color: Colors.blue),
-                          onChanged: (MaterialModel material) {
+                          onChanged: (String material) {
                             setState(() {
-                              _dropdownMaterialValue = material;
+                              _selectedMaterial = material;
                             });
                           },
-                          items: _materialList
-                              .map<DropdownMenuItem<MaterialModel>>(
-                                  (MaterialModel value) {
-                            return DropdownMenuItem<MaterialModel>(
+                          items: _materialNames
+                              .map<DropdownMenuItem<String>>(
+                                  (String value) {
+                            return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value.particulars),
+                              child: Text(value),
                             );
                           }).toList(),
                         );
@@ -989,26 +984,43 @@ class _AssociatePageState extends State<AssociatePage> {
                         }
 
                         List<AssociateModel> _vendorList = snap.data;
+                        List<String> _vendorNames = [];
+                        _vendorNames?.clear();
+                        _vendorNames.add("SELECT VENDOR");
+                        _vendorList.forEach((element) {
+                          _vendorNames.add(element.fullName);
+                        });
 
-                        AssociateModel _dropdownVendorValue = _vendorList[0];
-
-                        return DropdownButton<AssociateModel>(
-                          value: _dropdownVendorValue,
+                        return DropdownButton<String>(
+                          value: _selectedVendor,
                           icon: Icon(Icons.keyboard_arrow_down),
                           iconSize: 24,
                           elevation: 8,
                           style: TextStyle(color: Colors.blue),
-                          onChanged: (AssociateModel vendor) {
+                          onChanged: (String vendor) {
                             setState(() {
-                              _dropdownVendorValue = vendor;
+                              _selectedVendor = vendor;
                             });
+
+                            List<Map<String, dynamic>> list =
+                            _buildVendorMap(_vendorList);
+
+                            list.forEach((item) {
+                              if (item[_selectedVendor] != null) {
+                                _vendorId =
+                                    item[_selectedVendor].toString();
+                              }
+                            });
+
+                            Constants.vendorId = _vendorId;
+
+                            print("Vendor : ${Constants.vendorId}");
                           },
-                          items: _vendorList
-                              .map<DropdownMenuItem<AssociateModel>>(
-                                  (AssociateModel value) {
-                            return DropdownMenuItem<AssociateModel>(
+                          items: _vendorNames
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value.fullName),
+                              child: Text(value),
                             );
                           }).toList(),
                         );
@@ -1229,11 +1241,33 @@ class _AssociatePageState extends State<AssociatePage> {
     return data;
   }
 
+  /// Building a list of map, with unique key,value pair to search the corresponding id of the selected vendor
+  List<Map<String, int>> _buildVendorMap(List<AssociateModel> vendors) {
+    List<Map<String, int>> data = [];
+    vendors.forEach((vendor) {
+      data.add({vendor.fullName: vendor.id});
+    });
+
+    print("Line 1148: Labour Map : $data");
+
+    return data;
+  }
+
   /// Building a list of map, with unique key,value pair to search the corresponding id of the selected service
   List<Map<String, int>> _buildServiceMap(List<ServiceModel> services) {
     List<Map<String, int>> data = [];
     services.forEach((service) {
       data.add({service.name: service.id});
+    });
+
+    return data;
+  }
+
+  /// Building a list of map, with unique key, value pair to search the corresponding id of the selected material
+  List<Map<String, int>> _buildMaterialMap(List<MaterialModel> materials) {
+    List<Map<String, int>> data = [];
+    materials.forEach((material) {
+      data.add({material.particulars: material.id});
     });
 
     return data;
