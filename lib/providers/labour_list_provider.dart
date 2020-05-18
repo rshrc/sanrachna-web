@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 
 class LabourListProvider {
 
- static List<Map<String, String>> _labourList = [];
+ static List<SupervisorHasLaboursModel> _labourList = [];
 
-  static Future<List<Map<String, String>>> getLabours() async {
+  static Future<List<SupervisorHasLaboursModel>> getLabours() async {
     http.Response response = await http.get("https://sanrachna.pythonanywhere.com/api/associate/mls/");
     print("Line 12:::::::" +response.body);
 
@@ -16,7 +16,7 @@ class LabourListProvider {
     _labourList?.clear();
 
     responseList.forEach((element) {
-      _labourList.add(element);
+      _labourList.add(SupervisorHasLaboursModel.fromJson(element));
     });
 
     return _labourList;

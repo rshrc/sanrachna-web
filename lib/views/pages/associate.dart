@@ -30,7 +30,7 @@ class _AssociatePageState extends State<AssociatePage> {
   List<AssociateModel> _supervisorList = [];
   List<AssociateModel> _vendorList = [];
   List<String> _supervisorNames = [];
-  List<Map<String,String>> _labourSupervisorList = [];
+  List<SupervisorHasLaboursModel> _labourSupervisorList = [];
   List<SupervisorHasServicesModel> _servicesSupervisorList = [];
 
   String dataBuilderState = 'labour'; // initial state
