@@ -14,10 +14,9 @@ class TitleWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 40.0,
-        width: MediaQuery.of(context).size.width * 0.16,
         decoration: BoxDecoration(color: Colors.redAccent, borderRadius: BorderRadius.circular(16.0)),
         child: Center(
-          child: Text(title,
+          child: Text("  " + title + "  ",
               style: GoogleFonts.exo2(fontSize: fontSize ?? 26.0, color: Colors.white)
           ),
         ),

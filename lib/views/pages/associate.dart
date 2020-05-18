@@ -30,7 +30,7 @@ class _AssociatePageState extends State<AssociatePage> {
   List<AssociateModel> _supervisorList = [];
   List<AssociateModel> _vendorList = [];
   List<String> _supervisorNames = [];
-  List<SupervisorHasLaboursModel> _labourSupervisorList = [];
+  List<Map<String,String>> _labourSupervisorList = [];
   List<SupervisorHasServicesModel> _servicesSupervisorList = [];
 
   String dataBuilderState = 'labour'; // initial state
@@ -49,14 +49,8 @@ class _AssociatePageState extends State<AssociatePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height,
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width / 7,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width / 7,
               decoration: BoxDecoration(
                   color: Colors.redAccent,
                   border: Border.symmetric(
@@ -263,10 +257,7 @@ class _AssociatePageState extends State<AssociatePage> {
               ),
             ),
             SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width / 16,
+              width: MediaQuery.of(context).size.width / 16,
             ),
             Padding(
                 padding: EdgeInsets.only(top: 50.0),
@@ -356,36 +347,35 @@ class _AssociatePageState extends State<AssociatePage> {
                       DataColumn(label: Text("Delete")),
                     ],
                     rows: _labourList
-                        .map((element) =>
-                        DataRow(cells: <DataCell>[
-                          //Extracting from Map element the value
-                          DataCell(Text("${element.fullName}")),
-                          DataCell(Text("${element.organization}")),
-                          DataCell(Text("${element.email}")),
-                          DataCell(Text("${element.mobileNumber}")),
-                          DataCell(IconButton(
-                            onPressed: () {
-                              _associateProvider
-                                  .deleteLabour(element.id)
-                                  .then((value) {
-                                Toast.show(
-                                    "Deleting Labour ${element.fullName}",
-                                    context,
-                                    backgroundColor: Colors.green);
-                                setState(() {});
-                                Toast.show(
-                                    "Deleted Labour ${element.fullName}",
-                                    context,
-                                    backgroundColor: Colors.green);
-                                setState(() {});
-                              });
-                            },
-                            icon: Icon(
-                              Icons.delete_outline,
-                              color: Colors.grey,
-                            ),
-                          ))
-                        ]))
+                        .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.fullName}")),
+                              DataCell(Text("${element.organization}")),
+                              DataCell(Text("${element.email}")),
+                              DataCell(Text("${element.mobileNumber}")),
+                              DataCell(IconButton(
+                                onPressed: () {
+                                  _associateProvider
+                                      .deleteLabour(element.id)
+                                      .then((value) {
+                                    Toast.show(
+                                        "Deleting Labour ${element.fullName}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                    Toast.show(
+                                        "Deleted Labour ${element.fullName}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.grey,
+                                ),
+                              ))
+                            ]))
                         .toList(),
                   ),
                 ],
@@ -425,36 +415,35 @@ class _AssociatePageState extends State<AssociatePage> {
                       DataColumn(label: Text("Delete")),
                     ],
                     rows: _supervisorList
-                        .map((element) =>
-                        DataRow(cells: <DataCell>[
-                          //Extracting from Map element the value
-                          DataCell(Text("${element.fullName}")),
-                          DataCell(Text("${element.organization}")),
-                          DataCell(Text("${element.email}")),
-                          DataCell(Text("${element.mobileNumber}")),
-                          DataCell(IconButton(
-                            onPressed: () {
-                              _associateProvider
-                                  .deleteSupervisor(element.id)
-                                  .then((value) {
-                                Toast.show(
-                                    "Deleting Supervisor ${element.fullName}",
-                                    context,
-                                    backgroundColor: Colors.green);
-                                setState(() {});
-                                Toast.show(
-                                    "Deleted Supervisor ${element.fullName}",
-                                    context,
-                                    backgroundColor: Colors.green);
-                                setState(() {});
-                              });
-                            },
-                            icon: Icon(
-                              Icons.delete_outline,
-                              color: Colors.grey,
-                            ),
-                          ))
-                        ]))
+                        .map((element) => DataRow(cells: <DataCell>[
+                              //Extracting from Map element the value
+                              DataCell(Text("${element.fullName}")),
+                              DataCell(Text("${element.organization}")),
+                              DataCell(Text("${element.email}")),
+                              DataCell(Text("${element.mobileNumber}")),
+                              DataCell(IconButton(
+                                onPressed: () {
+                                  _associateProvider
+                                      .deleteSupervisor(element.id)
+                                      .then((value) {
+                                    Toast.show(
+                                        "Deleting Supervisor ${element.fullName}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                    Toast.show(
+                                        "Deleted Supervisor ${element.fullName}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.grey,
+                                ),
+                              ))
+                            ]))
                         .toList(),
                   ),
                 ],
@@ -494,55 +483,54 @@ class _AssociatePageState extends State<AssociatePage> {
                       DataColumn(label: Text("Delete")),
                     ],
                     rows: _vendorList
-                        .map((element) =>
-                        DataRow(cells: <DataCell>[
-                          DataCell(Text("${element.fullName}")),
-                          DataCell(Text("${element.organization}")),
-                          DataCell(Text("${element.email}")),
-                          DataCell(Text("${element.mobileNumber}")),
-                          DataCell(IconButton(
-                            onPressed: () {
-                              _associateProvider
-                                  .deleteVendor(element.id)
-                                  .then((value) {
-                                Toast.show(
-                                    "Deleting Vendor ${element.fullName}",
-                                    context,
-                                    backgroundColor: Colors.green);
-                                setState(() {});
-                                Toast.show(
-                                    "Deleted Vendor ${element.fullName}",
-                                    context,
-                                    backgroundColor: Colors.green);
-                                setState(() {});
-                              });
-                            },
-                            icon: Icon(
-                              Icons.delete_outline,
-                              color: Colors.grey,
-                            ),
-                          ))
-                        ]))
+                        .map((element) => DataRow(cells: <DataCell>[
+                              DataCell(Text("${element.fullName}")),
+                              DataCell(Text("${element.organization}")),
+                              DataCell(Text("${element.email}")),
+                              DataCell(Text("${element.mobileNumber}")),
+                              DataCell(IconButton(
+                                onPressed: () {
+                                  _associateProvider
+                                      .deleteVendor(element.id)
+                                      .then((value) {
+                                    Toast.show(
+                                        "Deleting Vendor ${element.fullName}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                    Toast.show(
+                                        "Deleted Vendor ${element.fullName}",
+                                        context,
+                                        backgroundColor: Colors.green);
+                                    setState(() {});
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.grey,
+                                ),
+                              ))
+                            ]))
                         .toList(),
                   ),
                 ],
               );
             });
 
-    /// when we are switching to the map interface (Labour/Supervisor)
+      /// when we are switching to the map interface (Labour/Supervisor)
 
       case 'map_ls':
         return _mappingDataBuilder(state: state);
         break;
 
-    /// when we are switching to (Service/Supervisor)
+      /// when we are switching to (Service/Supervisor)
 
       case 'map_ss':
         return _mappingDataBuilder(state: state);
 
         break;
 
-    /// when we are switching to (Material/Vendor)
+      /// when we are switching to (Material/Vendor)
 
       case 'map_mv':
         return _mappingDataBuilder(state: state);
@@ -568,13 +556,80 @@ class _AssociatePageState extends State<AssociatePage> {
             TitleWidget(title: "Labour/Supervisor", fontSize: 20.0),
             SizedBox(height: 10.0),
             Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width * 0.7,
+              width: MediaQuery.of(context).size.width * 0.7,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  FutureBuilder(
+                      future: _associateProvider.getSupervisors(),
+                      builder: (context, snap) {
+                        if (!snap.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        List<AssociateModel> _supervisorList = snap.data;
+                        //_buildSupervisorMap(_supervisorList);
+                        List<String> _supervisorNames = [];
+                        _supervisorNames?.clear();
+                        _supervisorNames.add("SELECT SUPERVISOR");
+                        _supervisorList.forEach((element) {
+                          _supervisorNames.add(element.fullName);
+                        });
+
+                        _supervisorId = "";
+
+                        return Column(
+                          children: [
+                            DropdownButton<String>(
+                              value: _selectedSupervisor,
+                              icon: Icon(Icons.keyboard_arrow_down),
+                              iconSize: 24,
+                              elevation: 8,
+                              style: TextStyle(color: Colors.blue),
+                              onChanged: (String supervisor) {
+                                setState(() {
+                                  _selectedSupervisor = supervisor;
+                                });
+
+                                List<Map<String, dynamic>> list =
+                                    _buildSupervisorMap(_supervisorList);
+
+                                list.forEach((item) {
+                                  if (item[_selectedSupervisor] != null) {
+                                    _supervisorId =
+                                        item[_selectedSupervisor].toString();
+                                  }
+                                });
+
+                                Constants.supervisorId = _supervisorId;
+
+                                print("Supervisor : ${Constants.supervisorId}");
+                              },
+                              items: _supervisorNames
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+//                            Container(
+//                              width: 100.0,
+//                              child: ListView.builder(
+//                                  padding: EdgeInsets.only(top: 40.0),
+//                                  shrinkWrap: true,
+//                                  itemCount: _supervisorList.length,
+//                                  itemBuilder: (context, index) {
+//                                    return Text(
+//                                        "${_supervisorList[index].fullName}");
+//                                  }),
+//                            )
+                          ],
+                        );
+                      }),
                   Column(
                     children: [
                       FutureBuilder(
@@ -612,7 +667,7 @@ class _AssociatePageState extends State<AssociatePage> {
                                       _selectedLabour = labour;
                                     });
                                     List<Map<String, dynamic>> list =
-                                    _buildLabourMap(_labourList);
+                                        _buildLabourMap(_labourList);
 
                                     list.forEach((item) {
                                       if (item[_selectedLabour] != null) {
@@ -628,98 +683,28 @@ class _AssociatePageState extends State<AssociatePage> {
                                   items: _labourNames
                                       .map<DropdownMenuItem<String>>(
                                           (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                ),
-                                Container(
-                                  width: 100.0,
-                                  child: ListView.builder(
-                                      padding: EdgeInsets.only(top: 40.0),
-                                      shrinkWrap: true,
-                                      itemCount: _laboursList.length,
-                                      itemBuilder: (context, index) {
-                                        return Text(
-                                            "${_laboursList[index].fullName}");
-                                      }),
-                                )
-                              ],
-                            );
-                          }),
-                    ],
-                  ),
-                  FutureBuilder(
-                      future: _associateProvider.getSupervisors(),
-                      builder: (context, snap) {
-                        if (!snap.hasData) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-
-                        List<AssociateModel> _supervisorList = snap.data;
-                        //_buildSupervisorMap(_supervisorList);
-                        List<String> _supervisorNames = [];
-                        _supervisorNames?.clear();
-                        _supervisorNames.add("SELECT SUPERVISOR");
-                        _supervisorList.forEach((element) {
-                          _supervisorNames.add(element.fullName);
-                        });
-
-                        _supervisorId = "";
-
-                        return Column(
-                          children: [
-                            DropdownButton<String>(
-                              value: _selectedSupervisor,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 24,
-                              elevation: 8,
-                              style: TextStyle(color: Colors.blue),
-                              onChanged: (String supervisor) {
-                                setState(() {
-                                  _selectedSupervisor = supervisor;
-                                });
-
-                                List<Map<String, dynamic>> list =
-                                _buildSupervisorMap(_supervisorList);
-
-                                list.forEach((item) {
-                                  if (item[_selectedSupervisor] != null) {
-                                    _supervisorId =
-                                        item[_selectedSupervisor].toString();
-                                  }
-                                });
-
-                                Constants.supervisorId = _supervisorId;
-
-                                print("Supervisor : ${Constants.supervisorId}");
-                              },
-                              items: _supervisorNames
-                                  .map<DropdownMenuItem<String>>(
-                                      (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
                                       child: Text(value),
                                     );
                                   }).toList(),
-                            ),
-                            Container(
-                              width: 100.0,
-                              child: ListView.builder(
-                                  padding: EdgeInsets.only(top: 40.0),
-                                  shrinkWrap: true,
-                                  itemCount: _supervisorList.length,
-                                  itemBuilder: (context, index) {
-                                    return Text(
-                                        "${_supervisorList[index].fullName}");
-                                  }),
-                            )
-                          ],
-                        );
-                      }),
+                                ),
+//                                Container(
+//                                  width: 100.0,
+//                                  child: ListView.builder(
+//                                      padding: EdgeInsets.only(top: 40.0),
+//                                      shrinkWrap: true,
+//                                      itemCount: _laboursList.length,
+//                                      itemBuilder: (context, index) {
+//                                        return Text(
+//                                            "${_laboursList[index].fullName}");
+//                                      }),
+//                                )
+                              ],
+                            );
+                          }),
+                    ],
+                  ),
                   Column(
                     children: [
                       RaisedButton(
@@ -730,8 +715,7 @@ class _AssociatePageState extends State<AssociatePage> {
                         ),
                         onPressed: () async {
                           print(
-                              "Line 712: Gonna Map ${Constants
-                                  .labourId} & ${Constants.supervisorId}");
+                              "Line 712: Gonna Map ${Constants.labourId} & ${Constants.supervisorId}");
 
                           _labourId = Constants.labourId;
                           _supervisorId = Constants.supervisorId;
@@ -750,29 +734,29 @@ class _AssociatePageState extends State<AssociatePage> {
                           }
                         },
                       ),
-                      SizedBox(
-                        height: 40.0,
-                      ),
-
-                      FutureBuilder(
-                        future: LabourListProvider.getLabours(),
-                        builder: (context, snap) {
-                          print(snap.data);
-                          _labourSupervisorList = snap.data;
-
-                          var data = _buildDataRenderingMap(
-                              _labourSupervisorList);
-
-                          return Container(
-
-                          );
-                        },
-                      )
                     ],
                   )
                 ],
               ),
             ),
+            SizedBox(height: 50.0,),
+            Container(height: 1.0, width: MediaQuery.of(context).size.width/1.5, color: Colors.black38,),
+
+            TitleWidget(title: "Display Data Labour/Supervisor", fontSize: 20.0),
+            SizedBox(height: 10.0),
+            FutureBuilder(
+              future: LabourListProvider.getLabours(),
+              builder: (context, snap){
+                print(snap.data);
+                _labourSupervisorList = snap.data;
+             //   var newMap = mapByKey("supervisor_name", "labour_name", "labour_name", _labourSupervisorList);
+               // _buildLSDataRenderingMap(_labourSupervisorList);
+              //  print(newMap);
+                return Container();
+                //return _displayLabourSupervisor(dataMap: mapData, selectedSupervisor: _selectedSupervisor);
+              },
+            )
+
           ],
         );
         break;
@@ -784,10 +768,7 @@ class _AssociatePageState extends State<AssociatePage> {
             TitleWidget(title: "Service/Supervisor", fontSize: 20.0),
             SizedBox(height: 10.0),
             Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width * 0.7,
+              width: MediaQuery.of(context).size.width * 0.7,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -824,7 +805,7 @@ class _AssociatePageState extends State<AssociatePage> {
                                 });
 
                                 List<Map<String, dynamic>> list =
-                                _buildServiceMap(_serviceList);
+                                    _buildServiceMap(_serviceList);
 
                                 list.forEach((item) {
                                   if (item[_selectedService] != null) {
@@ -840,11 +821,11 @@ class _AssociatePageState extends State<AssociatePage> {
                               items: _serviceNames
                                   .map<DropdownMenuItem<String>>(
                                       (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
                             ),
                             Container(
                               width: 100.0,
@@ -890,7 +871,7 @@ class _AssociatePageState extends State<AssociatePage> {
                                 });
 
                                 List<Map<String, dynamic>> list =
-                                _buildSupervisorMap(_supervisorList);
+                                    _buildSupervisorMap(_supervisorList);
 
                                 list.forEach((item) {
                                   if (item[_selectedSupervisor] != null) {
@@ -906,11 +887,11 @@ class _AssociatePageState extends State<AssociatePage> {
                               items: _supervisorNames
                                   .map<DropdownMenuItem<String>>(
                                       (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
                             ),
                             Container(
                               width: 100.0,
@@ -959,6 +940,8 @@ class _AssociatePageState extends State<AssociatePage> {
                 ],
               ),
             ),
+            SizedBox(height: 50.0,),
+            Container(height: 1.0, width: MediaQuery.of(context).size.width/1.5, color: Colors.black38,),
           ],
         );
         break;
@@ -970,10 +953,7 @@ class _AssociatePageState extends State<AssociatePage> {
             TitleWidget(title: "Material/Vendor", fontSize: 20.0),
             SizedBox(height: 10.0),
             Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width * 0.7,
+              width: MediaQuery.of(context).size.width * 0.7,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -1008,7 +988,7 @@ class _AssociatePageState extends State<AssociatePage> {
                             });
 
                             List<Map<String, dynamic>> list =
-                            _buildMaterialMap(_materialList);
+                                _buildMaterialMap(_materialList);
 
                             print("Line 970: $list");
 
@@ -1024,13 +1004,12 @@ class _AssociatePageState extends State<AssociatePage> {
                             print("Material : ${Constants.materialId}");
                           },
                           items: _materialNames
-                              .map<DropdownMenuItem<String>>(
-                                  (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
                         );
                       }),
                   FutureBuilder(
@@ -1062,12 +1041,11 @@ class _AssociatePageState extends State<AssociatePage> {
                             });
 
                             List<Map<String, dynamic>> list =
-                            _buildVendorMap(_vendorList);
+                                _buildVendorMap(_vendorList);
 
                             list.forEach((item) {
                               if (item[_selectedVendor] != null) {
-                                _vendorId =
-                                    item[_selectedVendor].toString();
+                                _vendorId = item[_selectedVendor].toString();
                               }
                             });
 
@@ -1113,7 +1091,9 @@ class _AssociatePageState extends State<AssociatePage> {
                   )
                 ],
               ),
-            )
+            ),
+            SizedBox(height: 50.0,),
+            Container(height: 1.0, width: MediaQuery.of(context).size.width/1.5, color: Colors.black38,),
           ],
         );
         break;
@@ -1133,25 +1113,13 @@ class _AssociatePageState extends State<AssociatePage> {
     await showDialog<String>(
       context: context,
       child: Container(
-        height: MediaQuery
-            .of(context)
-            .size
-            .height * 0.5,
-        width: MediaQuery
-            .of(context)
-            .size
-            .width * 0.3,
+        height: MediaQuery.of(context).size.height * 0.5,
+        width: MediaQuery.of(context).size.width * 0.3,
         child: AlertDialog(
           shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
           content: Container(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height / 2,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width / 3,
+            height: MediaQuery.of(context).size.height / 2,
+            width: MediaQuery.of(context).size.width / 3,
             child: Column(
               children: <Widget>[
                 Text("Add Labour"),
@@ -1363,10 +1331,11 @@ class _AssociatePageState extends State<AssociatePage> {
     return data;
   }
 
-  Map<String, List<String>> _buildDataRenderingMap(List<SupervisorHasLaboursModel> list) {
-    Map<String, List<String>> dataMap = {};
+  Map<String, List<String>> _buildLSDataRenderingMap(List<SupervisorHasLaboursModel> list) {
+/*    Map<String, List<String>> dataMap = {};
     List<String> labour = [];
     List<String> supervisors = [];
+    List< Map<String, List<String>>> megaMap = [];
 
     /// looping over each element of model to match with supervisorName and
     /// create a new supervisorList which has unique supervisors
@@ -1376,22 +1345,62 @@ class _AssociatePageState extends State<AssociatePage> {
     });
 
     print(supervisors);
-
+    List<List<String>> megaLabours = [];*/
     /// looping over each supervisor and matching it with list data to build labours array for that supervisor
-    supervisors?.forEach((val) {
-      labour?.clear(); /// clearing labour array for each new supervisor
+
+//    for(int i=0; i<supervisors.length; i++){
+//      labour?.clear();
+//      for(int j=0; j<list.length; j++){
+//        if(list[j].supervisorName == supervisors[i])
+//          labour.add(list[j].labourName);
+//      }
+//
+//      dataMap.addAll({
+//        supervisors[i]: labour
+//      });
+//    }
+//    print("Printing List ready: $dataMap");
+/*    supervisors?.forEach((val) {
+      String temp = val;
+      labour?.clear();
+
+      /// clearing labour array for each new supervisor
       list.forEach((data) {
         if (val == data.supervisorName) {
-          labour.add(data.labourName); /// if the supervisor names match, adding that labour in the array
+          labour.add(data.labourName);
+          /// if the supervisor names match, adding that labour in the array
         }
       });
 
-      /// adding all this data to the final map
-      dataMap.addAll({
-        val: labour
-      });
+      dataMap[val] = labour;
+      print(dataMap);
     });
     print("Printing List ready: $dataMap");
-    return dataMap;
+    return dataMap;*/
+
+
   }
+
+//  List<Map<String, List<Map<String, String>>>> mapByKey(String keyName, String newKeyName, String keyForNewName, List<Map<String,String>> input) {
+//    Map<String, Map<String, List<Map<String, String>>>> returnValue = Map<String, Map<String, List<Map<String, String>>>>();
+//    for (var currMap in input) {
+//      if (currMap.containsKey(keyName)) {
+//        var currKeyValue = currMap[keyName];
+//        var currKeyValueForNewName = currMap[keyForNewName];
+//        if (!returnValue.containsKey(currKeyValue)){
+//          returnValue[currKeyValue] = {currKeyValue : List<Map<String, String>>()};
+//        }
+//        returnValue[currKeyValue][currKeyValue].add({newKeyName : currKeyValueForNewName});
+//      }
+//    }
+//    return returnValue.values.toList();
+//  }
+
+//  Widget _displayLabourSupervisor({Map<String, List<String>> dataMap, String selectedSupervisor}) {
+//
+//    print(dataMap[selectedSupervisor]);
+//    return Container();
+//
+//  }
+
 }
