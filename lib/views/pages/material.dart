@@ -266,50 +266,10 @@ class _MaterialPageState extends State<MaterialPage> {
           SpeedDialChild(
               child: Icon(Icons.dashboard),
               backgroundColor: Colors.red,
-              label: 'Add Tiles',
+              label: 'Add Material',
               labelStyle: TextStyle(fontSize: 18.0),
               onTap: () {
-                _addMaterialDialog(context, material: "tiles");
-              }),
-          SpeedDialChild(
-              child: Icon(Icons.location_city),
-              backgroundColor: Colors.blue,
-              label: 'Add Civil',
-              labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () {
-                _addMaterialDialog(context, material: "civil");
-              }),
-          SpeedDialChild(
-              child: Icon(Icons.lightbulb_outline),
-              backgroundColor: Colors.red,
-              label: 'Add Electric',
-              labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () {
-                _addMaterialDialog(context, material: "electric");
-              }),
-          SpeedDialChild(
-              child: Icon(Icons.format_paint),
-              backgroundColor: Colors.blue,
-              label: 'Add Paint',
-              labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () {
-                _addMaterialDialog(context, material: "paint");
-              }),
-          SpeedDialChild(
-              child: Icon(Icons.settings),
-              backgroundColor: Colors.red,
-              label: 'Add Ply',
-              labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () {
-                _addMaterialDialog(context, material: "ply");
-              }),
-          SpeedDialChild(
-              child: Icon(Icons.transfer_within_a_station),
-              backgroundColor: Colors.blue,
-              label: 'Add Plumbing',
-              labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () {
-                _addMaterialDialog(context, material: "plumbing");
+                _addMaterialDialog(context);
               }),
         ],
       ),
@@ -320,7 +280,7 @@ class _MaterialPageState extends State<MaterialPage> {
     switch (state) {
       case 'civil':
         return FutureBuilder<Object>(
-            future: _materialProvider.getMaterials(),
+            future: _materialProvider.getMaterials("CIVIL"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -381,7 +341,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'electric':
         return FutureBuilder<Object>(
-            future: _materialProvider.getMaterials(),
+            future: _materialProvider.getMaterials("ELECTRIC"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -448,7 +408,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'tiles':
         return FutureBuilder<Object>(
-            future: _materialProvider.getMaterials(),
+            future: _materialProvider.getMaterials("TILES"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -515,7 +475,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'ply':
         return FutureBuilder<Object>(
-            future: _materialProvider.getMaterials(),
+            future: _materialProvider.getMaterials("PLY"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -545,7 +505,9 @@ class _MaterialPageState extends State<MaterialPage> {
                       DataColumn(label: Text("Delete")),
                     ],
                     rows: _ply
-                        .map((element) => DataRow(cells: <DataCell>[
+                        .map(
+                          (element) => DataRow(
+                            cells: <DataCell>[
                               //Extracting from Map element the value
                               DataCell(Text("${element.particulars}")),
                               DataCell(Text("${element.rate}")),
@@ -573,7 +535,9 @@ class _MaterialPageState extends State<MaterialPage> {
                                   color: Colors.grey,
                                 ),
                               ))
-                            ]))
+                            ],
+                          ),
+                        )
                         .toList(),
                   ),
                 ],
@@ -582,7 +546,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'paint':
         return FutureBuilder<Object>(
-            future: _materialProvider.getMaterials(),
+            future: _materialProvider.getMaterials("PAINT"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -649,7 +613,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'plumbing':
         return FutureBuilder<Object>(
-            future: _materialProvider.getMaterials(),
+            future: _materialProvider.getMaterials("PLUMBING"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -719,7 +683,7 @@ class _MaterialPageState extends State<MaterialPage> {
     }
   }
 
-  _addMaterialDialog(context, {material}) async {
+  _addMaterialDialog(context) async {
     TextEditingController _particularsController = TextEditingController();
     TextEditingController _unitController = TextEditingController();
     TextEditingController _rateController = TextEditingController();
@@ -728,6 +692,13 @@ class _MaterialPageState extends State<MaterialPage> {
 
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
     TextStyle _hintTextStyle = TextStyle(color: Colors.black, fontSize: 10.0);
+    String _materialType = "PLY";
+
+    onDropdownChanged(String value) {
+      setState(() {
+        _materialType = value;
+      });
+    }
 
     await showDialog<String>(
       context: context,
@@ -741,7 +712,7 @@ class _MaterialPageState extends State<MaterialPage> {
             width: MediaQuery.of(context).size.width / 3,
             child: Column(
               children: <Widget>[
-                Text("Add $material"),
+                Text("Add Material"),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -817,6 +788,39 @@ class _MaterialPageState extends State<MaterialPage> {
                     ),
                   ),
                 ),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Text("Material Type: "),
+                      Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 6,
+                            child: DropdownButton<String>(
+                              value: _materialType,
+                              icon: Icon(Icons.keyboard_arrow_down),
+                              iconSize: 24,
+                              elevation: 8,
+                              style: TextStyle(color: Colors.blue),
+                              onChanged: onDropdownChanged,
+                              items: <String>[
+                                'PLY',
+                                'CIVIL',
+                                'TILES',
+                                'PAINT',
+                                'ELECTRIC',
+                                'PLUMBING',
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          )),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -836,123 +840,28 @@ class _MaterialPageState extends State<MaterialPage> {
                 ),
                 onPressed: () {
                   // add it
-                  switch (material) {
-                    case 'electric':
-                      _materialProvider
-                          .addMaterials(
-                              particulars: _particularsController.text,
-                              rate: _rateController.text,
-                              unit: _unitController.text,
-                              quantity: _quantityController.text,
-                              prospect: int.parse(_prospectController.text),
-                              type: "ELECTRIC")
-                          .then((value) {
-                        Toast.show(
-                          "Added Electic Material",
-                          context,
-                          backgroundColor: Colors.green,
-                          duration: 3,
-                          textColor: Colors.white,
-                          border: Border.all(color: Colors.white),
-                        );
-                        setState(() {
-                          // Update Future Builder
-                        });
-                      });
-                      break;
-                    case 'paint':
-                      _materialProvider
-                          .addMaterials(
-                              particulars: _particularsController.text,
-                              rate: _rateController.text,
-                              unit: _unitController.text,
-                              quantity: _quantityController.text,
-                              prospect: int.parse(_prospectController.text),
-                              type: "PAINT")
-                          .then((value) {
-                        Toast.show(
-                          "Added Paint Material",
-                          context,
-                          backgroundColor: Colors.green,
-                          duration: 3,
-                          textColor: Colors.white,
-                          border: Border.all(color: Colors.white),
-                        );
-                        setState(() {
-                          // Update Future Builder
-                        });
-                      });
-                      break;
-                    case 'plumbing':
-                      _materialProvider
-                          .addMaterials(
-                              particulars: _particularsController.text,
-                              rate: _rateController.text,
-                              unit: _unitController.text,
-                              quantity: _quantityController.text,
-                              prospect: int.parse(_prospectController.text),
-                              type: "PLUMBING")
-                          .then((value) {
-                        Toast.show(
-                          "Added Plumbing Material",
-                          context,
-                          backgroundColor: Colors.green,
-                          duration: 3,
-                          textColor: Colors.white,
-                          border: Border.all(color: Colors.white),
-                        );
-                        setState(() {
-                          // Update Future Builder
-                        });
-                      });
-                      break;
-                    case 'ply':
-                      _materialProvider
-                          .addMaterials(
-                              particulars: _particularsController.text,
-                              rate: _rateController.text,
-                              unit: _unitController.text,
-                              quantity: _quantityController.text,
-                              prospect: int.parse(_prospectController.text),
-                              type: "PLY")
-                          .then((value) {
-                        Toast.show(
-                          "Added Ply Material",
-                          context,
-                          backgroundColor: Colors.green,
-                          duration: 3,
-                          textColor: Colors.white,
-                          border: Border.all(color: Colors.white),
-                        );
-                        setState(() {
-                          // Update Future Builder
-                        });
-                      });
-                      break;
-                    case 'tiles':
-                      _materialProvider
-                          .addMaterials(
-                              particulars: _particularsController.text,
-                              rate: _rateController.text,
-                              unit: _unitController.text,
-                              quantity: _quantityController.text,
-                              prospect: int.parse(_prospectController.text),
-                              type: "TILES")
-                          .then((value) {
-                        Toast.show(
-                          "Added Tiles Material",
-                          context,
-                          backgroundColor: Colors.green,
-                          duration: 3,
-                          textColor: Colors.white,
-                          border: Border.all(color: Colors.white),
-                        );
-                        setState(() {
-                          // Update Future Builder
-                        });
-                      });
-                      break;
-                  }
+
+                  _materialProvider
+                      .addMaterials(
+                          particulars: _particularsController.text,
+                          rate: _rateController.text,
+                          unit: _unitController.text,
+                          quantity: _quantityController.text,
+                          prospect: int.parse(_prospectController.text),
+                          type: _materialType)
+                      .then((value) {
+                    Toast.show(
+                      "Added Material of Type $_materialType",
+                      context,
+                      backgroundColor: Colors.green,
+                      duration: 3,
+                      textColor: Colors.white,
+                      border: Border.all(color: Colors.white),
+                    );
+                    setState(() {
+                      // Update Future Builder
+                    });
+                  });
                 })
           ],
         ),

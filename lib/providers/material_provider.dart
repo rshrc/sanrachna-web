@@ -24,7 +24,7 @@ class MaterialProvider implements MaterialAPIProvider {
   }
 
   @override
-  Future<List<MaterialModel>> getMaterials() async {
+  Future<List<MaterialModel>> getMaterials([String type]) async {
     http.Response response =
         await http.get('https://sanrachna.pythonanywhere.com/api/database/material/');
 
@@ -34,8 +34,15 @@ class MaterialProvider implements MaterialAPIProvider {
 
     _materials?.clear();
 
+    print("The type required is $type");
+
     responseList.forEach((element) {
-      _materials.add(MaterialModel.fromJson(element));
+      print("Line 38: ${element['type']}");
+      if(element['type'] == type) {
+        print("Found one of $type");
+        _materials.add(MaterialModel.fromJson(element));
+        print("Added the one of type $type");
+      }
     });
 
     return _materials;
