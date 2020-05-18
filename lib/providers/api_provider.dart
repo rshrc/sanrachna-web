@@ -81,7 +81,9 @@ abstract class ClientaleAPIProvider {
 }
 
 abstract class MaterialAPIProvider {
-  Future<List<MaterialModel>> getMaterials();
+
+  /// Optional type parameter
+  Future<List<MaterialModel>> getMaterials([String type]);
 
   Future<String> addMaterials({
     String sno,

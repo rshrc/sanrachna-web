@@ -320,7 +320,7 @@ class _MaterialPageState extends State<MaterialPage> {
     switch (state) {
       case 'civil':
         return FutureBuilder<Object>(
-            future: _materialProvider.getMaterials(),
+            future: _materialProvider.getMaterials("CIVIL"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -381,7 +381,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'electric':
         return FutureBuilder<Object>(
-            future: _materialProvider.getMaterials(),
+            future: _materialProvider.getMaterials("ELECTRIC"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -448,7 +448,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'tiles':
         return FutureBuilder<Object>(
-            future: _materialProvider.getMaterials(),
+            future: _materialProvider.getMaterials("TILES"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -515,7 +515,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'ply':
         return FutureBuilder<Object>(
-            future: _materialProvider.getMaterials(),
+            future: _materialProvider.getMaterials("PLY"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -545,7 +545,9 @@ class _MaterialPageState extends State<MaterialPage> {
                       DataColumn(label: Text("Delete")),
                     ],
                     rows: _ply
-                        .map((element) => DataRow(cells: <DataCell>[
+                        .map(
+                          (element) => DataRow(
+                            cells: <DataCell>[
                               //Extracting from Map element the value
                               DataCell(Text("${element.particulars}")),
                               DataCell(Text("${element.rate}")),
@@ -573,7 +575,9 @@ class _MaterialPageState extends State<MaterialPage> {
                                   color: Colors.grey,
                                 ),
                               ))
-                            ]))
+                            ],
+                          ),
+                        )
                         .toList(),
                   ),
                 ],
@@ -582,7 +586,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'paint':
         return FutureBuilder<Object>(
-            future: _materialProvider.getMaterials(),
+            future: _materialProvider.getMaterials("PAINT"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -649,7 +653,7 @@ class _MaterialPageState extends State<MaterialPage> {
         break;
       case 'plumbing':
         return FutureBuilder<Object>(
-            future: _materialProvider.getMaterials(),
+            future: _materialProvider.getMaterials("PLUMBING"),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
