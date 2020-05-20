@@ -10,7 +10,7 @@ const PdfColor lightGreen = PdfColor.fromInt(0xffcdf1e7);
 
 Future<Uint8List> generateQuotation(PdfPageFormat format) async {
   final pw.Document doc =
-      pw.Document(title: 'My Résumé', author: 'David PHAM-VAN');
+      pw.Document(title: 'Quotation', author: 'Sanrachna Admin');
 
   final pw.PageTheme pageTheme = await _myPageTheme(format);
 
@@ -78,14 +78,6 @@ Future<Uint8List> generateQuotation(PdfPageFormat format) async {
         crossAxisAlignment: pw.CrossAxisAlignment.center,
         mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
         children: <pw.Widget>[
-//          pw.ClipOval(
-//            child: pw.Container(
-//              width: 100,
-//              height: 100,
-//              color: lightGreen,
-//              child: pw.Image(profileImage),
-//            ),
-//          ),
           pw.Column(children: <pw.Widget>[
             _Percent(size: 60, value: .7, title: pw.Text('Word')),
             _Percent(size: 60, value: .4, title: pw.Text('Excel')),
@@ -110,10 +102,6 @@ Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
         top: 4.0 * PdfPageFormat.cm,
         right: 2.0 * PdfPageFormat.cm,
         bottom: 2.0 * PdfPageFormat.cm),
-//    theme: pw.ThemeData.withFont(
-//      base: pw.Font.ttf(await rootBundle.load('assets/open-sans.ttf')),
-//      bold: pw.Font.ttf(await rootBundle.load('assets/open-sans-bold.ttf')),
-//    ),
     buildBackground: (pw.Context context) {
       return pw.FullPage(
         ignoreMargins: true,

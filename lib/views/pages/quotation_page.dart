@@ -115,34 +115,26 @@ class QuotationPageState extends State<QuotationPage>
         )
     ];
 
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Pdf Printing Example'),
-          bottom: TabBar(
-            controller: _tabController,
-            tabs: _myTabs,
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Generate Quotation',
+            style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: _myTabs,
         ),
-        body: PdfPreview(
-          maxPageWidth: 700,
-          build: _tabGen[_tab],
-          actions: actions,
-          onPrinted: _showPrintedToast,
-          onShared: _showSharedToast,
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.deepOrange,
-          onPressed: _showSources,
-          child: Icon(Icons.code),
-        ),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        elevation: 0,
+      ),
+      body: PdfPreview(
+        maxPageWidth: 300,
+        build: _tabGen[_tab],
+        // actions: actions,
+        onPrinted: _showPrintedToast,
+        onShared: _showSharedToast,
+        canChangePageFormat: false,
       ),
     );
-  }
-
-  void _showSources() {
-//    ul.launch(
-//      'https://github.com/DavBfr/dart_pdf/blob/master/demo/lib/${_tabUrl[_tab]}',
-//    );
   }
 }
