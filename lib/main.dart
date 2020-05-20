@@ -64,41 +64,67 @@ class _SanrachnaState extends State<Sanrachna> {
           primaryColor: Colors.redAccent,
           indicatorColor: Colors.yellow,
           splashColor: Colors.yellow),
-      home: DefaultTabController(
-        length: 4,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              // labelStyle: GoogleFonts.exo2(fontSize: 32.0, color: Colors.white),
-              tabs: [
-                Tab(text: "Associate"),
-                Tab(text: "Clientele"),
-                Tab(text: "Material"),
-                Tab(text: "Service"),
-              ],
-            ),
-            title:
-                Text('Sanrachna', style: GoogleFonts.pacifico(fontSize: 40.0)),
-            centerTitle: true,
-            actions: [
-              IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                    return QuotationPage();
-                  }));
-                },
-                icon: Icon(Icons.picture_as_pdf),
-              ),
+      home: LandingPage(),
+    );
+  }
+}
+
+class LandingPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(
+            // labelStyle: GoogleFonts.exo2(fontSize: 32.0, color: Colors.white),
+            tabs: [
+              Tab(text: "Associate"),
+              Tab(text: "Clientele"),
+              Tab(text: "Material"),
+              Tab(text: "Service"),
             ],
           ),
-          body: TabBarView(
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              AssociatePage(),
-              ClientalePage(),
-              MaterialPage(),
-              ServicePage(),
-            ],
+          title: Text('Sanrachna', style: GoogleFonts.pacifico(fontSize: 40.0)),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {
+//                  Navigator.of(context)
+//                      .push(MaterialPageRoute(builder: (context) {
+//                    return QuotationPage();
+//                  }));
+                _showPdfDialog(context);
+              },
+              icon: Icon(Icons.picture_as_pdf),
+            ),
+          ],
+        ),
+        body: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            AssociatePage(),
+            ClientalePage(),
+            MaterialPage(),
+            ServicePage(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _showPdfDialog(context) async {
+    await showDialog<String>(
+      context: context,
+      child: Container(
+        height: 700,
+        width: 700,
+        child: AlertDialog(
+          shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
+          content: Container(
+            height: 700,
+            width: 700,
+            child: QuotationPage(),
           ),
         ),
       ),
