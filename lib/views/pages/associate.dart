@@ -253,6 +253,33 @@ class _AssociatePageState extends State<AssociatePage> {
                       ],
                     ),
                   ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    elevation: 0.0,
+                    onPressed: () {
+                      setState(() {
+                        dataBuilderState = 'test_render';
+                      });
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 8.0,
+                        ),
+                        Text(
+                          "Data Render Test",
+                          style: GoogleFonts.exo(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -536,6 +563,8 @@ class _AssociatePageState extends State<AssociatePage> {
         return _mappingDataBuilder(state: state);
 
         break;
+      case 'test_render':
+        return _mappingDataBuilder(state: state);
     }
     return null;
   }
@@ -739,24 +768,29 @@ class _AssociatePageState extends State<AssociatePage> {
                 ],
               ),
             ),
-            SizedBox(height: 50.0,),
-            Container(height: 1.0, width: MediaQuery.of(context).size.width/1.5, color: Colors.black38,),
-
-            TitleWidget(title: "Display Data Labour/Supervisor", fontSize: 20.0),
+            SizedBox(
+              height: 50.0,
+            ),
+            Container(
+              height: 1.0,
+              width: MediaQuery.of(context).size.width / 1.5,
+              color: Colors.black38,
+            ),
+            TitleWidget(
+                title: "Display Data Labour/Supervisor", fontSize: 20.0),
             SizedBox(height: 10.0),
             FutureBuilder(
               future: LabourListProvider.getLabours(),
-              builder: (context, snap){
+              builder: (context, snap) {
                 print(snap.data);
                 _labourSupervisorList = snap.data;
-             //   var newMap = mapByKey("supervisor_name", "labour_name", "labour_name", _labourSupervisorList);
-               // _buildLSDataRenderingMap(_labourSupervisorList);
-              //  print(newMap);
+                //   var newMap = mapByKey("supervisor_name", "labour_name", "labour_name", _labourSupervisorList);
+                // _buildLSDataRenderingMap(_labourSupervisorList);
+                //  print(newMap);
                 return Container();
                 //return _displayLabourSupervisor(dataMap: mapData, selectedSupervisor: _selectedSupervisor);
               },
             )
-
           ],
         );
         break;
@@ -827,16 +861,18 @@ class _AssociatePageState extends State<AssociatePage> {
                                 );
                               }).toList(),
                             ),
-                            Container(
-                              width: 100.0,
-                              child: ListView.builder(
-                                  padding: EdgeInsets.only(top: 40.0),
-                                  shrinkWrap: true,
-                                  itemCount: _serviceList.length,
-                                  itemBuilder: (context, index) {
-                                    return Text("${_serviceList[index].name}");
-                                  }),
-                            )
+
+                            /// todo: Shift Services below divider
+//                            Container(
+//                              width: 100.0,
+//                              child: ListView.builder(
+//                                  padding: EdgeInsets.only(top: 40.0),
+//                                  shrinkWrap: true,
+//                                  itemCount: _serviceList.length,
+//                                  itemBuilder: (context, index) {
+//                                    return Text("${_serviceList[index].name}");
+//                                  }),
+//                            )
                           ],
                         );
                       }),
@@ -893,17 +929,19 @@ class _AssociatePageState extends State<AssociatePage> {
                                 );
                               }).toList(),
                             ),
-                            Container(
-                              width: 100.0,
-                              child: ListView.builder(
-                                  padding: EdgeInsets.only(top: 40.0),
-                                  shrinkWrap: true,
-                                  itemCount: _supervisorList.length,
-                                  itemBuilder: (context, index) {
-                                    return Text(
-                                        "${_supervisorList[index].fullName}");
-                                  }),
-                            )
+
+                            /// todo: Supervisor display, shift below divider
+//                            Container(
+//                              width: 100.0,
+//                              child: ListView.builder(
+//                                  padding: EdgeInsets.only(top: 40.0),
+//                                  shrinkWrap: true,
+//                                  itemCount: _supervisorList.length,
+//                                  itemBuilder: (context, index) {
+//                                    return Text(
+//                                        "${_supervisorList[index].fullName}");
+//                                  }),
+//                            )
                           ],
                         );
                       }),
@@ -940,8 +978,16 @@ class _AssociatePageState extends State<AssociatePage> {
                 ],
               ),
             ),
-            SizedBox(height: 50.0,),
-            Container(height: 1.0, width: MediaQuery.of(context).size.width/1.5, color: Colors.black38,),
+            SizedBox(
+              height: 50.0,
+            ),
+            Container(
+              height: 1.0,
+              width: MediaQuery.of(context).size.width / 1.5,
+              color: Colors.black38,
+            ),
+            TitleWidget(
+                title: "Display Data Service/Supervisor", fontSize: 20.0),
           ],
         );
         break;
@@ -1092,8 +1138,185 @@ class _AssociatePageState extends State<AssociatePage> {
                 ],
               ),
             ),
-            SizedBox(height: 50.0,),
-            Container(height: 1.0, width: MediaQuery.of(context).size.width/1.5, color: Colors.black38,),
+            SizedBox(
+              height: 50.0,
+            ),
+            Container(
+              height: 1.0,
+              width: MediaQuery.of(context).size.width / 1.5,
+              color: Colors.black38,
+            ),
+            TitleWidget(title: "Display Data Material/Vendor", fontSize: 20.0),
+          ],
+        );
+        break;
+      case 'map_mv':
+        String _materialId, _vendorId;
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TitleWidget(title: "Material/Vendor", fontSize: 20.0),
+            SizedBox(height: 10.0),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FutureBuilder(
+                      future: _materialProvider.getMaterials(),
+                      builder: (context, snap) {
+                        if (!snap.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        List<MaterialModel> _materialList = snap.data;
+                        List<String> _materialNames = [];
+                        _materialNames?.clear();
+                        _materialNames.add("SELECT MATERIAL");
+                        _materialList.forEach((element) {
+                          _materialNames.add(element.particulars);
+                        });
+
+                        print("Line 558: $_materialList");
+
+                        return DropdownButton<String>(
+                          value: _selectedMaterial,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 8,
+                          style: TextStyle(color: Colors.blue),
+                          onChanged: (String material) {
+                            setState(() {
+                              _selectedMaterial = material;
+                            });
+
+                            List<Map<String, dynamic>> list =
+                                _buildMaterialMap(_materialList);
+
+                            print("Line 970: $list");
+
+                            list.forEach((item) {
+                              if (item[_selectedMaterial] != null) {
+                                _materialId =
+                                    item[_selectedMaterial].toString();
+                              }
+                            });
+
+                            Constants.materialId = _materialId;
+
+                            print("Material : ${Constants.materialId}");
+                          },
+                          items: _materialNames
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        );
+                      }),
+                  FutureBuilder(
+                      future: _associateProvider.getVendors(),
+                      builder: (context, snap) {
+                        if (!snap.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        List<AssociateModel> _vendorList = snap.data;
+                        List<String> _vendorNames = [];
+                        _vendorNames?.clear();
+                        _vendorNames.add("SELECT VENDOR");
+                        _vendorList.forEach((element) {
+                          _vendorNames.add(element.fullName);
+                        });
+
+                        return DropdownButton<String>(
+                          value: _selectedVendor,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 8,
+                          style: TextStyle(color: Colors.blue),
+                          onChanged: (String vendor) {
+                            setState(() {
+                              _selectedVendor = vendor;
+                            });
+
+                            List<Map<String, dynamic>> list =
+                                _buildVendorMap(_vendorList);
+
+                            list.forEach((item) {
+                              if (item[_selectedVendor] != null) {
+                                _vendorId = item[_selectedVendor].toString();
+                              }
+                            });
+
+                            Constants.vendorId = _vendorId;
+
+                            print("Vendor : ${Constants.vendorId}");
+                          },
+                          items: _vendorNames
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        );
+                      }),
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    child: Text(
+                      "Map",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () async {
+                      _materialId = Constants.materialId;
+                      _vendorId = Constants.vendorId;
+
+                      print("Line 1052: ${Constants.materialId}");
+                      print("Line 1053: ${Constants.vendorId}");
+
+                      if (_materialId != null && _vendorId != null) {
+                        await MapProvider.mapMaterialToVendor(
+                          materialId: int.parse(_materialId),
+                          vendorId: int.parse(_vendorId),
+                        ).then((value) {
+                          Toast.show("Mapped data", context,
+                              backgroundColor: Colors.green, duration: 2);
+                          setState(() {});
+                        });
+                      } else {
+                        Toast.show("Select Data", context);
+                      }
+                    },
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 50.0,
+            ),
+            Container(
+              height: 1.0,
+              width: MediaQuery.of(context).size.width / 1.5,
+              color: Colors.black38,
+            ),
+            TitleWidget(title: "Display Data Material/Vendor", fontSize: 20.0),
+          ],
+        );
+        break;
+      case 'test_render':
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TitleWidget(title: "Data Render Test", fontSize: 20.0),
+            Center(
+              child: Text("Data Render"),
+            )
           ],
         );
         break;
@@ -1331,7 +1554,8 @@ class _AssociatePageState extends State<AssociatePage> {
     return data;
   }
 
-  Map<String, List<String>> _buildLSDataRenderingMap(List<SupervisorHasLaboursModel> list) {
+  Map<String, List<String>> _buildLSDataRenderingMap(
+      List<SupervisorHasLaboursModel> list) {
 /*    Map<String, List<String>> dataMap = {};
     List<String> labour = [];
     List<String> supervisors = [];
@@ -1346,6 +1570,7 @@ class _AssociatePageState extends State<AssociatePage> {
 
     print(supervisors);
     List<List<String>> megaLabours = [];*/
+
     /// looping over each supervisor and matching it with list data to build labours array for that supervisor
 
 //    for(int i=0; i<supervisors.length; i++){
@@ -1377,8 +1602,6 @@ class _AssociatePageState extends State<AssociatePage> {
     });
     print("Printing List ready: $dataMap");
     return dataMap;*/
-
-
   }
 
 //  List<Map<String, List<Map<String, String>>>> mapByKey(String keyName, String newKeyName, String keyForNewName, List<Map<String,String>> input) {
