@@ -3,6 +3,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sanrachna_web/models/clientele_model.dart';
 import 'package:sanrachna_web/providers/clientele_provider.dart';
+import 'package:sanrachna_web/utils/generics.dart';
 import 'package:sanrachna_web/views/widgets/title_widget.dart';
 import 'package:toast/toast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,13 +23,7 @@ class _ClientalePageState extends State<ClientalePage> {
 
   ClienteleProvider _clienteleProvider = ClienteleProvider();
   String _siteType = "COMMERCIAL";
-
-
-  onDropdownChanged(String value){
-    setState(() {
-      _siteType = value;
-    });
-  }
+  String _sourceType = "ONLINE";
 
   @override
   Widget build(BuildContext context) {
@@ -422,11 +417,8 @@ class _ClientalePageState extends State<ClientalePage> {
     TextEditingController _organizationController = TextEditingController();
     TextEditingController _mobileNumberController = TextEditingController();
     TextEditingController _emailController = TextEditingController();
-    TextEditingController _siteTypeController = TextEditingController();
-    TextEditingController _sourceTypeController = TextEditingController();
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
     TextStyle _hintTextStyle = TextStyle(color: Colors.black, fontSize: 10.0);
-    String _sourceType = "ONLINE";
 
     await showDialog<String>(
       context: context,
@@ -440,7 +432,7 @@ class _ClientalePageState extends State<ClientalePage> {
             width: MediaQuery.of(context).size.width / 3,
             child: Column(
               children: <Widget>[
-                Text("Add Labour"),
+                Text("Add Clientele"),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
@@ -448,11 +440,10 @@ class _ClientalePageState extends State<ClientalePage> {
                       controller: _fullNameController,
                       autofocus: true,
                       decoration: InputDecoration(
-                        labelText: 'Full Name *',
-                        hintText: 'John Doe',
-                        labelStyle: _labelTextStyle,
-                        hintStyle: _hintTextStyle
-                      ),
+                          labelText: 'Full Name *',
+                          hintText: 'John Doe',
+                          labelStyle: _labelTextStyle,
+                          hintStyle: _hintTextStyle),
                     ),
                   ),
                 ),
@@ -510,12 +501,19 @@ class _ClientalePageState extends State<ClientalePage> {
                           child: Container(
                             width: MediaQuery.of(context).size.width / 6,
                             child: DropdownButton<String>(
-                              value: _siteType,
+                              value: Generics.siteType,
                               icon: Icon(Icons.keyboard_arrow_down),
                               iconSize: 24,
                               elevation: 8,
                               style: TextStyle(color: Colors.blue),
-                              onChanged: onDropdownChanged,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  _siteType = newValue;
+                                  Generics.siteType = newValue;
+                                  print(
+                                      "Generic SiteType : ${Generics.siteType}");
+                                });
+                              },
                               items: <String>[
                                 'COMMERCIAL',
                                 'HOME',
@@ -540,7 +538,7 @@ class _ClientalePageState extends State<ClientalePage> {
                           child: Container(
                             width: MediaQuery.of(context).size.width / 6,
                             child: DropdownButton<String>(
-                              value: _sourceType,
+                              value: Generics.sourceType,
                               icon: Icon(Icons.keyboard_arrow_down),
                               iconSize: 24,
                               elevation: 8,
@@ -548,6 +546,9 @@ class _ClientalePageState extends State<ClientalePage> {
                               onChanged: (String newValue) {
                                 setState(() {
                                   _sourceType = newValue;
+                                  Generics.sourceType = newValue;
+                                  print(
+                                      "Generic SourceType : ${Generics.sourceType}");
                                 });
                               },
                               items: <String>[
@@ -615,8 +616,8 @@ class _ClientalePageState extends State<ClientalePage> {
                         organization: _organizationController.text,
                         mobileNumber: _mobileNumberController.text,
                         email: _emailController.text,
-                        siteType: _siteTypeController.text,
-                        sourceType: _sourceTypeController.text,
+                        siteType: _siteType,
+                        sourceType: _sourceType,
                       )
                           .then((value) {
                         Toast.show(
@@ -639,8 +640,8 @@ class _ClientalePageState extends State<ClientalePage> {
                         organization: _organizationController.text,
                         mobileNumber: _mobileNumberController.text,
                         email: _emailController.text,
-                        siteType: _siteTypeController.text,
-                        sourceType: _sourceTypeController.text,
+                        siteType: _siteType,
+                        sourceType: _sourceType,
                       )
                           .then((value) {
                         Toast.show(
