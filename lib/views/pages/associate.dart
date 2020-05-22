@@ -17,6 +17,7 @@ import 'package:sanrachna_web/views/widgets/title_widget.dart';
 import 'package:toast/toast.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:sanrachna_web/views/widgets/render_md.dart';
 
 class AssociatePage extends StatefulWidget {
   @override
@@ -248,33 +249,6 @@ class _AssociatePageState extends State<AssociatePage> {
                         ),
                         Text(
                           "Material/Vendor",
-                          style: GoogleFonts.exo(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  RaisedButton(
-                    color: Colors.redAccent,
-                    elevation: 0.0,
-                    onPressed: () {
-                      setState(() {
-                        dataBuilderState = 'test_render';
-                      });
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 8.0,
-                        ),
-                        Text(
-                          "Data Render Test",
                           style: GoogleFonts.exo(
                               color: Colors.white,
                               fontSize: 16.0,
@@ -648,17 +622,6 @@ class _AssociatePageState extends State<AssociatePage> {
                                 );
                               }).toList(),
                             ),
-//                            Container(
-//                              width: 100.0,
-//                              child: ListView.builder(
-//                                  padding: EdgeInsets.only(top: 40.0),
-//                                  shrinkWrap: true,
-//                                  itemCount: _supervisorList.length,
-//                                  itemBuilder: (context, index) {
-//                                    return Text(
-//                                        "${_supervisorList[index].fullName}");
-//                                  }),
-//                            )
                           ],
                         );
                       }),
@@ -721,17 +684,6 @@ class _AssociatePageState extends State<AssociatePage> {
                                     );
                                   }).toList(),
                                 ),
-//                                Container(
-//                                  width: 100.0,
-//                                  child: ListView.builder(
-//                                      padding: EdgeInsets.only(top: 40.0),
-//                                      shrinkWrap: true,
-//                                      itemCount: _laboursList.length,
-//                                      itemBuilder: (context, index) {
-//                                        return Text(
-//                                            "${_laboursList[index].fullName}");
-//                                      }),
-//                                )
                               ],
                             );
                           }),
@@ -780,10 +732,9 @@ class _AssociatePageState extends State<AssociatePage> {
               color: Colors.black38,
             ),
             TitleWidget(
-                title: "Display Data Labour/Supervisor", fontSize: 20.0),
+                title: "Display Data Supervisor => Labour", fontSize: 20.0),
             SizedBox(height: 10.0),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FutureBuilder(
                     future: getMLS(),
@@ -797,6 +748,12 @@ class _AssociatePageState extends State<AssociatePage> {
 
                       List<dynamic> json = snapshot.data;
 
+                      if (json.length == 0) {
+                        return Center(
+                          child: Text("No data is mapped!"),
+                        );
+                      }
+
                       Map<String, List<String>> map = Map();
 
                       print("Line 15: $json");
@@ -804,9 +761,12 @@ class _AssociatePageState extends State<AssociatePage> {
                       json.forEach((element) {
                         print("Line 20: ${element['supervisor_name']}");
                         if (map.containsKey(element['supervisor_name'])) {
-                          map[element['supervisor_name']].add(element['labour_name']);
+                          map[element['supervisor_name']]
+                              .add(element['labour_name']);
                         } else {
-                          map[element['supervisor_name']] = [element['labour_name']];
+                          map[element['supervisor_name']] = [
+                            element['labour_name']
+                          ];
                         }
                       });
 
@@ -814,11 +774,15 @@ class _AssociatePageState extends State<AssociatePage> {
 
                       print("Line 32 : $map");
 
-                      return RenderLS(supervisorList: _supervisorList, map: map);
+                      return Center(
+                        child: RenderMD(
+                          ownerList: _supervisorList,
+                          map: map,
+                        ),
+                      );
                     }),
               ],
             )
-
           ],
         );
         break;
@@ -1015,7 +979,265 @@ class _AssociatePageState extends State<AssociatePage> {
               color: Colors.black38,
             ),
             TitleWidget(
-                title: "Display Data Service/Supervisor", fontSize: 20.0),
+                title: "Display Data Supervisor => Service", fontSize: 20.0),
+            Row(
+              children: [
+                FutureBuilder(
+                    future: getMSS(),
+                    builder: (context, snapshot) {
+                      print("Line 791: Future Builder called");
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+
+                      List<dynamic> json = snapshot.data;
+
+                      if (json.length == 0) {
+                        return Center(
+                          child: Text("No data is mapped!"),
+                        );
+                      }
+
+                      Map<String, List<String>> map = Map();
+
+                      print("Line 15: $json");
+
+                      json.forEach((element) {
+                        print("Line 20: ${element['supervisor_name']}");
+                        if (map.containsKey(element['supervisor_name'])) {
+                          map[element['supervisor_name']]
+                              .add(element['service_name']);
+                        } else {
+                          map[element['supervisor_name']] = [
+                            element['service_name']
+                          ];
+                        }
+                      });
+
+                      List<String> _supervisorList = map.keys.toList();
+
+                      print("Line 32 : $map");
+
+                      return Center(
+                        child: RenderMD(
+                          ownerList: _supervisorList,
+                          map: map,
+                        ),
+                      );
+                    }),
+              ],
+            )
+          ],
+        );
+        break;
+      case 'map_mv':
+        String _materialId, _vendorId;
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TitleWidget(title: "Material/Vendor", fontSize: 20.0),
+            SizedBox(height: 10.0),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FutureBuilder(
+                      future: _materialProvider.getMaterials(),
+                      builder: (context, snap) {
+                        if (!snap.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        List<MaterialModel> _materialList = snap.data;
+                        List<String> _materialNames = [];
+                        _materialNames?.clear();
+                        _materialNames.add("SELECT MATERIAL");
+                        _materialList.forEach((element) {
+                          _materialNames.add(element.particulars);
+                        });
+
+                        print("Line 558: $_materialList");
+
+                        return DropdownButton<String>(
+                          value: _selectedMaterial,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 8,
+                          style: TextStyle(color: Colors.blue),
+                          onChanged: (String material) {
+                            setState(() {
+                              _selectedMaterial = material;
+                            });
+
+                            List<Map<String, dynamic>> list =
+                                _buildMaterialMap(_materialList);
+
+                            print("Line 970: $list");
+
+                            list.forEach((item) {
+                              if (item[_selectedMaterial] != null) {
+                                _materialId =
+                                    item[_selectedMaterial].toString();
+                              }
+                            });
+
+                            Constants.materialId = _materialId;
+
+                            print("Material : ${Constants.materialId}");
+                          },
+                          items: _materialNames
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        );
+                      }),
+                  FutureBuilder(
+                      future: _associateProvider.getVendors(),
+                      builder: (context, snap) {
+                        if (!snap.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        List<AssociateModel> _vendorList = snap.data;
+                        List<String> _vendorNames = [];
+                        _vendorNames?.clear();
+                        _vendorNames.add("SELECT VENDOR");
+                        _vendorList.forEach((element) {
+                          _vendorNames.add(element.fullName);
+                        });
+
+                        return DropdownButton<String>(
+                          value: _selectedVendor,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 8,
+                          style: TextStyle(color: Colors.blue),
+                          onChanged: (String vendor) {
+                            setState(() {
+                              _selectedVendor = vendor;
+                            });
+
+                            List<Map<String, dynamic>> list =
+                                _buildVendorMap(_vendorList);
+
+                            list.forEach((item) {
+                              if (item[_selectedVendor] != null) {
+                                _vendorId = item[_selectedVendor].toString();
+                              }
+                            });
+
+                            Constants.vendorId = _vendorId;
+
+                            print("Vendor : ${Constants.vendorId}");
+                          },
+                          items: _vendorNames
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        );
+                      }),
+                  RaisedButton(
+                    color: Colors.redAccent,
+                    child: Text(
+                      "Map",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () async {
+                      _materialId = Constants.materialId;
+                      _vendorId = Constants.vendorId;
+
+                      print("Line 1052: ${Constants.materialId}");
+                      print("Line 1053: ${Constants.vendorId}");
+
+                      if (_materialId != null && _vendorId != null) {
+                        await MapProvider.mapMaterialToVendor(
+                          materialId: int.parse(_materialId),
+                          vendorId: int.parse(_vendorId),
+                        ).then((value) {
+                          Toast.show("Mapped data", context,
+                              backgroundColor: Colors.green, duration: 2);
+                          setState(() {});
+                        });
+                      } else {
+                        Toast.show("Select Data", context);
+                      }
+                    },
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 50.0,
+            ),
+            Container(
+              height: 1.0,
+              width: MediaQuery.of(context).size.width / 1.5,
+              color: Colors.black38,
+            ),
+            TitleWidget(title: "Display Data Material/Vendor", fontSize: 20.0),
+            Row(
+              children: [
+                FutureBuilder(
+                    future: getMSS(),
+                    builder: (context, snapshot) {
+                      print("Line 791: Future Builder called");
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+
+                      List<dynamic> json = snapshot.data;
+
+                      if (json.length == 0) {
+                        return Center(
+                          child: Text("No data is mapped!"),
+                        );
+                      }
+
+                      Map<String, List<String>> map = Map();
+
+                      print("Line 15: $json");
+
+                      json.forEach((element) {
+                        print("Line 20: ${element['supervisor_name']}");
+                        if (map.containsKey(element['supervisor_name'])) {
+                          map[element['supervisor_name']]
+                              .add(element['service_name']);
+                        } else {
+                          map[element['supervisor_name']] = [
+                            element['service_name']
+                          ];
+                        }
+                      });
+
+                      List<String> _supervisorList = map.keys.toList();
+
+                      print("Line 32 : $map");
+
+                      return Center(
+                        child: RenderMD(
+                          ownerList: _supervisorList,
+                          map: map,
+                        ),
+                      );
+                    }),
+              ],
+            )
+
           ],
         );
         break;
@@ -1177,168 +1399,6 @@ class _AssociatePageState extends State<AssociatePage> {
             TitleWidget(title: "Display Data Material/Vendor", fontSize: 20.0),
           ],
         );
-        break;
-      case 'map_mv':
-        String _materialId, _vendorId;
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TitleWidget(title: "Material/Vendor", fontSize: 20.0),
-            SizedBox(height: 10.0),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.7,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  FutureBuilder(
-                      future: _materialProvider.getMaterials(),
-                      builder: (context, snap) {
-                        if (!snap.hasData) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-
-                        List<MaterialModel> _materialList = snap.data;
-                        List<String> _materialNames = [];
-                        _materialNames?.clear();
-                        _materialNames.add("SELECT MATERIAL");
-                        _materialList.forEach((element) {
-                          _materialNames.add(element.particulars);
-                        });
-
-                        print("Line 558: $_materialList");
-
-                        return DropdownButton<String>(
-                          value: _selectedMaterial,
-                          icon: Icon(Icons.keyboard_arrow_down),
-                          iconSize: 24,
-                          elevation: 8,
-                          style: TextStyle(color: Colors.blue),
-                          onChanged: (String material) {
-                            setState(() {
-                              _selectedMaterial = material;
-                            });
-
-                            List<Map<String, dynamic>> list =
-                                _buildMaterialMap(_materialList);
-
-                            print("Line 970: $list");
-
-                            list.forEach((item) {
-                              if (item[_selectedMaterial] != null) {
-                                _materialId =
-                                    item[_selectedMaterial].toString();
-                              }
-                            });
-
-                            Constants.materialId = _materialId;
-
-                            print("Material : ${Constants.materialId}");
-                          },
-                          items: _materialNames
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        );
-                      }),
-                  FutureBuilder(
-                      future: _associateProvider.getVendors(),
-                      builder: (context, snap) {
-                        if (!snap.hasData) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-
-                        List<AssociateModel> _vendorList = snap.data;
-                        List<String> _vendorNames = [];
-                        _vendorNames?.clear();
-                        _vendorNames.add("SELECT VENDOR");
-                        _vendorList.forEach((element) {
-                          _vendorNames.add(element.fullName);
-                        });
-
-                        return DropdownButton<String>(
-                          value: _selectedVendor,
-                          icon: Icon(Icons.keyboard_arrow_down),
-                          iconSize: 24,
-                          elevation: 8,
-                          style: TextStyle(color: Colors.blue),
-                          onChanged: (String vendor) {
-                            setState(() {
-                              _selectedVendor = vendor;
-                            });
-
-                            List<Map<String, dynamic>> list =
-                                _buildVendorMap(_vendorList);
-
-                            list.forEach((item) {
-                              if (item[_selectedVendor] != null) {
-                                _vendorId = item[_selectedVendor].toString();
-                              }
-                            });
-
-                            Constants.vendorId = _vendorId;
-
-                            print("Vendor : ${Constants.vendorId}");
-                          },
-                          items: _vendorNames
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        );
-                      }),
-                  RaisedButton(
-                    color: Colors.redAccent,
-                    child: Text(
-                      "Map",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () async {
-                      _materialId = Constants.materialId;
-                      _vendorId = Constants.vendorId;
-
-                      print("Line 1052: ${Constants.materialId}");
-                      print("Line 1053: ${Constants.vendorId}");
-
-                      if (_materialId != null && _vendorId != null) {
-                        await MapProvider.mapMaterialToVendor(
-                          materialId: int.parse(_materialId),
-                          vendorId: int.parse(_vendorId),
-                        ).then((value) {
-                          Toast.show("Mapped data", context,
-                              backgroundColor: Colors.green, duration: 2);
-                          setState(() {});
-                        });
-                      } else {
-                        Toast.show("Select Data", context);
-                      }
-                    },
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 50.0,
-            ),
-            Container(
-              height: 1.0,
-              width: MediaQuery.of(context).size.width / 1.5,
-              color: Colors.black38,
-            ),
-            TitleWidget(title: "Display Data Material/Vendor", fontSize: 20.0),
-          ],
-        );
-        break;
-      case 'test_render':
-        return Container();
         break;
     }
     return null;
@@ -1347,6 +1407,28 @@ class _AssociatePageState extends State<AssociatePage> {
   static Future<dynamic> getMLS() async {
     http.Response response = await http
         .get('https://sanrachna.pythonanywhere.com/api/associate/mls/');
+
+    print("Line 18 : ${response.body}");
+
+    print("Line 36: ${jsonDecode(response.body).runtimeType}");
+
+    return jsonDecode(response.body);
+  }
+
+  static Future<dynamic> getMSS() async {
+    http.Response response = await http
+        .get('https://sanrachna.pythonanywhere.com/api/associate/mss/');
+
+    print("Line 18 : ${response.body}");
+
+    print("Line 36: ${jsonDecode(response.body).runtimeType}");
+
+    return jsonDecode(response.body);
+  }
+
+  static Future<dynamic> getMMV() async {
+    http.Response response = await http
+        .get('https://sanrachna.pythonanywhere.com/api/associate/mmv/');
 
     print("Line 18 : ${response.body}");
 
@@ -1583,157 +1665,5 @@ class _AssociatePageState extends State<AssociatePage> {
     });
 
     return data;
-  }
-
-  Map<String, List<String>> _buildLSDataRenderingMap(
-      List<SupervisorHasLaboursModel> list) {
-/*    Map<String, List<String>> dataMap = {};
-    List<String> labour = [];
-    List<String> supervisors = [];
-    List< Map<String, List<String>>> megaMap = [];
-
-    /// looping over each element of model to match with supervisorName and
-    /// create a new supervisorList which has unique supervisors
-    list?.forEach((element) {
-      if (!supervisors.contains(element.supervisorName))
-        supervisors.add(element.supervisorName);
-    });
-
-    print(supervisors);
-    List<List<String>> megaLabours = [];*/
-
-    /// looping over each supervisor and matching it with list data to build labours array for that supervisor
-
-//    for(int i=0; i<supervisors.length; i++){
-//      labour?.clear();
-//      for(int j=0; j<list.length; j++){
-//        if(list[j].supervisorName == supervisors[i])
-//          labour.add(list[j].labourName);
-//      }
-//
-//      dataMap.addAll({
-//        supervisors[i]: labour
-//      });
-//    }
-//    print("Printing List ready: $dataMap");
-/*    supervisors?.forEach((val) {
-      String temp = val;
-      labour?.clear();
-
-      /// clearing labour array for each new supervisor
-      list.forEach((data) {
-        if (val == data.supervisorName) {
-          labour.add(data.labourName);
-          /// if the supervisor names match, adding that labour in the array
-        }
-      });
-
-      dataMap[val] = labour;
-      print(dataMap);
-    });
-    print("Printing List ready: $dataMap");
-    return dataMap;*/
-  }
-
-//  List<Map<String, List<Map<String, String>>>> mapByKey(String keyName, String newKeyName, String keyForNewName, List<Map<String,String>> input) {
-//    Map<String, Map<String, List<Map<String, String>>>> returnValue = Map<String, Map<String, List<Map<String, String>>>>();
-//    for (var currMap in input) {
-//      if (currMap.containsKey(keyName)) {
-//        var currKeyValue = currMap[keyName];
-//        var currKeyValueForNewName = currMap[keyForNewName];
-//        if (!returnValue.containsKey(currKeyValue)){
-//          returnValue[currKeyValue] = {currKeyValue : List<Map<String, String>>()};
-//        }
-//        returnValue[currKeyValue][currKeyValue].add({newKeyName : currKeyValueForNewName});
-//      }
-//    }
-//    return returnValue.values.toList();
-//  }
-
-//  Widget _displayLabourSupervisor({Map<String, List<String>> dataMap, String selectedSupervisor}) {
-//
-//    print(dataMap[selectedSupervisor]);
-//    return Container();
-//
-//  }
-
-}
-
-class RenderLS extends StatefulWidget {
-  List<String> supervisorList;
-  dynamic map;
-
-  RenderLS({this.supervisorList, this.map});
-
-  @override
-  _RenderLSState createState() => _RenderLSState();
-}
-
-class _RenderLSState extends State<RenderLS> {
-
-  String supervisorKey;
-
-  @override
-  void initState() {
-    supervisorKey = widget.supervisorList[0];
-    print("Line 77 : $supervisorKey");
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              Text("Supervisor"),
-              Container(
-                height: MediaQuery.of(context).size.height / 3,
-                width: 200,
-                child: ListView.builder(
-                  itemCount: widget.supervisorList.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        // set key of map to this
-                        setState(() {
-                          supervisorKey = widget.supervisorList[index];
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text("${widget.supervisorList[index]}"),
-                      ),
-                    );
-                  },
-                ),
-              )
-            ],
-          ),
-          Column(
-            children: <Widget>[
-              Text("Labour"),
-              Container(
-                height: MediaQuery.of(context).size.height / 3,
-                width: MediaQuery.of(context).size.width / 2,
-                child: ListView.builder(
-                  itemCount: widget.map[supervisorKey].length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text(widget.map[supervisorKey][index]),
-                    );
-                  },
-                ),
-              )
-            ],
-          )
-        ],
-      ),
-    );
   }
 }
