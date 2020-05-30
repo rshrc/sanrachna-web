@@ -148,136 +148,137 @@ class _ServicePageState extends State<ServicePage> {
 
     await showDialog<String>(
       context: context,
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.5,
-        width: MediaQuery.of(context).size.width * 0.3,
-        child: AlertDialog(
-          shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
-          content: Container(
-            height: MediaQuery.of(context).size.height / 2,
-            width: MediaQuery.of(context).size.width / 3,
-            child: Column(
-              children: <Widget>[
-                Text("Add Service"),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _nameController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Name',
-                        hintText: 'John Doe',
-                        labelStyle: _labelTextStyle,
-                        hintStyle: _hintTextStyle
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => Container(
+          height: MediaQuery.of(context).size.height * 0.5,
+          width: MediaQuery.of(context).size.width * 0.3,
+          child: AlertDialog(
+            shape:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
+            content: Container(
+              height: MediaQuery.of(context).size.height / 2,
+              width: MediaQuery.of(context).size.width / 3,
+              child: Column(
+                children: <Widget>[
+                  Text("Add Service"),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: _nameController,
+                        autofocus: true,
+                        decoration: InputDecoration(
+                            labelText: 'Name',
+                            hintText: 'John Doe',
+                            labelStyle: _labelTextStyle,
+                            hintStyle: _hintTextStyle),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _unitController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Unit',
-                        hintText: 'Unit',
-                        labelStyle: _labelTextStyle,
-                        hintStyle: _hintTextStyle
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: _unitController,
+                        autofocus: true,
+                        decoration: InputDecoration(
+                            labelText: 'Unit',
+                            hintText: 'Unit',
+                            labelStyle: _labelTextStyle,
+                            hintStyle: _hintTextStyle),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _rateController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Rate',
-                        hintText: 'Rate',
-                        labelStyle: _labelTextStyle,
-                        hintStyle: _hintTextStyle
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: _rateController,
+                        autofocus: true,
+                        decoration: InputDecoration(
+                            labelText: 'Rate',
+                            hintText: 'Rate',
+                            labelStyle: _labelTextStyle,
+                            hintStyle: _hintTextStyle),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Text("Prospect: "),
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width / 6,
-                            child: DropdownButton<ProspectModel>(
-                              value: dropdownProspectValue,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 24,
-                              elevation: 8,
-                              style: TextStyle(color: Colors.blue),
-                              onChanged: (ProspectModel prospectModel) {
-                                setState(() {
-                                  dropdownProspectValue = prospectModel;
-                                  prospectId = prospectModel.id;
-                                });
-                              },
-                              items: _prospectList
-                                  .map<DropdownMenuItem<ProspectModel>>((ProspectModel value) {
-                                return DropdownMenuItem<ProspectModel>(
-                                  value: value,
-                                  child: Text(value.fullName),
-                                );
-                              }).toList(),
-                            ),
-                          )),
-                    ],
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Text("Prospect: "),
+                        Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 6,
+                              child: DropdownButton<ProspectModel>(
+                                value: dropdownProspectValue,
+                                icon: Icon(Icons.keyboard_arrow_down),
+                                iconSize: 24,
+                                elevation: 8,
+                                style: TextStyle(color: Colors.blue),
+                                onChanged: (ProspectModel prospectModel) {
+                                  setState(() {
+                                    dropdownProspectValue = prospectModel;
+                                    prospectId = prospectModel.id;
+                                  });
+                                },
+                                items: _prospectList
+                                    .map<DropdownMenuItem<ProspectModel>>(
+                                        (ProspectModel value) {
+                                  return DropdownMenuItem<ProspectModel>(
+                                    value: value,
+                                    child: Text(value.fullName),
+                                  );
+                                }).toList(),
+                              ),
+                            )),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.clear),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                }),
-            IconButton(
-                icon: Icon(Icons.check),
-                onPressed: () {
-                  // add it
-                  print("Trying to add prospect");
+            actions: <Widget>[
+              IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }),
+              IconButton(
+                  icon: Icon(Icons.check),
+                  onPressed: () {
+                    // add it
+                    print("Trying to add prospect");
 
-                  switch (service) {
-                    case 'service':
-                      print("Line 223: Inside service Case");
-                      _serviceProvider
-                          .addServices(
-                        name: _nameController.text,
-                        unit: _unitController.text,
-                        rate: _rateController.text,
-                        prospect: prospectId,
-                      )
-                          .then((value) {
-                        Toast.show(
-                          "Added Service ${_nameController.text}",
-                          context,
-                          backgroundColor: Colors.green,
-                          duration: 3,
-                          textColor: Colors.white,
-                          border: Border.all(color: Colors.white),
-                        );
-                        setState(() {
-                          // Update Future Builder
+                    switch (service) {
+                      case 'service':
+                        print("Line 223: Inside service Case");
+                        _serviceProvider
+                            .addServices(
+                          name: _nameController.text,
+                          unit: _unitController.text,
+                          rate: _rateController.text,
+                          prospect: prospectId,
+                        )
+                            .then((value) {
+                          Toast.show(
+                            "Added Service ${_nameController.text}",
+                            context,
+                            backgroundColor: Colors.green,
+                            duration: 3,
+                            textColor: Colors.white,
+                            border: Border.all(color: Colors.white),
+                          );
+                          setState(() {
+                            // Update Future Builder
+                          });
                         });
-                      });
-                      break;
-                  }
-                })
-          ],
+                        break;
+                    }
+                  })
+            ],
+          ),
         ),
       ),
     );

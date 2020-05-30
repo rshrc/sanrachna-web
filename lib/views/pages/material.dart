@@ -692,180 +692,188 @@ class _MaterialPageState extends State<MaterialPage> {
 
     TextStyle _labelTextStyle = TextStyle(color: Colors.black);
     TextStyle _hintTextStyle = TextStyle(color: Colors.black, fontSize: 10.0);
-    String _materialType = "PLY";
-
-    onDropdownChanged(String value) {
-      setState(() {
-        _materialType = value;
-      });
-    }
+    String _materialType;
 
     await showDialog<String>(
       context: context,
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.5,
-        width: MediaQuery.of(context).size.width * 0.3,
-        child: AlertDialog(
-          shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
-          content: Container(
-            height: MediaQuery.of(context).size.height / 2,
-            width: MediaQuery.of(context).size.width / 3,
-            child: Column(
-              children: <Widget>[
-                Text("Add Material"),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _particularsController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Particulars',
-                        hintText: 'Particulars',
-                        labelStyle: _labelTextStyle,
-                        hintStyle: _hintTextStyle,
+      builder: (context) {
+        return StatefulBuilder(
+          builder:
+              (BuildContext context, void Function(void Function()) setState) =>
+                  Container(
+            height: MediaQuery.of(context).size.height * 0.5,
+            width: MediaQuery.of(context).size.width * 0.3,
+            child: AlertDialog(
+              shape:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
+              content: Container(
+                height: MediaQuery.of(context).size.height / 2,
+                width: MediaQuery.of(context).size.width / 3,
+                child: Column(
+                  children: <Widget>[
+                    Text("Add Material"),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: _particularsController,
+                          autofocus: true,
+                          decoration: InputDecoration(
+                            labelText: 'Particulars',
+                            hintText: 'Particulars',
+                            labelStyle: _labelTextStyle,
+                            hintStyle: _hintTextStyle,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _rateController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Rate',
-                        hintText: 'Rate',
-                        labelStyle: _labelTextStyle,
-                        hintStyle: _hintTextStyle,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: _rateController,
+                          autofocus: true,
+                          decoration: InputDecoration(
+                            labelText: 'Rate',
+                            hintText: 'Rate',
+                            labelStyle: _labelTextStyle,
+                            hintStyle: _hintTextStyle,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _unitController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Unit',
-                        hintText: 'Unit',
-                        labelStyle: _labelTextStyle,
-                        hintStyle: _hintTextStyle,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: _unitController,
+                          autofocus: true,
+                          decoration: InputDecoration(
+                            labelText: 'Unit',
+                            hintText: 'Unit',
+                            labelStyle: _labelTextStyle,
+                            hintStyle: _hintTextStyle,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _quantityController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Quantity',
-                        hintText: 'Quantity',
-                        labelStyle: _labelTextStyle,
-                        hintStyle: _hintTextStyle,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: _quantityController,
+                          autofocus: true,
+                          decoration: InputDecoration(
+                            labelText: 'Quantity',
+                            hintText: 'Quantity',
+                            labelStyle: _labelTextStyle,
+                            hintStyle: _hintTextStyle,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _prospectController,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        labelText: 'Prospect',
-                        hintText: 'Prospect',
-                        labelStyle: _labelTextStyle,
-                        hintStyle: _hintTextStyle,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: _prospectController,
+                          autofocus: true,
+                          decoration: InputDecoration(
+                            labelText: 'Prospect',
+                            hintText: 'Prospect',
+                            labelStyle: _labelTextStyle,
+                            hintStyle: _hintTextStyle,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Text("Material Type: "),
-                      Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width / 6,
-                            child: DropdownButton<String>(
-                              value: _materialType,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 24,
-                              elevation: 8,
-                              style: TextStyle(color: Colors.blue),
-                              onChanged: onDropdownChanged,
-                              items: <String>[
-                                'PLY',
-                                'CIVIL',
-                                'TILES',
-                                'PAINT',
-                                'ELECTRIC',
-                                'PLUMBING',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Text("Material Type: "),
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 6,
+                              child: DropdownButton<String>(
+                                value: _materialType,
+                                icon: Icon(Icons.keyboard_arrow_down),
+                                iconSize: 24,
+                                elevation: 8,
+                                style: TextStyle(color: Colors.blue),
+                                onChanged: (String value) {
+                                  setState(() {
+                                    _materialType = value;
+                                  });
+                                },
+                                hint: Text('Choose Type'),
+                                items: <String>[
+                                  'PLY',
+                                  'CIVIL',
+                                  'TILES',
+                                  'PAINT',
+                                  'ELECTRIC',
+                                  'PLUMBING',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
                             ),
-                          )),
-                    ],
-                  ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
+              ),
+              actions: <Widget>[
+                FlatButton(
+                    child: Text(
+                      "CANCEL",
+                      style: TextStyle(color: Colors.redAccent, fontSize: 16.0),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
+                FlatButton(
+                    child: Text(
+                      "ADD",
+                      style: TextStyle(color: Colors.blue, fontSize: 16.0),
+                    ),
+                    onPressed: () {
+                      // add it
+                      print(_materialType);
+                      _materialProvider
+                          .addMaterials(
+                        particulars: _particularsController.text,
+                        rate: _rateController.text,
+                        unit: _unitController.text,
+                        quantity: _quantityController.text,
+                        prospect: int.parse(_prospectController.text),
+                        type: _materialType,
+                      )
+                          .then((value) {
+                        Toast.show(
+                          "Added Material of Type $_materialType",
+                          context,
+                          backgroundColor: Colors.green,
+                          duration: 3,
+                          textColor: Colors.white,
+                          border: Border.all(color: Colors.white),
+                        );
+                        setState(() {
+                          // Update Future Builder
+                        });
+                      });
+                    })
               ],
             ),
           ),
-          actions: <Widget>[
-            FlatButton(
-                child: Text(
-                  "CANCEL",
-                  style: TextStyle(color: Colors.redAccent, fontSize: 16.0),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                }),
-            FlatButton(
-                child: Text(
-                  "ADD",
-                  style: TextStyle(color: Colors.blue, fontSize: 16.0),
-                ),
-                onPressed: () {
-                  // add it
-
-                  _materialProvider
-                      .addMaterials(
-                          particulars: _particularsController.text,
-                          rate: _rateController.text,
-                          unit: _unitController.text,
-                          quantity: _quantityController.text,
-                          prospect: int.parse(_prospectController.text),
-                          type: _materialType)
-                      .then((value) {
-                    Toast.show(
-                      "Added Material of Type $_materialType",
-                      context,
-                      backgroundColor: Colors.green,
-                      duration: 3,
-                      textColor: Colors.white,
-                      border: Border.all(color: Colors.white),
-                    );
-                    setState(() {
-                      // Update Future Builder
-                    });
-                  });
-                })
-          ],
-        ),
-      ),
+        );
+      },
     );
   }
 }
